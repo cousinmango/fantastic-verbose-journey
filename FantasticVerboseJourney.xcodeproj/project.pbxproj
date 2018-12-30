@@ -17,6 +17,7 @@
 		553032D421D87F78001DB357 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 553032D221D87F78001DB357 /* LaunchScreen.storyboard */; };
 		553032DF21D87F78001DB357 /* FantasticVerboseJourneyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553032DE21D87F78001DB357 /* FantasticVerboseJourneyTests.swift */; };
 		553032EA21D87F78001DB357 /* FantasticVerboseJourneyUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553032E921D87F78001DB357 /* FantasticVerboseJourneyUITests.swift */; };
+		5562217221D887B900BA22BB /* SKView+DebugPerformanceOptimisable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5562217121D887B900BA22BB /* SKView+DebugPerformanceOptimisable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +54,7 @@
 		553032E521D87F78001DB357 /* FantasticVerboseJourneyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FantasticVerboseJourneyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		553032E921D87F78001DB357 /* FantasticVerboseJourneyUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FantasticVerboseJourneyUITests.swift; sourceTree = "<group>"; };
 		553032EB21D87F78001DB357 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5562217121D887B900BA22BB /* SKView+DebugPerformanceOptimisable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SKView+DebugPerformanceOptimisable.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,7 +105,7 @@
 		553032C221D87F77001DB357 /* FantasticVerboseJourney */ = {
 			isa = PBXGroup;
 			children = (
-				553032C321D87F77001DB357 /* AppDelegate.swift */,
+				5562217021D8869100BA22BB /* Delegates */,
 				553032C521D87F77001DB357 /* GameScene.sks */,
 				553032C721D87F77001DB357 /* Actions.sks */,
 				553032C921D87F77001DB357 /* GameScene.swift */,
@@ -112,6 +114,7 @@
 				553032D021D87F78001DB357 /* Assets.xcassets */,
 				553032D221D87F78001DB357 /* LaunchScreen.storyboard */,
 				553032D521D87F78001DB357 /* Info.plist */,
+				5562217321D8881D00BA22BB /* Extensions */,
 			);
 			path = FantasticVerboseJourney;
 			sourceTree = "<group>";
@@ -132,6 +135,22 @@
 				553032EB21D87F78001DB357 /* Info.plist */,
 			);
 			path = FantasticVerboseJourneyUITests;
+			sourceTree = "<group>";
+		};
+		5562217021D8869100BA22BB /* Delegates */ = {
+			isa = PBXGroup;
+			children = (
+				553032C321D87F77001DB357 /* AppDelegate.swift */,
+			);
+			path = Delegates;
+			sourceTree = "<group>";
+		};
+		5562217321D8881D00BA22BB /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				5562217121D887B900BA22BB /* SKView+DebugPerformanceOptimisable.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -268,6 +287,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				553032CA21D87F77001DB357 /* GameScene.swift in Sources */,
+				5562217221D887B900BA22BB /* SKView+DebugPerformanceOptimisable.swift in Sources */,
 				553032CC21D87F77001DB357 /* GameViewController.swift in Sources */,
 				553032C421D87F77001DB357 /* AppDelegate.swift in Sources */,
 			);
