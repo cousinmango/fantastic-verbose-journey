@@ -91,7 +91,8 @@ class GameScene: SKScene {
     }
     
     @objc func spawnChickenRandom() {
-        let chickenNode = SKSpriteNode(color: UIColor.yellow, size: CGSize(width: 50, height: 50))
+        let chickenNode = SKSpriteNode(imageNamed: "chicken")//(color: UIColor.yellow, size: CGSize(width: 50, height: 50))
+        chickenNode.size = CGSize(width: 100, height: 100)
         let randomInt = Int.random(in: 1...4)
         let edgeMargin : CGFloat = size.width * 0.2
         switch randomInt {
@@ -155,7 +156,8 @@ extension GameScene {
         physicsWorld.gravity = .zero
         physicsWorld.contactDelegate = self
         // duck setup
-        let duckNode = SKSpriteNode(color: UIColor.red, size: CGSize(width: 50, height: 50))
+        let duckNode = SKSpriteNode(imageNamed: "duck")//(color: UIColor.red, size: CGSize(width: 50, height: 50))
+        duckNode.size = CGSize(width: 100, height: 100)
         duckNode.position = CGPoint(x: size.width/2, y: size.height/2)
         addChild(duckNode)
         //addSKButton()
