@@ -14,6 +14,7 @@ class GameViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("GameViewController:: viewDidLoad()")
         
         // Load main game scene. - TODO: Replace with home menu.
         guard let gameScene = GameScene(fileNamed: "GameScene") else {

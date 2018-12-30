@@ -8,11 +8,6 @@
 
 import SpriteKit.SKView
 
-protocol DebugPerformanceOptimisable {
-    func setPerformanceOptimisation(enable toggle: Bool)
-    func setShowDebug(enable toggle: Bool)
-}
-
 extension SKView: DebugPerformanceOptimisable {
     /// Set performance optimisations for SKViews.
     func setPerformanceOptimisation(enable toggle: Bool = true) {
