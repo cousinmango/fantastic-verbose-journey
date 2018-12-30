@@ -15,15 +15,21 @@ class GameViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         print("GameViewController:: viewDidLoad()")
-        
+
+        // Load ref to storyboard view... lame instead of programmatic
+        guard let skView = self.view as! SKView? else { return }
         // Load main game scene. - TODO: Replace with home menu.
-        guard let gameScene = GameScene(fileNamed: "GameScene") else {
-            return
-        }
+        guard let gameScene = GameScene(fileNamed: "GameScene") else { return }
+
         gameScene.scaleMode = .aspectFit
-        gameScene.view?.setShowDebug()
         gameScene.view?.setPerformanceOptimisation()
-        
+        gameScene.view?.setShowDebug()
+
+        skView.presentScene(
+            gameScene,
+            transition: SKTransition.reveal(with: .down, duration: 1.0)
+        )
+
     }
 }
 
@@ -45,3 +51,5 @@ extension GameViewController {
         return true
     }
 }
+
+
