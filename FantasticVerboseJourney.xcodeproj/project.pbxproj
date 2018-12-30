@@ -21,6 +21,8 @@
 		553032D121D87F78001DB357 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 553032D021D87F78001DB357 /* Assets.xcassets */; };
 		553032DF21D87F78001DB357 /* FantasticVerboseJourneyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553032DE21D87F78001DB357 /* FantasticVerboseJourneyTests.swift */; };
 		553032EA21D87F78001DB357 /* FantasticVerboseJourneyUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553032E921D87F78001DB357 /* FantasticVerboseJourneyUITests.swift */; };
+		55A4F6EB21D89A3C001C6C16 /* InjectionIiiHotReloadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A4F6EA21D89A3C001C6C16 /* InjectionIiiHotReloadable.swift */; };
+		55A4F6ED21D89A91001C6C16 /* UIViewController+InjectionIiiHotReloadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A4F6EC21D89A91001C6C16 /* UIViewController+InjectionIiiHotReloadable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +63,8 @@
 		553032E521D87F78001DB357 /* FantasticVerboseJourneyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FantasticVerboseJourneyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		553032E921D87F78001DB357 /* FantasticVerboseJourneyUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FantasticVerboseJourneyUITests.swift; sourceTree = "<group>"; };
 		553032EB21D87F78001DB357 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		55A4F6EA21D89A3C001C6C16 /* InjectionIiiHotReloadable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InjectionIiiHotReloadable.swift; sourceTree = "<group>"; };
+		55A4F6EC21D89A91001C6C16 /* UIViewController+InjectionIiiHotReloadable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+InjectionIiiHotReloadable.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,9 +114,10 @@
 		35E93A5431D29E3F718C2EE8 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				35E93FDB35FF04810F9951C7 /* SKView+DebugPerformanceOptimisable.swift */,
 				35E93F56C03B3C29BADD1E32 /* Protocols */,
+				35E93FDB35FF04810F9951C7 /* SKView+DebugPerformanceOptimisable.swift */,
 				35E9354863941805D65056D0 /* CGPoint+VectorCalculatable.swift */,
+				55A4F6EC21D89A91001C6C16 /* UIViewController+InjectionIiiHotReloadable.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -129,6 +134,7 @@
 		35E93F56C03B3C29BADD1E32 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
+				55A4F6EA21D89A3C001C6C16 /* InjectionIiiHotReloadable.swift */,
 				35E9359E50CA9C43D41E236C /* VectorCalculatable.swift */,
 				35E93560957D53124D620CC2 /* DebugPerformanceOptimisable.swift */,
 			);
@@ -339,8 +345,10 @@
 				35E93A7F622424793C311A9B /* SKView+DebugPerformanceOptimisable.swift in Sources */,
 				35E933A7B94BD6A90B670AF5 /* VectorCalculatable.swift in Sources */,
 				35E936BBB8FB3F84078B77B1 /* CGPoint+VectorCalculatable.swift in Sources */,
+				55A4F6ED21D89A91001C6C16 /* UIViewController+InjectionIiiHotReloadable.swift in Sources */,
 				35E939BE614723B599903340 /* GameViewController.swift in Sources */,
 				35E93077D328251DDAC8090F /* GameScene.swift in Sources */,
+				55A4F6EB21D89A3C001C6C16 /* InjectionIiiHotReloadable.swift in Sources */,
 				35E937E24C532B083A63CD46 /* DebugPerformanceOptimisable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
