@@ -24,7 +24,8 @@ class GameViewController: UIViewController {
         gameScene.scaleMode = .aspectFit
         gameScene.view?.setPerformanceOptimisation()
         gameScene.view?.setShowDebug()
-
+        gameScene.view?.backgroundColor = .clear
+        gameScene.view?.allowsTransparency = true
         skView.presentScene(
             gameScene,
             transition: SKTransition.reveal(with: .down, duration: 1.0)

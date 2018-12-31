@@ -86,7 +86,13 @@ extension GameScene: SKButtonDelegate {
         // - DEBUG:
         self.removeAllChildren() // clear -- TODO: Move this code to the hot reload injection refresher.
         let pauseGGScene = PauseScene(returnScene: self)
+        self.view?.allowsTransparency = true
+        self.backgroundColor = .clear
+        
+        self.view?.presentScene(
+            pauseGGScene,
+            transition: SKTransition.reveal(with: .down, duration: 0.5)
+        )
 
-        self.view?.presentScene(pauseGGScene)
     }
 }

@@ -28,6 +28,7 @@
 		55A4F6ED21D89A91001C6C16 /* UIViewController+InjectionIiiHotReloadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A4F6EC21D89A91001C6C16 /* UIViewController+InjectionIiiHotReloadable.swift */; };
 		55A4F6EF21D89C47001C6C16 /* SKButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A4F6EE21D89C47001C6C16 /* SKButton.swift */; };
 		55A4F6F321D89CD7001C6C16 /* SKButtonDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A4F6F221D89CD7001C6C16 /* SKButtonDelegate.swift */; };
+		55A4F6FE21DA29CF001C6C16 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55A4F6FD21DA29CF001C6C16 /* CloudKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,6 +76,8 @@
 		55A4F6EC21D89A91001C6C16 /* UIViewController+InjectionIiiHotReloadable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+InjectionIiiHotReloadable.swift"; sourceTree = "<group>"; };
 		55A4F6EE21D89C47001C6C16 /* SKButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKButton.swift; sourceTree = "<group>"; };
 		55A4F6F221D89CD7001C6C16 /* SKButtonDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKButtonDelegate.swift; sourceTree = "<group>"; };
+		55A4F6FB21DA29CC001C6C16 /* FantasticVerboseJourney.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FantasticVerboseJourney.entitlements; sourceTree = "<group>"; };
+		55A4F6FD21DA29CF001C6C16 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +85,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				55A4F6FE21DA29CF001C6C16 /* CloudKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -184,6 +188,7 @@
 				553032DD21D87F78001DB357 /* FantasticVerboseJourneyTests */,
 				553032E821D87F78001DB357 /* FantasticVerboseJourneyUITests */,
 				553032C121D87F77001DB357 /* Products */,
+				55A4F6FC21DA29CF001C6C16 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -200,6 +205,7 @@
 		553032C221D87F77001DB357 /* FantasticVerboseJourney */ = {
 			isa = PBXGroup;
 			children = (
+				55A4F6FB21DA29CC001C6C16 /* FantasticVerboseJourney.entitlements */,
 				5562217021D8869100BA22BB /* Delegates */,
 				553032C721D87F77001DB357 /* Actions.sks */,
 				553032D021D87F78001DB357 /* Assets.xcassets */,
@@ -261,6 +267,14 @@
 				55A4F6F221D89CD7001C6C16 /* SKButtonDelegate.swift */,
 			);
 			path = Protocols;
+			sourceTree = "<group>";
+		};
+		55A4F6FC21DA29CF001C6C16 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				55A4F6FD21DA29CF001C6C16 /* CloudKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -331,6 +345,14 @@
 				TargetAttributes = {
 					553032BF21D87F77001DB357 = {
 						CreatedOnToolsVersion = 10.1;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+							com.apple.iCloud = {
+								enabled = 1;
+							};
+						};
 					};
 					553032D921D87F78001DB357 = {
 						CreatedOnToolsVersion = 10.1;
@@ -565,6 +587,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = FantasticVerboseJourney/FantasticVerboseJourney.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 835HC59RFV;
 				INFOPLIST_FILE = FantasticVerboseJourney/Info.plist;
@@ -572,7 +595,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = slimelime.FantasticVerboseJourney;
+				PRODUCT_BUNDLE_IDENTIFIER = cousinmango.FantasticVerboseJourney;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -583,6 +606,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = FantasticVerboseJourney/FantasticVerboseJourney.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 835HC59RFV;
 				INFOPLIST_FILE = FantasticVerboseJourney/Info.plist;
@@ -590,7 +614,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = slimelime.FantasticVerboseJourney;
+				PRODUCT_BUNDLE_IDENTIFIER = cousinmango.FantasticVerboseJourney;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
