@@ -34,11 +34,10 @@ class SKButton: SKSpriteNode {
         //        if self.contains(tap.location(in: self)) { // redundant?
         //
         //        }
-        self.delegate.skButtonTapped(sender: self)
     }
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         print("SKButton:: touchesEnded()")
         self.setScale(1.0) // restore default button size.
+        self.delegate.skButtonTapped(sender: self)
     }
-    
 }
