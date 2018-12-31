@@ -15,9 +15,11 @@ class GameViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         print("GameViewController:: viewDidLoad()")
-
+        
+        
         // Load ref to storyboard view... lame instead of programmatic
         guard let skView = self.view as! SKView? else { return }
+        skView.showsNodeCount = true
         // Load main game scene. - TODO: Replace with home menu.
         //guard let homeMenuScene = HomeMenuScene(fileNamed: "HomeMenuScene") else { return }
         let homeMenuScene = HomeMenuScene(size: view.bounds.size)

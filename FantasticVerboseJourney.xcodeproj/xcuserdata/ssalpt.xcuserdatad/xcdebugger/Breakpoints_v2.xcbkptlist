@@ -10,91 +10,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FantasticVerboseJourney/Views/Scenes/HomeMenuScene/HomeMenuScene.swift"
-            timestampString = "567898115.8395751"
+            timestampString = "567947150.782946"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "98"
-            endingLineNumber = "98"
+            startingLineNumber = "128"
+            endingLineNumber = "128"
             landmarkName = "addSKButton()"
             landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "FantasticVerboseJourney/Views/Scenes/GameScene/GameScene.swift"
-            timestampString = "567898115.841959"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "25"
-            endingLineNumber = "25"
-            landmarkName = "init(coder:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "FantasticVerboseJourney.GameScene.init() -&gt; FantasticVerboseJourney.GameScene"
-                  moduleName = "FantasticVerboseJourney"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ssalpt/Desktop/fantastic%20verbose%20journey%20app/fantastic-verbose-journey/FantasticVerboseJourney/Views/Scenes/GameScene/GameScene.swift"
-                  timestampString = "567872058.449214"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "25"
-                  endingLineNumber = "25"
-                  offsetFromSymbolStart = "26">
-               </Location>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "FantasticVerboseJourney.GameScene.init(size: __C.CGSize) -&gt; FantasticVerboseJourney.GameScene"
-                  moduleName = "FantasticVerboseJourney"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ssalpt/Desktop/fantastic%20verbose%20journey%20app/fantastic-verbose-journey/FantasticVerboseJourney/Views/Scenes/GameScene/GameScene.swift"
-                  timestampString = "567872058.455712"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "25"
-                  endingLineNumber = "25"
-                  offsetFromSymbolStart = "36">
-               </Location>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "FantasticVerboseJourney.GameScene.init(coder: __C.NSCoder) -&gt; Swift.Optional&lt;FantasticVerboseJourney.GameScene&gt;"
-                  moduleName = "FantasticVerboseJourney"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ssalpt/Desktop/fantastic%20verbose%20journey%20app/fantastic-verbose-journey/FantasticVerboseJourney/Views/Scenes/GameScene/GameScene.swift"
-                  timestampString = "567872058.459941"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "25"
-                  endingLineNumber = "25"
-                  offsetFromSymbolStart = "41">
-               </Location>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "FantasticVerboseJourney.GameScene.duckNode.getter : __C.SKSpriteNode"
-                  moduleName = "FantasticVerboseJourney"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ssalpt/Desktop/fantastic%20verbose%20journey%20app/fantastic-verbose-journey/FantasticVerboseJourney/Views/Scenes/GameScene/GameScene.swift"
-                  timestampString = "567872058.4642299"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "25"
-                  endingLineNumber = "25"
-                  offsetFromSymbolStart = "44">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		03BBE9EB21D8B90E001CBAE4 /* HomeMenuScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 03BBE9EA21D8B90E001CBAE4 /* HomeMenuScene.sks */; };
+		03BBE9ED21D97F87001CBAE4 /* HudNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03BBE9EC21D97F87001CBAE4 /* HudNode.swift */; };
 		35E93118FC69ADBF864D8512 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E937C22C223D2838BB1F71 /* GameViewController.swift */; };
 		35E93175665D1A30DA6E4B26 /* HomeMenuScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E9345A0BA1F8BF2778FDA9 /* HomeMenuScene.swift */; };
 		35E9330A7FF414B71890071D /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 35E938A99B0608F569AC32AB /* GameScene.sks */; };
@@ -50,6 +51,7 @@
 
 /* Begin PBXFileReference section */
 		03BBE9EA21D8B90E001CBAE4 /* HomeMenuScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = HomeMenuScene.sks; sourceTree = "<group>"; };
+		03BBE9EC21D97F87001CBAE4 /* HudNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HudNode.swift; sourceTree = "<group>"; };
 		35E932D20F86DCD84061B40D /* PauseScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PauseScene.swift; sourceTree = "<group>"; };
 		35E9345A0BA1F8BF2778FDA9 /* HomeMenuScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeMenuScene.swift; sourceTree = "<group>"; };
 		35E9354863941805D65056D0 /* CGPoint+VectorCalculatable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGPoint+VectorCalculatable.swift"; sourceTree = "<group>"; };
@@ -175,6 +177,7 @@
 			isa = PBXGroup;
 			children = (
 				35E938A99B0608F569AC32AB /* GameScene.sks */,
+				03BBE9EC21D97F87001CBAE4 /* HudNode.swift */,
 				35E93729E6F5C78AD46FD4F2 /* GameScene.swift */,
 			);
 			path = GameScene;
@@ -413,6 +416,7 @@
 				35E934D3A210667EB592ACC3 /* SKButtonFactory.swift in Sources */,
 				35E93EC5AD44C4F5CF23FE1C /* PauseScene.swift in Sources */,
 				35E937EE323612406D218DAC /* GameScene.swift in Sources */,
+				03BBE9ED21D97F87001CBAE4 /* HudNode.swift in Sources */,
 				35E93175665D1A30DA6E4B26 /* HomeMenuScene.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
