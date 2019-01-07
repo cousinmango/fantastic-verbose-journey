@@ -33,9 +33,11 @@ class HomeMenuScene: SKScene {
     }
 
     override func didMove(to view: SKView) {
-        //resetDefaults()
+        // resetDefaults()
         print("HomeMenuScene:: didMove() start \(view)")
         print("HomeMenuScene:: size", size)
+        
+        
         // title setup
         let titleNode = SKSpriteNode(color: UIColor.red, size: CGSize(width: 300, height: 150))
         titleNode.position = CGPoint(x: size.width/2, y: size.height - 100)
@@ -57,20 +59,15 @@ class HomeMenuScene: SKScene {
         let tempStartLabel = SKLabelNode(text: "START")
         tempStartLabel.fontName = "DIN Alternate"
         tempStartLabel.fontSize = 30
-        tempStartLabel.position = CGPoint(x: size.width/2, y: size.width/2 - 10)
-        addChild(tempStartLabel)
+
         
         // ^^^^^^^^^^TEMP^^^^^^^^^^
-        setup()
-        /*// high score label setup
-        let highscoreLabel = SKLabelNode(text: )
-        highscoreLabel.position = CGPoint(x: size.width/2, y: size.height/2)
-        highscoreLabel.fontName = "DIN Alternate"
-        highscoreLabel.fontColor = SKColor.black
-        highscoreLabel.fontSize = 50
-        addChild(highscoreLabel)*/
-            
         
+        setup()
+
+        let startButton = createSKButtonStart()
+        startButton.addChild(tempStartLabel)
+        addChild(startButton)
         print("HomeMenuScene:: didMove() finished")
     }
     
@@ -89,7 +86,6 @@ extension HomeMenuScene {
         // Setup physics
         physicsWorld.gravity = .zero
         physicsWorld.contactDelegate = self
-        addSKButton()
     }
 }
 
@@ -123,13 +119,14 @@ extension HomeMenuScene: SKPhysicsContactDelegate {
 
 // - MARK: Button setup
 extension HomeMenuScene {
-    func addSKButton() {
+    func createSKButtonStart() -> SKButton {
         let button: SKButton = SKButtonFactory.getButton(delegate: self)
         button.position = CGPoint(x: size.width/2, y: size.width/2)
         button.zPosition = -3
         button.color = SKColor.blue
         button.size = CGSize(width: 250, height: 100)
-        addChild(button) // - Circular dependency? self.child = button. button.delegate = self...
+        
+        return button
     }
 }
 
