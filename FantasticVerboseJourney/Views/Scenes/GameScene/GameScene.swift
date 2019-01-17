@@ -60,13 +60,7 @@ class GameScene: SKScene {
         setup()
         
         print("GameScene:: didMove() finished")
-    }
-    /*
-    func getRandomTimeInterval() -> TimeInterval{
-        var randomTimeInterval = TimeInterval.random(in: 0.5...4)
-        return randomTimeInterval
-    }*/
-    
+    }    
     
     // Time of last update(currentTime:) call
     var lastUpdateTime = TimeInterval(0)
@@ -106,7 +100,6 @@ class GameScene: SKScene {
             // Randomize seconds until next action
             timeUntilNextAction2 = Double.random(in: 0 ..< 3)
         }
-
     }
 
     func spawnDuck() {
@@ -180,10 +173,9 @@ class GameScene: SKScene {
                                            SKAction.removeFromParent()]))
     }
 
-    
-    func spawnFireball(position: CGPoint, destination: CGPoint) {
+    func spawnFireball(position: CGPoint, destination: CGPoint, angle: CGFloat) {
         print("fireball fired")
-        
+        // setup fireball animation
         let fireballAtlas = SKTextureAtlas(named: "fire")
         var fireballFrames : [SKTexture] = []
         let numFrames = fireballAtlas.textureNames.count
@@ -200,27 +192,11 @@ class GameScene: SKScene {
         fireballNode.physicsBody?.collisionBitMask = PhysicsCategory.none
         fireballNode.physicsBody = SKPhysicsBody(rectangleOf: fireballNode.size)
         fireballNode.position = position
+        fireballNode.zRotation = angle
         addChild(fireballNode)
-        /*var dx = CGFloat(chickenPosition1.x)
-        var dy = CGFloat(chickenPosition1.y)
-        
-        let magnitude = sqrt(dx * dx + dy * dy)
-        
-        dx /= magnitude
-        dy /= magnitude
-        
-        let vector = CGVector(dx: dx, dy: dy)
-        
-        fireballNode.physicsBody?.applyImpulse(vector)*/
-        
+        // start fireball animation
         fireballNode.run(SKAction.repeatForever(SKAction.animate(with: fireballFrames, timePerFrame: 0.1)))
-        
-        /*bear.run(SKAction.repeatForever(
-            SKAction.animate(with: bearWalkingFrames,
-                             timePerFrame: 0.1,
-                             resize: false,
-                             restore: true)))*/
-        
+        // move fireball
         fireballNode.run(SKAction.move(to: destination, duration: 0.2), completion: {fireballNode.removeFromParent()})
     }
 
@@ -262,8 +238,6 @@ class GameScene: SKScene {
 
         }
     }
-
-    
 }
 
 // - MARK: Setup helpers
@@ -292,40 +266,36 @@ extension GameScene {
         if duckSuspended == false {
             for touch in touches {
                 let touchLocation = touch.location(in: self)
+                var orientAngle : CGFloat
                 switch (touchLocation.x, touchLocation.y) {
                 case (size.width/2..<size.width, size.height/2..<size.height):
-                    duckNode.run(SKAction.rotate(toAngle: CGFloat(tanh(size.height / size.width)), duration: 0.08, shortestUnitArc: true))
-                    spawnFireball(position: CGPoint(x: size.width/2, y: size.height/2), destination: CGPoint(x: size.width, y: size.height))//chickenPosition1)//CGPoint(x: size.width - size.width * 0.2, y: size.height - size.width * 0.2))
+                    orientAngle = CGFloat(tanh(size.height / size.width))
+                    duckNode.run(SKAction.rotate(toAngle: orientAngle, duration: 0.08, shortestUnitArc: true))
+                    spawnFireball(position: CGPoint(x: size.width/2, y: size.height/2), destination: CGPoint(x: size.width, y: size.height), angle: orientAngle)//chickenPosition1)//CGPoint(x: size.width - size.width * 0.2, y: size.height - size.width * 0.2))
                     print("touch in top right")
                 case (size.width/2..<size.width, 0..<size.height/2):
-                    duckNode.run(SKAction.rotate(toAngle: CGFloat(-tanh(size.height / size.width)), duration: 0.08, shortestUnitArc: true))
-                    spawnFireball(position: CGPoint(x: size.width/2, y: size.height/2), destination: CGPoint(x: size.width, y: 0))// chickenPosition2)//CGPoint(x: size.width - size.width * 0.2, y: size.width * 0.2))
+                    orientAngle = CGFloat(-tanh(size.height / size.width))
+                    duckNode.run(SKAction.rotate(toAngle: orientAngle, duration: 0.08, shortestUnitArc: true))
+                    spawnFireball(position: CGPoint(x: size.width/2, y: size.height/2), destination: CGPoint(x: size.width, y: 0), angle: orientAngle)// chickenPosition2)//CGPoint(x: size.width - size.width * 0.2, y: size.width * 0.2))
                     print("touch in bottom right")
                 case (0..<size.width/2, 0..<size.height/2):
-                    duckNode.run(SKAction.rotate(toAngle: CGFloat(tanh(size.height / size.width) + CGFloat(Double.pi)), duration: 0.08, shortestUnitArc: true))
-                    spawnFireball(position: CGPoint(x: size.width/2, y: size.height/2), destination: CGPoint(x: 0, y: 0))//chickenPosition3)//CGPoint(x: size.width * 0.2, y: size.width * 0.2))
+                    orientAngle = CGFloat(tanh(size.height / size.width) + CGFloat(Double.pi))
+                    duckNode.run(SKAction.rotate(toAngle: orientAngle, duration: 0.08, shortestUnitArc: true))
+                    spawnFireball(position: CGPoint(x: size.width/2, y: size.height/2), destination: CGPoint(x: 0, y: 0), angle: orientAngle)//chickenPosition3)//CGPoint(x: size.width * 0.2, y: size.width * 0.2))
                     print("touch in bottom left")
                 case (0..<size.width/2, size.height/2..<size.height):
-                    duckNode.run(SKAction.rotate(toAngle: CGFloat(-tanh(size.height / size.width) + CGFloat(Double.pi)), duration: 0.08, shortestUnitArc: true))
-                    spawnFireball(position: CGPoint(x: size.width/2, y: size.height/2), destination: CGPoint(x: 0, y: size.height))//chickenPosition4)//CGPoint(x: size.width * 0.2, y: size.height - size.width * 0.2))
+                    orientAngle = CGFloat(-tanh(size.height / size.width) + CGFloat(Double.pi))
+                    duckNode.run(SKAction.rotate(toAngle: orientAngle, duration: 0.08, shortestUnitArc: true))
+                    spawnFireball(position: CGPoint(x: size.width/2, y: size.height/2), destination: CGPoint(x: 0, y: size.height), angle: orientAngle)//chickenPosition4)//CGPoint(x: size.width * 0.2, y: size.height - size.width * 0.2))
                     print("touch in top left")
                 default:
                     print("touch in no quadrants")
                 }
             }
+            duckNode.run(SKAction.sequence([SKAction.scale(to: 1.2, duration: 0.05), SKAction.scale(to: 1, duration: 0.1)]))
         }
         //print("GameScene:: touchesBegan() end")
     }
-/*    override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
-        let touch:UITouch = touches.anyObject() as UITouch
-        let touchLocation = touch.locationInNode(self)
-        
-        if touchLocation.x < self.frame.size.width / 2 {
-            // Left side of the screen
-        } else {
-            // Right side of the screen
-        }
-    }*/
 
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         //print("GameScene:: touchesEnded begin")
@@ -338,9 +308,6 @@ extension GameScene {
 extension GameScene: SKPhysicsContactDelegate {
     
     func didBegin(_ contact: SKPhysicsContact) {
-        //print("Pew pew contact", contact)
-        //        let bodyA = contact.bodyA
-        //        let bodyB = contact.bodyB
         var firstBody: SKPhysicsBody
         var secondBody: SKPhysicsBody
         if contact.bodyA.categoryBitMask < contact.bodyB.categoryBitMask {
