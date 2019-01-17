@@ -11,6 +11,7 @@ import SpriteKit
 
 class HudNode : SKNode {
     private let scoreKey = "DUCKMAN_HIGHSCORE"
+    private let currentScoreKey = "CURRENT_SCORE"
     private let scoreNode = SKLabelNode(fontNamed: "DIN Alternate")
     private let highscoreNode = SKLabelNode(fontNamed: "DIN Alternate")
     private(set) var score : Int = 0
@@ -22,6 +23,7 @@ class HudNode : SKNode {
         let defaults = UserDefaults.standard
         
         highscore = defaults.integer(forKey: scoreKey)
+        score = defaults.integer(forKey: currentScoreKey)
         
         scoreNode.text = "\(score)"
         scoreNode.fontSize = 70
@@ -43,7 +45,6 @@ class HudNode : SKNode {
     public func addPoint() {
 
         score += 1
-        updateScoreboard()
 
         if score > highscore {
             highscore = score
@@ -59,9 +60,11 @@ class HudNode : SKNode {
                 scoreNode.fontColor = SKColor.yellow
             }
         }
+        updateScoreboard()
     }
     
     public func resetPoints() {
+        print("resetPoints")
         score = 0
         
         updateScoreboard()
@@ -74,10 +77,17 @@ class HudNode : SKNode {
         }
     }
     
+    public func saveCurrentScore() {
+        let defaults = UserDefaults.standard
+        
+        defaults.set(score, forKey: currentScoreKey)
+    }
+    
     private func updateScoreboard() {
         scoreNode.text = "\(score)"
         highscoreNode.text = "\(highscore)"
         print("score:", score)
         print("highscore:", highscore)
     }
+    
 }

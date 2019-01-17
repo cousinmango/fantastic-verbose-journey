@@ -12,6 +12,10 @@ import GameplayKit
 class HomeMenuScene: SKScene {
     
     let hud = HudNode()
+    private let scoreKey = "DUCKMAN_HIGHSCORE"
+    private var highscore : Int = 0
+    private let currentScoreKey = "CURRENT_SCORE"
+    private var currentScore : Int = 0
     
     override init() {
         super.init()
@@ -24,7 +28,7 @@ class HomeMenuScene: SKScene {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
-    func resetDefaults() {
+    func resetDefaults() { // resets high score
         let defaults = UserDefaults.standard
         let dictionary = defaults.dictionaryRepresentation()
         dictionary.keys.forEach { key in
@@ -33,6 +37,7 @@ class HomeMenuScene: SKScene {
     }
 
     override func didMove(to view: SKView) {
+        print("on home screen", hud.score)
         // resetDefaults()
         print("HomeMenuScene:: didMove() start \(view)")
         print("HomeMenuScene:: size", size)
@@ -47,6 +52,22 @@ class HomeMenuScene: SKScene {
         logoNode.position = CGPoint(x: size.width/2, y: size.height/2)
         logoNode.size = CGSize(width: 150, height: 150)
         addChild(logoNode)
+
+        let defaults = UserDefaults.standard
+        
+        currentScore = defaults.integer(forKey: currentScoreKey)
+        let scoreLabel = SKLabelNode(text: String(currentScore))
+        scoreLabel.fontName = "DIN Alternate"
+        scoreLabel.fontSize = 40
+        scoreLabel.position = CGPoint(x: 50, y: 100)
+        addChild(scoreLabel)
+
+        highscore = defaults.integer(forKey: scoreKey)
+        let highscoreLabel = SKLabelNode(text: String(highscore))
+        highscoreLabel.fontName = "DIN Alternate"
+        highscoreLabel.fontSize = 40
+        highscoreLabel.position = CGPoint(x: 50, y: 50)
+        addChild(highscoreLabel)
         
         // ___________TEMP__________
         
@@ -56,17 +77,15 @@ class HomeMenuScene: SKScene {
         tempTitleLabel.position = CGPoint(x: titleNode.position.x, y: titleNode.position.y - 15)
         addChild(tempTitleLabel)
         
-        let tempStartLabel = SKLabelNode(text: "START")
-        tempStartLabel.fontName = "DIN Alternate"
-        tempStartLabel.fontSize = 30
-
-        
         // ^^^^^^^^^^TEMP^^^^^^^^^^
         
         setup()
 
         let startButton = createSKButtonStart()
-        startButton.addChild(tempStartLabel)
+        let startButtonLabel = SKLabelNode(text: "START")
+        startButtonLabel.fontName = "DIN Alternate"
+        startButtonLabel.fontSize = 30
+        startButton.addChild(startButtonLabel)
         addChild(startButton)
         print("HomeMenuScene:: didMove() finished")
     }

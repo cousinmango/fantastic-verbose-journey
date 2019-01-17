@@ -92,7 +92,7 @@ class GameScene: SKScene {
             // reset
             timeSinceLastAction = TimeInterval(0)
             // Randomize seconds until next action
-            timeUntilNextAction = CDouble(arc4random_uniform(2))
+            timeUntilNextAction = Double.random(in: 0 ..< 0.5)//CDouble(arc4random_uniform(2))
         }
         
         // Pan spawn at random time interval
@@ -141,7 +141,7 @@ class GameScene: SKScene {
     
     func spawnPanRandom() {
         let panNode = SKSpriteNode(imageNamed: "egg")//color: UIColor.lightGray, size: CGSize(width: 50, height: 50))
-        panNode.size = CGSize(width: 50, height: 50)
+        panNode.size = CGSize(width: 100, height: 100)
         panNode.physicsBody = SKPhysicsBody(rectangleOf: panNode.size)
         panNode.physicsBody?.categoryBitMask = PhysicsCategory.pan
         panNode.physicsBody?.contactTestBitMask = PhysicsCategory.fireball
@@ -205,7 +205,8 @@ class GameScene: SKScene {
             gameTimer = nil
             self.removeAllChildren() // clear -- TODO: Move this code to the hot reload injection refresher.
             let homeMenuScene = HomeMenuScene(size: size)
-            
+            print("before home screen", hud.score)
+            hud.saveCurrentScore()
             self.view?.presentScene(homeMenuScene)
 
         }
@@ -292,33 +293,40 @@ extension GameScene: SKPhysicsContactDelegate {
             firstBody = contact.bodyB
             secondBody = contact.bodyA
         }
-        
+        // when a chicken spawns in same position as existing chicken
         if ((firstBody.categoryBitMask == PhysicsCategory.chicken) &&
             (secondBody.categoryBitMask == PhysicsCategory.chicken)) {
             if let chicken = firstBody.node as? SKSpriteNode,
-                let chicken2 = secondBody.node as? SKSpriteNode {
+                let chicken2 = secondBody.node as? SKSpriteNode { //chicken2 is the initial chicken
+                //chicken2.run(SKAction.sequence([SKAction.scale(to: 0, duration: 0.1), SKAction.removeFromParent()]))
+                //chicken.removeFromParent()
                 chicken.removeFromParent()
-                chicken2.removeFromParent()
                 print("chicken hit chicken")
             }
+        // when pan spawns in same position as existing pan
         } else if ((firstBody.categoryBitMask == PhysicsCategory.pan) &&
             (secondBody.categoryBitMask == PhysicsCategory.pan)) {
             if let pan = firstBody.node as? SKSpriteNode,
-                let fireball = secondBody.node as? SKSpriteNode {
-                fireball.removeFromParent()
+                let pan2 = secondBody.node as? SKSpriteNode { // pan2 is initial pan
+                //fireball.removeFromParent()
                 pan.removeFromParent()
                 print("pan hit pan")
             }
-        
+        // chicken hit by fireball
         } else if ((firstBody.categoryBitMask & PhysicsCategory.chicken != 0) &&
             (secondBody.categoryBitMask & PhysicsCategory.fireball != 0)) {
             if let chicken = firstBody.node as? SKSpriteNode,
                 let fireball = secondBody.node as? SKSpriteNode {
                 fireball.removeFromParent()
-                chicken.removeFromParent()
+                chicken.run(SKAction.sequence([SKAction.moveBy(x: 0, y: 10, duration: 0.05),
+                                               SKAction.setTexture(SKTexture(imageNamed: "egg")),
+                                               SKAction.moveBy(x: 0, y: -10, duration: 0.1)]))
+                //chicken.texture = SKTexture(imageNamed: "egg")
+                //chicken.removeFromParent()
                 hud.addPoint()
                 print("HIT CHICKEN!")
             }
+        // pan hit by fireball
         } else if ((firstBody.categoryBitMask & PhysicsCategory.pan != 0) &&
             (secondBody.categoryBitMask & PhysicsCategory.fireball != 0)) {
             if let pan = firstBody.node as? SKSpriteNode,
