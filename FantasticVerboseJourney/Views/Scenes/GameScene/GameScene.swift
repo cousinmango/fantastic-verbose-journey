@@ -22,10 +22,10 @@ class GameScene: SKScene {
     
     struct PhysicsCategory {
         static let none      : UInt32 = 0
-        static let all       : UInt32 = UInt32.max
+        //static let all       : UInt32 = UInt32.max
         static let chicken   : UInt32 = 0b1       // 1
         static let pan       : UInt32 = 0b10      // 2
-        static let fireball  : UInt32 = 0b11      // 2
+        static let fireball  : UInt32 = 0b11      // 3
     }
 
     private let hud = HudNode()
@@ -92,7 +92,7 @@ class GameScene: SKScene {
             // reset
             timeSinceLastAction = TimeInterval(0)
             // Randomize seconds until next action
-            timeUntilNextAction = CDouble(arc4random_uniform(3))
+            timeUntilNextAction = CDouble(arc4random_uniform(2))
         }
         
         // Pan spawn at random time interval
@@ -116,6 +116,7 @@ class GameScene: SKScene {
         chickenNode.physicsBody = SKPhysicsBody(rectangleOf: chickenNode.size)
         chickenNode.physicsBody?.categoryBitMask = PhysicsCategory.chicken
         chickenNode.physicsBody?.contactTestBitMask = PhysicsCategory.fireball
+        chickenNode.physicsBody?.collisionBitMask = PhysicsCategory.none
         let randomInt = Int.random(in: 1...4)
         switch randomInt {
         case 1:
@@ -144,19 +145,20 @@ class GameScene: SKScene {
         panNode.physicsBody = SKPhysicsBody(rectangleOf: panNode.size)
         panNode.physicsBody?.categoryBitMask = PhysicsCategory.pan
         panNode.physicsBody?.contactTestBitMask = PhysicsCategory.fireball
+        panNode.physicsBody?.collisionBitMask = PhysicsCategory.none
         let randomInt = Int.random(in: 1...4)
-        let edgeMargin : CGFloat = size.width * 0.3
+        let edgeMargin : CGFloat = 0.3
         switch randomInt {
         case 1:
-            panNode.position = CGPoint(x: size.width - edgeMargin, y: size.height - edgeMargin)
+            panNode.position = CGPoint(x: size.width * (1 - edgeMargin), y: size.height * (1 - edgeMargin))
         case 2:
-            panNode.position = CGPoint(x: size.width - edgeMargin, y: edgeMargin)
+            panNode.position = CGPoint(x: size.width * (1 - edgeMargin), y: size.height * edgeMargin)
         case 3:
-            panNode.position = CGPoint(x: edgeMargin, y: edgeMargin)
+            panNode.position = CGPoint(x: size.width * edgeMargin, y: size.height * edgeMargin)
         case 4:
-            panNode.position = CGPoint(x: edgeMargin, y: size.height - edgeMargin)
+            panNode.position = CGPoint(x: size.width * edgeMargin, y: size.height * (1 - edgeMargin))
         default:
-            panNode.position = CGPoint(x: size.width - edgeMargin, y: size.height - edgeMargin)
+            panNode.position = CGPoint(x: size.width * (1 - edgeMargin), y: size.height * (1 - edgeMargin))
             print("ERROR: pan spawn default")
         }
         addChild(panNode)
@@ -172,7 +174,8 @@ class GameScene: SKScene {
         print("fireball fired")
         let fireballNode = SKSpriteNode(color: UIColor.orange, size: CGSize(width: 10, height: 10))
         fireballNode.physicsBody?.categoryBitMask = PhysicsCategory.fireball
-        fireballNode.physicsBody?.contactTestBitMask = PhysicsCategory.chicken | PhysicsCategory.pan
+        //fireballNode.physicsBody?.contactTestBitMask = PhysicsCategory.chicken | PhysicsCategory.pan
+        fireballNode.physicsBody?.collisionBitMask = PhysicsCategory.none
         fireballNode.physicsBody = SKPhysicsBody(rectangleOf: fireballNode.size)
         fireballNode.position = position
         addChild(fireballNode)
@@ -290,14 +293,31 @@ extension GameScene: SKPhysicsContactDelegate {
             secondBody = contact.bodyA
         }
         
-        if ((firstBody.categoryBitMask & PhysicsCategory.chicken != 0) &&
+        if ((firstBody.categoryBitMask == PhysicsCategory.chicken) &&
+            (secondBody.categoryBitMask == PhysicsCategory.chicken)) {
+            if let chicken = firstBody.node as? SKSpriteNode,
+                let chicken2 = secondBody.node as? SKSpriteNode {
+                chicken.removeFromParent()
+                chicken2.removeFromParent()
+                print("chicken hit chicken")
+            }
+        } else if ((firstBody.categoryBitMask == PhysicsCategory.pan) &&
+            (secondBody.categoryBitMask == PhysicsCategory.pan)) {
+            if let pan = firstBody.node as? SKSpriteNode,
+                let fireball = secondBody.node as? SKSpriteNode {
+                fireball.removeFromParent()
+                pan.removeFromParent()
+                print("pan hit pan")
+            }
+        
+        } else if ((firstBody.categoryBitMask & PhysicsCategory.chicken != 0) &&
             (secondBody.categoryBitMask & PhysicsCategory.fireball != 0)) {
             if let chicken = firstBody.node as? SKSpriteNode,
                 let fireball = secondBody.node as? SKSpriteNode {
                 fireball.removeFromParent()
                 chicken.removeFromParent()
                 hud.addPoint()
-                print("hit chicken!")
+                print("HIT CHICKEN!")
             }
         } else if ((firstBody.categoryBitMask & PhysicsCategory.pan != 0) &&
             (secondBody.categoryBitMask & PhysicsCategory.fireball != 0)) {
@@ -305,7 +325,7 @@ extension GameScene: SKPhysicsContactDelegate {
                 let fireball = secondBody.node as? SKSpriteNode {
                 fireball.removeFromParent()
                 pan.removeFromParent()
-                print("hit pan!")
+                print("HIT PAN!")
             }
         }
     }

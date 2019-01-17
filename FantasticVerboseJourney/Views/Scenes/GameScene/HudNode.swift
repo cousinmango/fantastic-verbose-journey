@@ -42,8 +42,8 @@ class HudNode : SKNode {
     
     public func addPoint() {
 
-        updateScoreboard()
         score += 1
+        updateScoreboard()
 
         if score > highscore {
             highscore = score
