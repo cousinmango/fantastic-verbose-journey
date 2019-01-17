@@ -139,7 +139,8 @@ class GameScene: SKScene {
     }
     
     func spawnPanRandom() {
-        let panNode = SKSpriteNode(color: UIColor.lightGray, size: CGSize(width: 50, height: 50))
+        let panNode = SKSpriteNode(imageNamed: "egg")//color: UIColor.lightGray, size: CGSize(width: 50, height: 50))
+        panNode.size = CGSize(width: 50, height: 50)
         panNode.physicsBody = SKPhysicsBody(rectangleOf: panNode.size)
         panNode.physicsBody?.categoryBitMask = PhysicsCategory.pan
         panNode.physicsBody?.contactTestBitMask = PhysicsCategory.fireball
@@ -168,6 +169,7 @@ class GameScene: SKScene {
 
     
     func spawnFireball(position: CGPoint, destination: CGPoint) {
+        print("fireball fired")
         let fireballNode = SKSpriteNode(color: UIColor.orange, size: CGSize(width: 10, height: 10))
         fireballNode.physicsBody?.categoryBitMask = PhysicsCategory.fireball
         fireballNode.physicsBody?.contactTestBitMask = PhysicsCategory.chicken | PhysicsCategory.pan
@@ -187,7 +189,6 @@ class GameScene: SKScene {
         fireballNode.physicsBody?.applyImpulse(vector)*/
         let moveToChicken = SKAction.move(to: destination, duration: 0.1)
         fireballNode.run(moveToChicken)
-        print("fireball fired")
     }
 
     
