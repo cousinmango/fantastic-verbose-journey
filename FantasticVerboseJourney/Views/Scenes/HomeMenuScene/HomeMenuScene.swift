@@ -58,8 +58,8 @@ class HomeMenuScene: SKScene {
         currentScore = defaults.integer(forKey: currentScoreKey)
         let scoreLabel = SKLabelNode(text: String(currentScore))
         scoreLabel.fontName = "DIN Alternate"
-        scoreLabel.fontSize = 40
-        scoreLabel.position = CGPoint(x: 50, y: 100)
+        scoreLabel.fontSize = 80
+        scoreLabel.position = CGPoint(x: size.width / 2, y: size.height * 0.6)
         addChild(scoreLabel)
 
         highscore = defaults.integer(forKey: scoreKey)
