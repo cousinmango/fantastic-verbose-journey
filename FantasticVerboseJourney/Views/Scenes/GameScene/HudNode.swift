@@ -21,21 +21,22 @@ class HudNode : SKNode {
     //Setup hud here
     public func setup(size: CGSize) {
         let defaults = UserDefaults.standard
+        var scaleFactor = size.height * 0.105 // size.height = 568 for iPhone SE (half of vert res 1136)
         
         highscore = defaults.integer(forKey: scoreKey)
         score = defaults.integer(forKey: currentScoreKey)
         
         scoreNode.text = "\(score)"
-        scoreNode.fontSize = 70
+        scoreNode.fontSize = scaleFactor //60
         scoreNode.position = CGPoint(x: size.width / 2, y: size.height * 0.85)
         scoreNode.zPosition = 1
         
         addChild(scoreNode)
         
-        highscoreNode.text = "\(highscore)"
-        highscoreNode.fontSize = 30
+        highscoreNode.text = "BEST: \(highscore)"
+        highscoreNode.fontSize = scaleFactor * 0.4//25
         highscoreNode.fontColor = SKColor.yellow
-        highscoreNode.position = CGPoint(x: size.width * 0.2, y: size.height * 0.85)
+        highscoreNode.position = CGPoint(x: size.width / 2, y: size.height * 0.1)
         highscoreNode.zPosition = 1
         
         addChild(highscoreNode)
@@ -43,9 +44,10 @@ class HudNode : SKNode {
     }
     
     public func addPoint() {
-
+        scoreNode.run(SKAction.sequence([SKAction.scale(to: 1.2, duration: 0.05),
+                                         SKAction.scale(to: 1, duration: 0.05)]))
         score += 1
-
+        
         if score > highscore {
             highscore = score
             
@@ -85,7 +87,7 @@ class HudNode : SKNode {
     
     private func updateScoreboard() {
         scoreNode.text = "\(score)"
-        highscoreNode.text = "\(highscore)"
+        highscoreNode.text = "BEST: \(highscore)"
         print("score:", score)
         print("highscore:", highscore)
     }

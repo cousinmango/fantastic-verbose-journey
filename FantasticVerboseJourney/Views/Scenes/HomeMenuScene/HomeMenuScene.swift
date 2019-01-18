@@ -37,6 +37,8 @@ class HomeMenuScene: SKScene {
     }
 
     override func didMove(to view: SKView) {
+        let scaleFactor = size.height * 0.25 // = 284 on iPhone SE
+
         print("on home screen", hud.score)
         // resetDefaults()
         print("HomeMenuScene:: didMove() start \(view)")
@@ -44,29 +46,31 @@ class HomeMenuScene: SKScene {
         
         
         // title setup
-        let titleNode = SKSpriteNode(color: UIColor.red, size: CGSize(width: 300, height: 150))
-        titleNode.position = CGPoint(x: size.width/2, y: size.height - 100)
+        let titleNode = SKSpriteNode(imageNamed: "egg")//color: UIColor.red, size: CGSize(width: 300, height: 150))
+        titleNode.position = CGPoint(x: size.width/2, y: size.height * 0.9)
+        titleNode.size = CGSize(width: scaleFactor * 3, height: scaleFactor)
         addChild(titleNode)
         
         let logoNode = SKSpriteNode(imageNamed: "duck")
         logoNode.position = CGPoint(x: size.width/2, y: size.height/2)
-        logoNode.size = CGSize(width: 150, height: 150)
+        logoNode.size = CGSize(width: scaleFactor, height: scaleFactor)
         addChild(logoNode)
+        logoNode.run(SKAction.repeatForever(SKAction.rotate(byAngle: -2 * CGFloat(Double.pi), duration: 4)))
 
         let defaults = UserDefaults.standard
         
         currentScore = defaults.integer(forKey: currentScoreKey)
         let scoreLabel = SKLabelNode(text: String(currentScore))
         scoreLabel.fontName = "DIN Alternate"
-        scoreLabel.fontSize = 80
-        scoreLabel.position = CGPoint(x: size.width / 2, y: size.height * 0.6)
+        scoreLabel.fontSize = scaleFactor * 0.4//80
+        scoreLabel.position = CGPoint(x: size.width / 2, y: size.height * 0.64)
         addChild(scoreLabel)
 
         highscore = defaults.integer(forKey: scoreKey)
-        let highscoreLabel = SKLabelNode(text: String(highscore))
+        let highscoreLabel = SKLabelNode(text: "BEST: \(highscore)")//String(highscore))
         highscoreLabel.fontName = "DIN Alternate"
-        highscoreLabel.fontSize = 40
-        highscoreLabel.position = CGPoint(x: 50, y: 50)
+        highscoreLabel.fontSize = scaleFactor * 0.15//40
+        highscoreLabel.position = CGPoint(x: size.width / 2, y: size.height * 0.3)
         addChild(highscoreLabel)
         
         // ___________TEMP__________
@@ -85,6 +89,7 @@ class HomeMenuScene: SKScene {
         let startButtonLabel = SKLabelNode(text: "START")
         startButtonLabel.fontName = "DIN Alternate"
         startButtonLabel.fontSize = 30
+        startButton.size = CGSize(width: scaleFactor, height: scaleFactor * 0.5)
         startButton.addChild(startButtonLabel)
         addChild(startButton)
         print("HomeMenuScene:: didMove() finished")
@@ -140,7 +145,7 @@ extension HomeMenuScene: SKPhysicsContactDelegate {
 extension HomeMenuScene {
     func createSKButtonStart() -> SKButton {
         let button: SKButton = SKButtonFactory.getButton(delegate: self)
-        button.position = CGPoint(x: size.width/2, y: size.width/2)
+        button.position = CGPoint(x: size.width/2, y: size.height * 0.2)
         button.zPosition = -3
         button.color = SKColor.blue
         button.size = CGSize(width: 250, height: 100)
