@@ -59,7 +59,7 @@ class GameScene: SKScene {
         //print("GameScene:: size", size)
         
         timerNode.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.left
-        timerNode.position = CGPoint(x: size.width/2 - (scaleFactor * 0.05), y: size.height * 0.75)
+        timerNode.position = CGPoint(x: size.width/2 - (scaleFactor * 0.05), y: size.height * 0.77)
         timerNode.fontName = "DIN Alternate"
         timerNode.fontColor = SKColor(red: 0.63, green: 0.16, blue: 0.41, alpha: 1.0)
         timerNode.fontSize = scaleFactor * 0.2//30

@@ -55,7 +55,7 @@ class HomeMenuScene: SKScene {
         // title setup
         let titleNode = SKSpriteNode(imageNamed: "title")//color: UIColor.red, size: CGSize(width: 300, height: 150))
         titleNode.position = CGPoint(x: size.width/2, y: size.height * 0.85)
-        titleNode.setScale(scaleFactor * 0.0015)
+        titleNode.setScale(scaleFactor * 0.0013)
         //titleNode.size = CGSize(width: scaleFactor * 3, height: titleNode.size.y * scaleFactor)
         addChild(titleNode)
         
