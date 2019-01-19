@@ -12,6 +12,7 @@ import GameplayKit
 class HomeMenuScene: SKScene {
     
     let hud = HudNode()
+    let gameScene = GameScene()
     private let scoreKey = "DUCKMAN_HIGHSCORE"
     private var highscore : Int = 0
     private let currentScoreKey = "CURRENT_SCORE"
@@ -59,11 +60,16 @@ class HomeMenuScene: SKScene {
         addChild(titleNode)
         
         let logoNode = SKSpriteNode(imageNamed: "duck")
+        logoNode.anchorPoint = CGPoint(x: 0.5, y: 0.4)
         logoNode.position = CGPoint(x: size.width/2, y: size.height/2)
         logoNode.size = CGSize(width: scaleFactor, height: scaleFactor)
         addChild(logoNode)
         logoNode.run(SKAction.repeatForever(SKAction.rotate(byAngle: -2 * CGFloat(Double.pi), duration: 4)))
+        let scaleUpDown = SKAction.repeatForever(SKAction.sequence([SKAction.scale(to: 0.85, duration: 0.8), SKAction.scale(to: 1, duration: 0.8)]))
+        scaleUpDown.timingMode = SKActionTimingMode.easeInEaseOut
+        logoNode.run(scaleUpDown)
 
+        
         let defaults = UserDefaults.standard
         
         currentScore = defaults.integer(forKey: currentScoreKey)
