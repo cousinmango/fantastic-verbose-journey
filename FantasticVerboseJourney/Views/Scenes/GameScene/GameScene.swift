@@ -61,6 +61,7 @@ class GameScene: SKScene {
         timerNode.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.left
         timerNode.position = CGPoint(x: size.width/2 - (scaleFactor * 0.05), y: size.height * 0.75)
         timerNode.fontName = "DIN Alternate"
+        timerNode.fontColor = SKColor(red: 0.63, green: 0.16, blue: 0.41, alpha: 1.0)
         timerNode.fontSize = scaleFactor * 0.2//30
         timerNode.text = ": \(timeLeft)"
         addChild(timerNode)
@@ -121,6 +122,7 @@ class GameScene: SKScene {
     func spawnDuck() {
         // duck setup
         duckNode.size = CGSize(width: scaleFactor, height: scaleFactor)
+        duckNode.anchorPoint = CGPoint(x: 0.5, y: 0.4)
         duckNode.position = CGPoint(x: size.width/2, y: size.height/2 + 10)
         duckNode.zPosition = 5
         duckNode.zRotation = 0
@@ -164,7 +166,7 @@ class GameScene: SKScene {
     
     func spawnPanRandom() {
         let panNode = SKSpriteNode(imageNamed: "pan")//color: UIColor.lightGray, size: CGSize(width: 50, height: 50))
-        panNode.size = CGSize(width: scaleFactor * 0.6, height: scaleFactor * 0.6)
+        panNode.size = CGSize(width: scaleFactor * 0.8, height: scaleFactor * 0.8)
         panNode.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: panNode.size.width / 2, height: panNode.size.height / 2)) //circleOfRadius: panNode.size.height/4)
         panNode.physicsBody?.categoryBitMask = PhysicsCategory.pan
         panNode.physicsBody?.contactTestBitMask = PhysicsCategory.fireball
@@ -194,7 +196,7 @@ class GameScene: SKScene {
                                            SKAction.removeFromParent()]))
     }
 
-    func spawnFireball(position: CGPoint, destination: CGPoint, angle: CGFloat) {
+    func spawnFireball(position: CGPoint, destination: CGPoint, angle: CGFloat) { // also spawns arm sprite
         print("fireball fired")
         // setup fireball animation
         let fireballAtlas = SKTextureAtlas(named: "fire")
@@ -212,13 +214,29 @@ class GameScene: SKScene {
         //fireballNode.physicsBody?.contactTestBitMask = PhysicsCategory.chicken | PhysicsCategory.pan
         fireballNode.physicsBody?.collisionBitMask = PhysicsCategory.none
         fireballNode.physicsBody = SKPhysicsBody(circleOfRadius: fireballNode.size.width / 2)
+        fireballNode.anchorPoint = CGPoint(x: 0, y: 0.5)
         fireballNode.position = position
+        fireballNode.zPosition = 6
         fireballNode.zRotation = angle
         addChild(fireballNode)
         // start fireball animation
         fireballNode.run(SKAction.repeatForever(SKAction.animate(with: fireballFrames, timePerFrame: 0.1)))
         // move fireball
         fireballNode.run(SKAction.move(to: destination, duration: 0.2), completion: {fireballNode.removeFromParent()})
+        
+        // SPAWN ARM
+        let arm = SKSpriteNode(imageNamed: "arm")
+        arm.size = CGSize(width: scaleFactor * 0.85, height: scaleFactor * 0.85)
+        arm.anchorPoint = CGPoint(x: 0, y: 0.5)
+        arm.position = CGPoint(x: size.width/2, y: size.height/2)
+        arm.zPosition = 5
+        arm.zRotation = angle
+        addChild(arm)
+        arm.run(SKAction.sequence([SKAction.scale(to: 0, duration: 0),
+                                   SKAction.scale(to: 1, duration: 0.1),
+                                   SKAction.scale(to: 0, duration: 0.1),
+                                   SKAction.removeFromParent()]))
+
     }
 
     func duckHit() {
@@ -382,7 +400,7 @@ extension GameScene: SKPhysicsContactDelegate {
             (secondBody.categoryBitMask & PhysicsCategory.fireball != 0)) {
             if let pan = firstBody.node as? SKSpriteNode,
                 let fireball = secondBody.node as? SKSpriteNode {
-                fireball.run(SKAction.sequence([SKAction.rotate(byAngle: CGFloat(Double.pi), duration: 0.01), SKAction.move(to: duckNode.position, duration: 0.15)]), completion: {fireball.removeFromParent()}) // fireball bounce back
+                fireball.run(SKAction.sequence([SKAction.scale(to: 0.6, duration: 0), SKAction.rotate(byAngle: CGFloat(Double.pi), duration: 0), SKAction.move(to: duckNode.position, duration: 0.15)]), completion: {fireball.removeFromParent()}) // fireball bounce back
                 pan.run(SKAction.sequence([SKAction.scale(to: 1.3, duration: 0.05), SKAction.scale(to: 1, duration: 0.1)]))
                 //pan.run(SKAction.move(to: CGPoint(x: (pan.position.x + duckNode.position.x) / 2, y: (pan.position.y + duckNode.position.y) / 2), duration: 0.2))
                 if duckSuspended == false {

@@ -21,13 +21,14 @@ class HudNode : SKNode {
     //Setup hud here
     public func setup(size: CGSize) {
         let defaults = UserDefaults.standard
-        var scaleFactor = size.height * 0.105 // size.height = 568 for iPhone SE (half of vert res 1136)
+        let scaleFactor = size.height * 0.105 // size.height = 568 for iPhone SE (half of vert res 1136)
         
         highscore = defaults.integer(forKey: scoreKey)
         score = defaults.integer(forKey: currentScoreKey)
         
         scoreNode.text = "\(score)"
         scoreNode.fontSize = scaleFactor //60
+        scoreNode.fontColor = SKColor(red: 0.63, green: 0.16, blue: 0.41, alpha: 1.0)
         scoreNode.position = CGPoint(x: size.width / 2, y: size.height * 0.85)
         scoreNode.zPosition = 1
         
@@ -35,7 +36,7 @@ class HudNode : SKNode {
         
         highscoreNode.text = "BEST: \(highscore)"
         highscoreNode.fontSize = scaleFactor * 0.4//25
-        highscoreNode.fontColor = SKColor.yellow
+        highscoreNode.fontColor = SKColor(red: 0.63, green: 0.16, blue: 0.41, alpha: 1.0)
         highscoreNode.position = CGPoint(x: size.width / 2, y: size.height * 0.1)
         highscoreNode.zPosition = 1
         

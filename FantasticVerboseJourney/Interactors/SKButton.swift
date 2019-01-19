@@ -30,7 +30,7 @@ class SKButton: SKSpriteNode {
         print("SKButton touchesBegan() tap \(tap)")
         
         // Simple touch response effect for button node.
-        self.setScale(0.85)
+        self.setScale(0.35)
         //        if self.contains(tap.location(in: self)) { // redundant?
         //
         //        }
