@@ -17,14 +17,16 @@ class GameViewController: UIViewController {
         print("GameViewController:: viewDidLoad()")
         
         
-        // Load ref to storyboard view... lame instead of programmatic
+        // Load ref to storyboard view... lame vs programmatic
         guard let skView = self.view as! SKView? else { return }
         skView.showsNodeCount = false
-        skView.showsPhysics = false
-        // Load main game scene. - TODO: Replace with home menu.
-        //guard let homeMenuScene = HomeMenuScene(fileNamed: "HomeMenuScene") else { return }
+
+//         skView.showsPhysics = false
+
         let homeMenuScene = HomeMenuScene(size: view.bounds.size)
-        //homeMenuScene.scaleMode = .aspectFit
+        // homeMenuScene.scaleMode = .aspectFit
+        // Default blank .sks file replicate programmatically with dimension W: 750 H: 1334
+        // Anchor point 0.5, 0.5
         homeMenuScene.view?.setPerformanceOptimisation()
         homeMenuScene.view?.setShowDebug()
 
