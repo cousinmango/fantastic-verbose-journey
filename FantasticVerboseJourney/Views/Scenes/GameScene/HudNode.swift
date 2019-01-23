@@ -11,6 +11,7 @@ import SpriteKit
 
 class HudNode : SKNode {
     private let scoreKey = "DUCKMAN_HIGHSCORE"
+    private let currentScoreKey = "CURRENT_SCORE"
     private let scoreNode = SKLabelNode(fontNamed: "DIN Alternate")
     private let highscoreNode = SKLabelNode(fontNamed: "DIN Alternate")
     private(set) var score : Int = 0
@@ -20,20 +21,23 @@ class HudNode : SKNode {
     //Setup hud here
     public func setup(size: CGSize) {
         let defaults = UserDefaults.standard
+        let scaleFactor = size.height * 0.105 // size.height = 568 for iPhone SE (half of vert res 1136)
         
         highscore = defaults.integer(forKey: scoreKey)
+        score = defaults.integer(forKey: currentScoreKey)
         
         scoreNode.text = "\(score)"
-        scoreNode.fontSize = 70
+        scoreNode.fontSize = scaleFactor //60
+        scoreNode.fontColor = SKColor(red: 0.63, green: 0.16, blue: 0.41, alpha: 1.0)
         scoreNode.position = CGPoint(x: size.width / 2, y: size.height * 0.85)
         scoreNode.zPosition = 1
         
         addChild(scoreNode)
         
-        highscoreNode.text = "\(highscore)"
-        highscoreNode.fontSize = 30
-        highscoreNode.fontColor = SKColor.yellow
-        highscoreNode.position = CGPoint(x: size.width * 0.2, y: size.height * 0.85)
+        highscoreNode.text = "BEST: \(highscore)"
+        highscoreNode.fontSize = scaleFactor * 0.4//25
+        highscoreNode.fontColor = SKColor(red: 0.63, green: 0.16, blue: 0.41, alpha: 1.0)
+        highscoreNode.position = CGPoint(x: size.width / 2, y: size.height * 0.1)
         highscoreNode.zPosition = 1
         
         addChild(highscoreNode)
@@ -41,10 +45,10 @@ class HudNode : SKNode {
     }
     
     public func addPoint() {
-
-        updateScoreboard()
+        scoreNode.run(SKAction.sequence([SKAction.scale(to: 1.2, duration: 0.05),
+                                         SKAction.scale(to: 1, duration: 0.05)]))
         score += 1
-
+        
         if score > highscore {
             highscore = score
             
@@ -59,9 +63,11 @@ class HudNode : SKNode {
                 scoreNode.fontColor = SKColor.yellow
             }
         }
+        updateScoreboard()
     }
     
     public func resetPoints() {
+        print("resetPoints")
         score = 0
         
         updateScoreboard()
@@ -74,10 +80,17 @@ class HudNode : SKNode {
         }
     }
     
+    public func saveCurrentScore() {
+        let defaults = UserDefaults.standard
+        
+        defaults.set(score, forKey: currentScoreKey)
+    }
+    
     private func updateScoreboard() {
         scoreNode.text = "\(score)"
-        highscoreNode.text = "\(highscore)"
+        highscoreNode.text = "BEST: \(highscore)"
         print("score:", score)
         print("highscore:", highscore)
     }
+    
 }
