@@ -21,6 +21,8 @@ class GameViewController: UIViewController {
         guard let skView = self.view as! SKView? else { return }
         skView.showsNodeCount = false
 
+//         skView.showsPhysics = false
+
         let homeMenuScene = HomeMenuScene(size: view.bounds.size)
         // homeMenuScene.scaleMode = .aspectFit
         // Default blank .sks file replicate programmatically with dimension W: 750 H: 1334
