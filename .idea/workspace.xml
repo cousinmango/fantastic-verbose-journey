@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a63c867c-83e4-486b-8d6b-1bf18e13ac2d" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/FantasticVerboseJourney/Delegates/AppDelegate.swift" beforeDir="false" afterPath="$PROJECT_DIR$/FantasticVerboseJourney/Delegates/AppDelegate.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FantasticVerboseJourney/Views/Scenes/GameScene/GameScene.swift" beforeDir="false" afterPath="$PROJECT_DIR$/FantasticVerboseJourney/Views/Scenes/GameScene/GameScene.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FantasticVerboseJourney/Views/Scenes/HomeMenuScene/HomeMenuScene.swift" beforeDir="false" afterPath="$PROJECT_DIR$/FantasticVerboseJourney/Views/Scenes/HomeMenuScene/HomeMenuScene.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FantasticVerboseJourney/Views/Scenes/PauseScene/PauseScene.swift" beforeDir="false" afterPath="$PROJECT_DIR$/FantasticVerboseJourney/Views/Scenes/PauseScene/PauseScene.swift" afterDir="false" />
-    </list>
+    <list default="true" id="a63c867c-83e4-486b-8d6b-1bf18e13ac2d" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,8 +14,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/FantasticVerboseJourney/Views/Scenes/PauseScene/PauseScene.swift">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="472">
-              <caret line="35" column="6" selection-start-line="35" selection-start-column="6" selection-end-line="40" />
+            <state relative-caret-position="421">
+              <caret line="42" column="43" selection-start-line="42" selection-start-column="43" selection-end-line="42" selection-end-column="43" />
             </state>
           </provider>
         </entry>
@@ -72,8 +67,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Cidr.FilesView" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -140,6 +133,8 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Cidr.FilesView" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -209,18 +204,18 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="5889000" />
+    <option name="totallyTimeSpent" value="5902000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="469" y="36" width="1397" height="977" extended-state="0" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49943504" visible="true" weight="0.2494465" />
-      <window_info id="Structure" order="1" sideWeight="0.500565" side_tool="true" visible="true" weight="0.2494465" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4974705" visible="true" weight="0.2494465" />
+      <window_info id="Structure" order="1" sideWeight="0.5025295" side_tool="true" visible="true" weight="0.2494465" />
       <window_info id="Designer" order="2" />
       <window_info id="Favorites" order="3" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.3299435" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.3299435" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -250,9 +245,7 @@
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/FantasticVerboseJourney/Assets.xcassets/AppIcon.appiconset/Icon-1.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
+    <entry file="file://$PROJECT_DIR$/FantasticVerboseJourney/Assets.xcassets/AppIcon.appiconset/Icon-1.png" />
     <entry file="file://$PROJECT_DIR$/FantasticVerboseJourney/Extensions/Utilities/CGPoint+VectorCalculatable.swift">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="300">
@@ -328,8 +321,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/FantasticVerboseJourney/Views/Scenes/PauseScene/PauseScene.swift">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="472">
-          <caret line="35" column="6" selection-start-line="35" selection-start-column="6" selection-end-line="40" />
+        <state relative-caret-position="421">
+          <caret line="42" column="43" selection-start-line="42" selection-start-column="43" selection-end-line="42" selection-end-column="43" />
         </state>
       </provider>
     </entry>
