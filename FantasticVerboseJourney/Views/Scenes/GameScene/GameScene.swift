@@ -26,11 +26,14 @@ class GameScene: SKScene {
         static let chicken   : UInt32 = 0b1       // 1
         static let pan       : UInt32 = 0b10      // 2
         static let fireball  : UInt32 = 0b11      // 3
+        static let timeChicken: UInt32 = 0b100
     }
 
     private let hud = HudNode()
     var scaleFactor : CGFloat = 1136/2 * 0.25 // change value in didMove(to view
+    var timeChickenChance : Int = 15
     let BG = SKSpriteNode(imageNamed: "BG")
+    var textColor = SKColor(red: 0.63, green: 0.16, blue: 0.41, alpha: 1.0)
     var gameTimer : Timer? = nil
     var timeLeft = 30
     var gameMusic: SKAudioNode!
@@ -52,9 +55,10 @@ class GameScene: SKScene {
         scaleFactor = size.height * 0.25
         
         BG.position = CGPoint(x: size.width / 2, y: size.height / 2)
-        BG.size = CGSize(width: size.height, height: size.height)//(width: size.width, height: size.height)
+        BG.size = CGSize(width: size.height * 1.5, height: size.height * 1.5)//(width: size.width, height: size.height)
         BG.zPosition = -10
         addChild(BG)
+        BG.run(SKAction.repeatForever(SKAction.rotate(byAngle: -2 * CGFloat(Double.pi), duration: 4)))
         
         let edgeMargin : CGFloat = 0.15
         chickenPosition1 = CGPoint(x: size.width * (1 - edgeMargin), y: size.height * (1 - edgeMargin) + 10)
@@ -67,7 +71,7 @@ class GameScene: SKScene {
         timerNode.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.left
         timerNode.position = CGPoint(x: size.width/2 - (scaleFactor * 0.05), y: size.height * 0.77)
         timerNode.fontName = "DIN Alternate"
-        timerNode.fontColor = SKColor(red: 0.63, green: 0.16, blue: 0.41, alpha: 1.0)
+        timerNode.fontColor = textColor
         timerNode.fontSize = scaleFactor * 0.2//30
         timerNode.text = ": \(timeLeft)"
         addChild(timerNode)
@@ -158,6 +162,15 @@ class GameScene: SKScene {
             chickenNode.position = chickenPosition1
             print("ERROR: chicken spawn default")
         }
+        
+        let randomTimeChicken = Int.random(in: 1...timeChickenChance) // chance/frequency of timeChicken
+        if randomTimeChicken == 1 {
+            chickenNode.physicsBody?.categoryBitMask = PhysicsCategory.timeChicken
+            chickenNode.texture = SKTexture(imageNamed: "timerIcon")
+            chickenNode.size = CGSize(width: scaleFactor * 0.3, height: scaleFactor * 0.3)
+            chickenNode.run(SKAction.repeatForever(SKAction.rotate(byAngle: -2 * CGFloat(Double.pi), duration: 2)))
+        }
+        
         addChild(chickenNode)
         chickenNode.run(SKAction.sequence([SKAction.scale(to: 0, duration: 0),
                                            SKAction.scale(to: 1, duration: 0.1),
@@ -266,10 +279,33 @@ class GameScene: SKScene {
         })
     }
     
+    func addTime() {
+        timerNode.run(SKAction.sequence([SKAction.scale(to: 1.2, duration: 0.05),
+                                         SKAction.scale(to: 1, duration: 0.05)]))
+        timeLeft += 1 // amount of time to add
+        timerNode.text = ": \(timeLeft)"
+    }
+    
+    func BGFlash() {
+        BG.run(SKAction.sequence([SKAction.colorize(with: UIColor(hue: 0.15, saturation: 1, brightness: 0.5, alpha: 1), colorBlendFactor: 0.3, duration: 0),
+                                                    SKAction.colorize(with: UIColor.black, colorBlendFactor: 0, duration: 0.5)]))
+    }
+    
     @objc func onTimerFires()
     {
         timeLeft -= 1
         timerNode.text = ": \(timeLeft)"
+        
+        switch timeLeft {
+        case 0..<6:
+            timeChickenChance = 2
+        case 6..<13:
+            timeChickenChance = 5
+            BGFlash()
+        default:
+            BG.colorBlendFactor = 0
+            timeChickenChance = 15
+        }
         
         if timeLeft <= 0 {
             gameTimer?.invalidate()
@@ -371,6 +407,23 @@ extension GameScene: SKPhysicsContactDelegate {
                 //chicken.removeFromParent()
                 print("chicken hit chicken")
             }
+        } else if ((firstBody.categoryBitMask == PhysicsCategory.chicken) &&
+            (secondBody.categoryBitMask == PhysicsCategory.timeChicken)) {
+            if let chicken = firstBody.node as? SKSpriteNode,
+                let timeChicken = secondBody.node as? SKSpriteNode { // pan2 is initial pan
+                //pan.run(SKAction.sequence([SKAction.scale(to: 0, duration: 0.1), SKAction.removeFromParent()]))
+                
+                chicken.run(SKAction.sequence([SKAction.moveBy(x: 0, y: 10, duration: 0.05), SKAction.removeFromParent()]))
+                print("time hit chicken")
+            }
+        } else if ((firstBody.categoryBitMask == PhysicsCategory.timeChicken) &&
+                (secondBody.categoryBitMask == PhysicsCategory.timeChicken)) {
+                if let timeChicken = firstBody.node as? SKSpriteNode,
+                    let timeChicken2 = secondBody.node as? SKSpriteNode { //chicken2 is the initial chicken
+                    timeChicken2.run(SKAction.sequence([SKAction.moveBy(x: 0, y: 10, duration: 0.05), SKAction.removeFromParent()]))
+                    print("time hit time")
+                }
+
         // when pan spawns in same position as existing pan
         } else if ((firstBody.categoryBitMask == PhysicsCategory.pan) &&
             (secondBody.categoryBitMask == PhysicsCategory.pan)) {
@@ -388,7 +441,6 @@ extension GameScene: SKPhysicsContactDelegate {
                 let pan = secondBody.node as? SKSpriteNode {
                 //print("pan hit chicken")
             }
-
         // chicken hit by fireball
         } else if ((firstBody.categoryBitMask & PhysicsCategory.chicken != 0) &&
             (secondBody.categoryBitMask & PhysicsCategory.fireball != 0)) {
@@ -402,6 +454,19 @@ extension GameScene: SKPhysicsContactDelegate {
                 hud.addPoint()
                 print("HIT CHICKEN!")
             }
+            // timeChicken hit by fireball
+        } else if ((firstBody.categoryBitMask & PhysicsCategory.timeChicken != 0) &&
+            (secondBody.categoryBitMask & PhysicsCategory.fireball != 0)) {
+            if let timeChicken = firstBody.node as? SKSpriteNode,
+                let fireball = secondBody.node as? SKSpriteNode {
+                fireball.removeFromParent()
+                timeChicken.run(SKAction.sequence([SKAction.playSoundFileNamed("chickenhitSound.wav", waitForCompletion: false),
+                                               SKAction.scale(to: 1.2, duration: 0.05),
+                                               SKAction.scale(to: 1, duration: 0.1)]))
+                addTime()
+                print("HIT TIMECHICKEN!")
+            }
+
         // pan hit by fireball
         } else if ((firstBody.categoryBitMask & PhysicsCategory.pan != 0) &&
             (secondBody.categoryBitMask & PhysicsCategory.fireball != 0)) {

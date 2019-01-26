@@ -10,6 +10,7 @@ import Foundation
 import SpriteKit
 
 class HudNode : SKNode {
+    var textColor = SKColor(red: 0.63, green: 0.16, blue: 0.41, alpha: 1.0)
     private let scoreKey = "DUCKMAN_HIGHSCORE"
     private let currentScoreKey = "CURRENT_SCORE"
     private let scoreNode = SKLabelNode(fontNamed: "DIN Alternate")
@@ -28,7 +29,7 @@ class HudNode : SKNode {
         
         scoreNode.text = "\(score)"
         scoreNode.fontSize = scaleFactor //60
-        scoreNode.fontColor = SKColor(red: 0.63, green: 0.16, blue: 0.41, alpha: 1.0)
+        scoreNode.fontColor = textColor
         scoreNode.position = CGPoint(x: size.width / 2, y: size.height * 0.85)
         scoreNode.zPosition = 1
         
@@ -36,7 +37,7 @@ class HudNode : SKNode {
         
         highscoreNode.text = "BEST: \(highscore)"
         highscoreNode.fontSize = scaleFactor * 0.4//25
-        highscoreNode.fontColor = SKColor(red: 0.63, green: 0.16, blue: 0.41, alpha: 1.0)
+        highscoreNode.fontColor = textColor
         highscoreNode.position = CGPoint(x: size.width / 2, y: size.height * 0.1)
         highscoreNode.zPosition = 1
         
@@ -76,7 +77,7 @@ class HudNode : SKNode {
             showingHighScore = false
             
             scoreNode.run(SKAction.scale(to: 1.0, duration: 0.25))
-            scoreNode.fontColor = SKColor.white
+            scoreNode.fontColor = textColor
         }
     }
     

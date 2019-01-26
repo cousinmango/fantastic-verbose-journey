@@ -54,9 +54,10 @@ class HomeMenuScene: SKScene {
         print("HomeMenuScene:: size", size)
         
         BG.position = CGPoint(x: size.width / 2, y: size.height / 2)
-        BG.size = CGSize(width: size.height, height: size.height)//(width: size.width, height: size.height)
+        BG.size = CGSize(width: size.height * 1.5, height: size.height * 1.5)//(width: size.width, height: size.height)
         BG.zPosition = -10
         addChild(BG)
+        BG.run(SKAction.repeatForever(SKAction.rotate(byAngle: -2 * CGFloat(Double.pi), duration: 25)))
 
         // title setup
         let titleNode = SKSpriteNode(imageNamed: "title")//color: UIColor.red, size: CGSize(width: 300, height: 150))
