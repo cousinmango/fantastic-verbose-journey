@@ -33,6 +33,7 @@ class GameScene: SKScene {
     let BG = SKSpriteNode(imageNamed: "BG")
     var gameTimer : Timer? = nil
     var timeLeft = 30
+    var gameMusic: SKAudioNode!
     let timerNode = SKLabelNode(text: "")
     var chickenPosition1 : CGPoint = CGPoint(x: 0, y: 0 )
     var chickenPosition2 : CGPoint = CGPoint(x: 0, y: 0 )
@@ -43,6 +44,11 @@ class GameScene: SKScene {
     private var fireballFrames: [SKTexture] = []
     
     override func didMove(to view: SKView) {
+        if let musicURL = Bundle.main.url(forResource: "gameMusic", withExtension: "wav") {
+            gameMusic = SKAudioNode(url: musicURL)
+            addChild(gameMusic)
+        }
+        
         scaleFactor = size.height * 0.25
         
         BG.position = CGPoint(x: size.width / 2, y: size.height / 2)
@@ -389,7 +395,8 @@ extension GameScene: SKPhysicsContactDelegate {
             if let chicken = firstBody.node as? SKSpriteNode,
                 let fireball = secondBody.node as? SKSpriteNode {
                 fireball.removeFromParent()
-                chicken.run(SKAction.sequence([SKAction.moveBy(x: 0, y: 10, duration: 0.05),
+                chicken.run(SKAction.sequence([SKAction.playSoundFileNamed("chickenhitSound.wav", waitForCompletion: false),
+                                               SKAction.moveBy(x: 0, y: 10, duration: 0.05),
                                                SKAction.setTexture(SKTexture(imageNamed: "egg")),
                                                SKAction.moveBy(x: 0, y: -10, duration: 0.1)]))
                 hud.addPoint()
@@ -404,7 +411,9 @@ extension GameScene: SKPhysicsContactDelegate {
                                                 //SKAction.scale(to: 0.6, duration: 0),
                                                 SKAction.move(to: duckNode.position, duration: 0.15)]),
                              completion: {fireball.removeFromParent()}) // fireball bounce back
-                pan.run(SKAction.sequence([SKAction.scale(to: 1.3, duration: 0.05), SKAction.scale(to: 1, duration: 0.1)]))
+                pan.run(SKAction.sequence([SKAction.playSoundFileNamed("panhitSound.wav", waitForCompletion: false),
+                                           SKAction.scale(to: 1.3, duration: 0.05),
+                                           SKAction.scale(to: 1, duration: 0.1)]))
                 //pan.run(SKAction.move(to: CGPoint(x: (pan.position.x + duckNode.position.x) / 2, y: (pan.position.y + duckNode.position.y) / 2), duration: 0.2))
                 if duckSuspended == false {
                     duckHit()
