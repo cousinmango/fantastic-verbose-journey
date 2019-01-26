@@ -13,6 +13,7 @@ class HomeMenuScene: SKScene {
     
     let hud = HudNode()
     let gameScene = GameScene()
+    var homeMusic: SKAudioNode!
     private let scoreKey = "DUCKMAN_HIGHSCORE"
     private var highscore : Int = 0
     private let currentScoreKey = "CURRENT_SCORE"
@@ -40,6 +41,11 @@ class HomeMenuScene: SKScene {
     }
 
     override func didMove(to view: SKView) {
+        if let musicURL = Bundle.main.url(forResource: "homeMusic", withExtension: "wav") {
+            homeMusic = SKAudioNode(url: musicURL)
+            addChild(homeMusic)
+        }
+        
         scaleFactor = size.height * 0.25 // = 284 on iPhone SE
 
         print("on home screen", hud.score)
