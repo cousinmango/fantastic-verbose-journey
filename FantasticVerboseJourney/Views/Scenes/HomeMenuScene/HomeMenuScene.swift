@@ -20,6 +20,7 @@ class HomeMenuScene: SKScene {
     private var currentScore : Int = 0
     let BG = SKSpriteNode(imageNamed: "BG")
     var scaleFactor : CGFloat = 284 // default minumum - change value in didMove(to view
+    var startButton : SKButton!
     
     override init() {
         super.init()
@@ -65,6 +66,11 @@ class HomeMenuScene: SKScene {
         titleNode.setScale(scaleFactor * 0.0013)
         //titleNode.size = CGSize(width: scaleFactor * 3, height: titleNode.size.y * scaleFactor)
         addChild(titleNode)
+        titleNode.run(SKAction.sequence([SKAction.scale(to: 0, duration: 0),
+                                         SKAction.wait(forDuration: 0.8),
+                                           SKAction.scale(to: scaleFactor * 0.0015, duration: 0.1),
+                                           SKAction.scale(to: scaleFactor * 0.0013, duration: 0.1)]))
+
         
         let logoNode = SKSpriteNode(imageNamed: "duck")
         logoNode.anchorPoint = CGPoint(x: 0.5, y: 0.4)
@@ -86,6 +92,12 @@ class HomeMenuScene: SKScene {
         scoreLabel.fontSize = scaleFactor * 0.4//80
         scoreLabel.position = CGPoint(x: size.width / 2, y: size.height * 0.64)
         addChild(scoreLabel)
+        scoreLabel.run(SKAction.sequence([SKAction.scale(to: 1, duration: 0),
+                                         SKAction.wait(forDuration: 0.2),
+                                         SKAction.scale(to: 1.4, duration: 0.1),
+                                         SKAction.wait(forDuration: 0.3),
+                                         SKAction.scale(to: 1, duration: 0.1)]))
+
 
         highscore = defaults.integer(forKey: scoreKey)
         let highscoreLabel = SKLabelNode(text: "BEST: \(highscore)")//String(highscore))
@@ -107,13 +119,17 @@ class HomeMenuScene: SKScene {
         
         setup()
 
-        let startButton = createSKButtonStart()
+        startButton = createSKButtonStart()
         /*let startButtonLabel = SKLabelNode(text: "START")
         startButtonLabel.fontName = "DIN Alternate"
         startButtonLabel.fontSize = 30*/
         //startButton.size = CGSize(width: startButton.width * scaleFactor, height: startButton.height * scaleFactor)
         //startButton.addChild(startButtonLabel)
         addChild(startButton)
+        startButton.run(SKAction.sequence([SKAction.scale(to: 0, duration: 0),
+                                           SKAction.wait(forDuration: 1.1),
+                                           SKAction.scale(to: scaleFactor * 0.0035, duration: 0.1),
+                                           SKAction.scale(to: scaleFactor * 0.003, duration: 0.1)]))
         print("HomeMenuScene:: didMove() finished")
     }
     
@@ -127,7 +143,7 @@ class HomeMenuScene: SKScene {
 extension HomeMenuScene {
     
     private func setup() {
-        backgroundColor = SKColor.yellow
+        //backgroundColor = SKColor.yellow
         
         // Setup physics
         physicsWorld.gravity = .zero
@@ -182,11 +198,12 @@ extension HomeMenuScene {
 extension HomeMenuScene: SKButtonDelegate {
     func skButtonTapped(sender: SKButton) {
         print("HomeMenuScene+SKButtonDelegate:: skButtonTapped()", sender)
-        
+
         // - DEBUG:
-        self.removeAllChildren() // clear -- TODO: Move this code to the hot reload injection refresher.
+        let gameSceneTransition = SKTransition.push(with: .up, duration: 0.5)
         let gameScene = GameScene(size: size)
         gameScene.scaleMode = .aspectFit
-        self.view?.presentScene(gameScene)
+        self.view?.presentScene(gameScene, transition: gameSceneTransition)
+        //self.removeAllChildren() // clear -- TODO: Move this code to the hot reload injection refresher.
     }
 }

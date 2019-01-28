@@ -299,9 +299,12 @@ class GameScene: SKScene {
         switch timeLeft {
         case 0..<6:
             timeChickenChance = 2
-        case 6..<13:
-            timeChickenChance = 5
             BGFlash()
+        case 6..<11:
+            timeChickenChance = 4
+            BGFlash()
+        case 11..<14:
+            timeChickenChance = 5
         default:
             BG.colorBlendFactor = 0
             timeChickenChance = 15
@@ -310,11 +313,12 @@ class GameScene: SKScene {
         if timeLeft <= 0 {
             gameTimer?.invalidate()
             gameTimer = nil
-            self.removeAllChildren() // clear -- TODO: Move this code to the hot reload injection refresher.
+            //self.removeAllChildren() // clear -- TODO: Move this code to the hot reload injection refresher.
             let homeMenuScene = HomeMenuScene(size: size)
             print("before home screen", hud.score)
             hud.saveCurrentScore()
-            self.view?.presentScene(homeMenuScene)
+            let homeSceneTransition = SKTransition.push(with: .down, duration: 0.5)
+            self.view?.presentScene(homeMenuScene, transition: homeSceneTransition)
 
         }
     }
