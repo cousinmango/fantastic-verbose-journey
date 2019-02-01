@@ -39,7 +39,8 @@ class SKButton: SKSpriteNode {
     }
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         print("SKButton:: touchesEnded()")
-        self.setScale(1.0) // restore default button size.
+        //self.setScale(1.0) // restore default button size.
+        self.colorBlendFactor = 0
         self.delegate.skButtonTapped(sender: self)
     }
 }
