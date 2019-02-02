@@ -31,19 +31,19 @@ class GameScene: SKScene {
 
     private let hud = HudNode()
     var scaleFactor : CGFloat = 1136/2 * 0.25 // change value in didMove(to view
-    var timeChickenChance : Int = 15
+    var timeChickenChance: Int = 15
     let BG = SKSpriteNode(imageNamed: "BG")
     var textColor = SKColor(red: 0.63, green: 0.16, blue: 0.41, alpha: 1.0)
-    var gameTimer : Timer? = nil
+    var gameTimer: Timer? = nil
     var timeLeft = 30
     var gameMusic: SKAudioNode!
     let timerNode = SKLabelNode(text: "")
-    var chickenPosition1 : CGPoint = CGPoint(x: 0, y: 0 )
-    var chickenPosition2 : CGPoint = CGPoint(x: 0, y: 0 )
-    var chickenPosition3 : CGPoint = CGPoint(x: 0, y: 0 )
-    var chickenPosition4 : CGPoint = CGPoint(x: 0, y: 0 )
+    var chickenPosition1: CGPoint = CGPoint(x: 0, y: 0 )
+    var chickenPosition2: CGPoint = CGPoint(x: 0, y: 0 )
+    var chickenPosition3: CGPoint = CGPoint(x: 0, y: 0 )
+    var chickenPosition4: CGPoint = CGPoint(x: 0, y: 0 )
     let duckNode = SKSpriteNode(imageNamed: "duck")
-    var duckSuspended : Bool = false
+    var duckSuspended: Bool = false
     private var fireballFrames: [SKTexture] = []
     
     override func didMove(to view: SKView) {
@@ -60,7 +60,7 @@ class GameScene: SKScene {
         addChild(BG)
         BG.run(SKAction.repeatForever(SKAction.rotate(byAngle: -2 * CGFloat(Double.pi), duration: 4)))
         
-        let edgeMargin : CGFloat = 0.15
+        let edgeMargin: CGFloat = 0.15
         chickenPosition1 = CGPoint(x: size.width * (1 - edgeMargin), y: size.height * (1 - edgeMargin) + 10)
         chickenPosition2 = CGPoint(x: size.width * (1 - edgeMargin), y: size.height * edgeMargin + 10)
         chickenPosition3 = CGPoint(x: size.width * edgeMargin, y: size.height * edgeMargin + 10)
@@ -170,17 +170,23 @@ class GameScene: SKScene {
             chickenNode.size = CGSize(width: scaleFactor * 0.3, height: scaleFactor * 0.3)
             chickenNode.run(SKAction.repeatForever(SKAction.rotate(byAngle: -2 * CGFloat(Double.pi), duration: 2)))
         }
-        
+
         addChild(chickenNode)
-        chickenNode.run(SKAction.sequence([SKAction.scale(to: 0, duration: 0),
-                                           SKAction.scale(to: 1, duration: 0.1),
-                                           SKAction.moveBy(x: 0, y: -10, duration: 0.1),
-                                           SKAction.run {
-                                            chickenNode.zPosition = CGFloat(2)
-            },
-                                           SKAction.wait(forDuration: 1),
-                                           SKAction.scale(to: 0, duration: 0.1),
-                                           SKAction.removeFromParent()]))
+        chickenNode.run(
+            SKAction.sequence(
+                [
+                    SKAction.scale(to: 0, duration: 0),
+                    SKAction.scale(to: 1, duration: 0.1),
+                    SKAction.moveBy(x: 0, y: -10, duration: 0.1),
+                    SKAction.run {
+                        chickenNode.zPosition = CGFloat(2)
+                    },
+                    SKAction.wait(forDuration: 1),
+                    SKAction.scale(to: 0, duration: 0.1),
+                    SKAction.removeFromParent()
+                ]
+            )
+        )
     }
 
     func spawnPanRandom() {
@@ -190,8 +196,9 @@ class GameScene: SKScene {
         panNode.physicsBody?.categoryBitMask = PhysicsCategory.pan
         panNode.physicsBody?.contactTestBitMask = PhysicsCategory.fireball
         panNode.physicsBody?.collisionBitMask = PhysicsCategory.none
+
         let randomInt = Int.random(in: 1...4)
-        let edgeMargin : CGFloat = 0.3
+        let edgeMargin: CGFloat = 0.3
         switch randomInt {
         case 1:
             panNode.position = CGPoint(x: size.width * (1 - edgeMargin), y: size.height * (1 - edgeMargin))
@@ -208,18 +215,24 @@ class GameScene: SKScene {
             print("ERROR: pan spawn default")
         }
         addChild(panNode)
-        panNode.run(SKAction.sequence([SKAction.scale(to: 0, duration: 0),
-                                           SKAction.scale(to: 1, duration: 0.1),
-                                           SKAction.wait(forDuration: 1),
-                                           SKAction.scale(to: 0, duration: 0.1),
-                                           SKAction.removeFromParent()]))
+        panNode.run(
+            SKAction.sequence(
+                [
+                    SKAction.scale(to: 0, duration: 0),
+                    SKAction.scale(to: 1, duration: 0.1),
+                    SKAction.wait(forDuration: 1),
+                    SKAction.scale(to: 0, duration: 0.1),
+                    SKAction.removeFromParent()
+                ]
+            )
+        )
     }
 
     func spawnFireball(position: CGPoint, destination: CGPoint, angle: CGFloat) { // also spawns arm sprite
         print("fireball fired")
         // setup fireball animation
         let fireballAtlas = SKTextureAtlas(named: "fire")
-        var fireballFrames : [SKTexture] = []
+        var fireballFrames: [SKTexture] = []
         let numFrames = fireballAtlas.textureNames.count
         for i in 1...numFrames {
             let fireballTextureName = "fire\(i)"
@@ -261,7 +274,7 @@ class GameScene: SKScene {
     func duckHit() {
         duckSuspended = true
         let peking = SKSpriteNode(imageNamed: "peking")
-        let duckSuspendTime : Double = 1
+        let duckSuspendTime: Double = 1
         peking.position = CGPoint(x: duckNode.position.x, y: duckNode.position.y + 10)
         peking.size = duckNode.size
         duckNode.run(SKAction.sequence([SKAction.moveBy(x: 0, y: 10, duration: 0.05),
@@ -298,7 +311,7 @@ class GameScene: SKScene {
         
         switch timeLeft {
         case 0..<6:
-            timeChickenChance = 2
+            timeChickenChance = 2 // ? unused.
             BGFlash()
         case 6..<11:
             timeChickenChance = 4
@@ -350,7 +363,7 @@ extension GameScene {
         if duckSuspended == false {
             for touch in touches {
                 let touchLocation = touch.location(in: self)
-                var orientAngle : CGFloat
+                var orientAngle: CGFloat
                 switch (touchLocation.x, touchLocation.y) {
                 case (size.width/2..<size.width, size.height/2..<size.height):
                     orientAngle = CGFloat(tanh(size.height / size.width))
@@ -500,7 +513,7 @@ extension GameScene {
     func addSKButton() {
         let button: SKButton = SKButtonFactory.getButton(delegate: self)
 
-        addChild(button) // - Circular dependency? self.child = button. button.delegate = self...
+        addChild(button) // Is OK if weak ref delegate. - Circular dependency? self.child = button. button.delegate = self...
     }
 }
 
