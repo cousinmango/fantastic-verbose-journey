@@ -21,16 +21,16 @@ class GameScene: SKScene {
     }
     
     struct PhysicsCategory {
-        static let none      : UInt32 = 0
-        //static let all       : UInt32 = UInt32.max
-        static let chicken   : UInt32 = 0b1       // 1
-        static let pan       : UInt32 = 0b10      // 2
-        static let fireball  : UInt32 = 0b11      // 3
+        static let none       : UInt32 = 0
+        //static let all        : UInt32 = UInt32.max
+        static let chicken    : UInt32 = 0b1       // 1
+        static let pan        : UInt32 = 0b10      // 2
+        static let fireball   : UInt32 = 0b11      // 3
         static let timeChicken: UInt32 = 0b100
     }
 
     private let hud = HudNode()
-    var scaleFactor : CGFloat = 1136/2 * 0.25 // change value in didMove(to view
+    var scaleFactor: CGFloat = 1136/2 * 0.25 // change value in didMove(to view
     var timeChickenChance: Int = 15
     let BG = SKSpriteNode(imageNamed: "BG")
     var textColor = SKColor(red: 0.63, green: 0.16, blue: 0.41, alpha: 1.0)

@@ -15,12 +15,12 @@ class HomeMenuScene: SKScene {
     let gameScene = GameScene()
     var homeMusic: SKAudioNode!
     private let scoreKey = "DUCKMAN_HIGHSCORE"
-    private var highscore : Int = 0
+    private var highscore: Int = 0
     private let currentScoreKey = "CURRENT_SCORE"
-    private var currentScore : Int = 0
+    private var currentScore: Int = 0
     let BG = SKSpriteNode(imageNamed: "BG")
-    var scaleFactor : CGFloat = 284 // default minumum - change value in didMove(to view
-    var startButton : SKButton!
+    var scaleFactor: CGFloat = 284 // default minumum - change value in didMove(to view
+    var startButton: SKButton!
     
     override init() {
         super.init()
