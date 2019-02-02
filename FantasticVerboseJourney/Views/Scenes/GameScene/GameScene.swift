@@ -3,7 +3,7 @@
 //  FantasticVerboseJourney
 //
 //  Created by SLim on 30/12/18.
-//  Copyright © 2018 CousinMango. All rights reserved.
+//  Copyright © 2019 CousinMango. All rights reserved.
 //
 
 import SpriteKit
@@ -182,7 +182,7 @@ class GameScene: SKScene {
                                            SKAction.scale(to: 0, duration: 0.1),
                                            SKAction.removeFromParent()]))
     }
-    
+
     func spawnPanRandom() {
         let panNode = SKSpriteNode(imageNamed: "pan")//color: UIColor.lightGray, size: CGSize(width: 50, height: 50))
         panNode.size = CGSize(width: scaleFactor * 0.8, height: scaleFactor * 0.8)
@@ -285,7 +285,7 @@ class GameScene: SKScene {
         timeLeft += 1 // amount of time to add
         timerNode.text = ": \(timeLeft)"
     }
-    
+
     func BGFlash() {
         BG.run(SKAction.sequence([SKAction.colorize(with: UIColor(hue: 0.15, saturation: 1, brightness: 0.5, alpha: 1), colorBlendFactor: 0.3, duration: 0),
                                                     SKAction.colorize(with: UIColor.black, colorBlendFactor: 0, duration: 0.5)]))

@@ -1,7 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a63c867c-83e4-486b-8d6b-1bf18e13ac2d" name="Default Changelist" comment="" />
+    <list default="true" id="a63c867c-83e4-486b-8d6b-1bf18e13ac2d" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FantasticVerboseJourney/Delegates/AppDelegate.swift" beforeDir="false" afterPath="$PROJECT_DIR$/FantasticVerboseJourney/Delegates/AppDelegate.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FantasticVerboseJourney/Extensions/Utilities/CGPoint+VectorCalculatable.swift" beforeDir="false" afterPath="$PROJECT_DIR$/FantasticVerboseJourney/Extensions/Utilities/CGPoint+VectorCalculatable.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FantasticVerboseJourney/Extensions/Utilities/Protocols/DebugPerformanceOptimisable.swift" beforeDir="false" afterPath="$PROJECT_DIR$/FantasticVerboseJourney/Extensions/Utilities/Protocols/DebugPerformanceOptimisable.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FantasticVerboseJourney/Extensions/Utilities/Protocols/InjectionIiiHotReloadable.swift" beforeDir="false" afterPath="$PROJECT_DIR$/FantasticVerboseJourney/Extensions/Utilities/Protocols/InjectionIiiHotReloadable.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FantasticVerboseJourney/Extensions/Utilities/Protocols/VectorCalculatable.swift" beforeDir="false" afterPath="$PROJECT_DIR$/FantasticVerboseJourney/Extensions/Utilities/Protocols/VectorCalculatable.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FantasticVerboseJourney/Extensions/Utilities/SKView+DebugPerformanceOptimisable.swift" beforeDir="false" afterPath="$PROJECT_DIR$/FantasticVerboseJourney/Extensions/Utilities/SKView+DebugPerformanceOptimisable.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FantasticVerboseJourney/Extensions/Utilities/UIViewController+InjectionIiiHotReloadable.swift" beforeDir="false" afterPath="$PROJECT_DIR$/FantasticVerboseJourney/Extensions/Utilities/UIViewController+InjectionIiiHotReloadable.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FantasticVerboseJourney/Info.plist" beforeDir="false" afterPath="$PROJECT_DIR$/FantasticVerboseJourney/Info.plist" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FantasticVerboseJourney/Interactors/Protocols/SKButtonDelegate.swift" beforeDir="false" afterPath="$PROJECT_DIR$/FantasticVerboseJourney/Interactors/Protocols/SKButtonDelegate.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FantasticVerboseJourney/Interactors/SKButton.swift" beforeDir="false" afterPath="$PROJECT_DIR$/FantasticVerboseJourney/Interactors/SKButton.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FantasticVerboseJourney/Interactors/SKButtonFactory.swift" beforeDir="false" afterPath="$PROJECT_DIR$/FantasticVerboseJourney/Interactors/SKButtonFactory.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FantasticVerboseJourney/Views/GameViewController.swift" beforeDir="false" afterPath="$PROJECT_DIR$/FantasticVerboseJourney/Views/GameViewController.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FantasticVerboseJourney/Views/Scenes/GameScene/GameScene.swift" beforeDir="false" afterPath="$PROJECT_DIR$/FantasticVerboseJourney/Views/Scenes/GameScene/GameScene.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FantasticVerboseJourney/Views/Scenes/GameScene/HudNode.swift" beforeDir="false" afterPath="$PROJECT_DIR$/FantasticVerboseJourney/Views/Scenes/GameScene/HudNode.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FantasticVerboseJourney/Views/Scenes/HomeMenuScene/HomeMenuScene.swift" beforeDir="false" afterPath="$PROJECT_DIR$/FantasticVerboseJourney/Views/Scenes/HomeMenuScene/HomeMenuScene.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FantasticVerboseJourney/Views/Scenes/PauseScene/PauseScene.swift" beforeDir="false" afterPath="$PROJECT_DIR$/FantasticVerboseJourney/Views/Scenes/PauseScene/PauseScene.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FantasticVerboseJourneyTests/FantasticVerboseJourneyTests.swift" beforeDir="false" afterPath="$PROJECT_DIR$/FantasticVerboseJourneyTests/FantasticVerboseJourneyTests.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FantasticVerboseJourneyUITests/FantasticVerboseJourneyUITests.swift" beforeDir="false" afterPath="$PROJECT_DIR$/FantasticVerboseJourneyUITests/FantasticVerboseJourneyUITests.swift" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -12,10 +32,10 @@
   <component name="FileEditorManager">
     <leaf>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/FantasticVerboseJourney/Views/Scenes/PauseScene/PauseScene.swift">
+        <entry file="file://$PROJECT_DIR$/FantasticVerboseJourney/Views/Scenes/GameScene/GameScene.swift">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="421">
-              <caret line="42" column="43" selection-start-line="42" selection-start-column="43" selection-end-line="42" selection-end-column="43" />
+            <state relative-caret-position="120">
+              <caret line="9" column="18" lean-forward="true" selection-start-line="9" selection-start-column="18" selection-end-line="9" selection-end-column="18" />
             </state>
           </provider>
         </entry>
@@ -25,7 +45,17 @@
   <component name="FindInProjectRecents">
     <findStrings>
       <find>oran</find>
+      <find>touch</find>
+      <find>usage</find>
+      <find>mi</find>
+      <find>pulse</find>
+      <find>second</find>
+      <find>UIColor</find>
+      <find>© 2018</find>
     </findStrings>
+    <replaceStrings>
+      <replace>© 2019</replace>
+    </replaceStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -47,8 +77,8 @@
         <option value="$PROJECT_DIR$/FantasticVerboseJourney/Views/GameScene/GameScene.swift" />
         <option value="$PROJECT_DIR$/FantasticVerboseJourney/Views/GameViewController.swift" />
         <option value="$PROJECT_DIR$/FantasticVerboseJourney/Views/Scenes/HomeMenuScene/HomeMenuScene.swift" />
-        <option value="$PROJECT_DIR$/FantasticVerboseJourney/Views/Scenes/GameScene/GameScene.swift" />
         <option value="$PROJECT_DIR$/FantasticVerboseJourney/Views/Scenes/PauseScene/PauseScene.swift" />
+        <option value="$PROJECT_DIR$/FantasticVerboseJourney/Views/Scenes/GameScene/GameScene.swift" />
       </list>
     </option>
   </component>
@@ -78,6 +108,25 @@
               <item name="" type="efc3779f:XcodeRootNode" />
               <item name="FantasticVerboseJourney" type="1d218c8b:XcodeProjectNode" />
               <item name="FantasticVerboseJourney" type="fcab9f18:XcodeViewNode" />
+            </path>
+            <path>
+              <item name="" type="efc3779f:XcodeRootNode" />
+              <item name="FantasticVerboseJourney" type="1d218c8b:XcodeProjectNode" />
+              <item name="FantasticVerboseJourney" type="fcab9f18:XcodeViewNode" />
+              <item name="Delegates" type="fcab9f18:XcodeViewNode" />
+            </path>
+            <path>
+              <item name="" type="efc3779f:XcodeRootNode" />
+              <item name="FantasticVerboseJourney" type="1d218c8b:XcodeProjectNode" />
+              <item name="FantasticVerboseJourney" type="fcab9f18:XcodeViewNode" />
+              <item name="Extensions" type="fcab9f18:XcodeViewNode" />
+            </path>
+            <path>
+              <item name="" type="efc3779f:XcodeRootNode" />
+              <item name="FantasticVerboseJourney" type="1d218c8b:XcodeProjectNode" />
+              <item name="FantasticVerboseJourney" type="fcab9f18:XcodeViewNode" />
+              <item name="Extensions" type="fcab9f18:XcodeViewNode" />
+              <item name="Utilities" type="fcab9f18:XcodeViewNode" />
             </path>
             <path>
               <item name="" type="efc3779f:XcodeRootNode" />
@@ -143,6 +192,7 @@
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="restartRequiresConfirmation" value="false" />
+    <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -204,18 +254,19 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="5902000" />
+    <option name="totallyTimeSpent" value="6827000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="469" y="36" width="1397" height="977" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4974705" visible="true" weight="0.2494465" />
       <window_info id="Structure" order="1" sideWeight="0.5025295" side_tool="true" visible="true" weight="0.2494465" />
       <window_info id="Designer" order="2" />
       <window_info id="Favorites" order="3" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.3299435" />
+      <window_info active="true" anchor="bottom" id="Find" order="1" visible="true" weight="0.3299435" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.3299435" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -267,13 +318,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/FantasticVerboseJourney/Extensions/Utilities/SKView+DebugPerformanceOptimisable.swift">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="22" column="30" lean-forward="true" selection-start-line="22" selection-start-column="30" selection-end-line="22" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$APPLICATION_HOME_DIR$/Resources/module_cache.zip!/ModuleCache/10B61/4.2.1/arm64/iphoneos12.1/SpriteKit.SKTransition/SpriteKit.SKTransition.swift">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="379">
@@ -298,31 +342,50 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/FantasticVerboseJourney/Views/Scenes/HomeMenuScene/HomeMenuScene.swift">
+    <entry file="file://$PROJECT_DIR$/FantasticVerboseJourney/Views/Scenes/PauseScene/PauseScene.swift">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="20" column="17" selection-start-line="20" selection-start-column="17" selection-end-line="20" selection-end-column="17" />
+        <state relative-caret-position="421">
+          <caret line="42" column="43" selection-start-line="42" selection-start-column="43" selection-end-line="42" selection-end-column="43" />
         </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/FantasticVerboseJourney/Delegates/AppDelegate.swift">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-219" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/FantasticVerboseJourney/Views/GameViewController.swift">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="217">
-          <caret line="27" column="15" lean-forward="true" selection-start-line="27" selection-start-column="15" selection-end-line="30" selection-end-column="9" />
+        <state relative-caret-position="225">
+          <caret line="43" column="15" selection-start-line="43" selection-start-column="15" selection-end-line="43" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/FantasticVerboseJourney/Extensions/Utilities/UIViewController+InjectionIiiHotReloadable.swift">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="10" column="28" lean-forward="true" selection-start-line="10" selection-start-column="28" selection-end-line="10" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/FantasticVerboseJourney/Extensions/Utilities/SKView+DebugPerformanceOptimisable.swift">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="22" column="30" lean-forward="true" selection-start-line="22" selection-start-column="30" selection-end-line="22" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/FantasticVerboseJourney/Views/Scenes/HomeMenuScene/HomeMenuScene.swift">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="385">
+          <caret line="41" column="5" lean-forward="true" selection-start-line="41" selection-start-column="5" selection-end-line="41" selection-end-column="5" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/FantasticVerboseJourney/Views/Scenes/GameScene/GameScene.swift">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="73" column="24" lean-forward="true" selection-start-line="73" selection-start-column="24" selection-end-line="73" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/FantasticVerboseJourney/Views/Scenes/PauseScene/PauseScene.swift">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="421">
-          <caret line="42" column="43" selection-start-line="42" selection-start-column="43" selection-end-line="42" selection-end-column="43" />
+        <state relative-caret-position="120">
+          <caret line="9" column="18" lean-forward="true" selection-start-line="9" selection-start-column="18" selection-end-line="9" selection-end-column="18" />
         </state>
       </provider>
     </entry>

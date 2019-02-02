@@ -2,7 +2,7 @@
 //  FantasticVerboseJourney
 //
 //  Created by SLim on 2018-12-30.
-//  Copyright © 2018 CousinMango. All rights reserved.
+//  Copyright © 2019 CousinMango. All rights reserved.
 //
 
 import Foundation

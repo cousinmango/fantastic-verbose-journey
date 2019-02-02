@@ -3,7 +3,7 @@
 //  FantasticVerboseJourneyTests
 //
 //  Created by SLim on 30/12/18.
-//  Copyright © 2018 CousinMango. All rights reserved.
+//  Copyright © 2019 CousinMango. All rights reserved.
 //
 
 import XCTest

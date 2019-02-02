@@ -3,7 +3,7 @@
 //  FantasticVerboseJourney
 //
 //  Created by Lai Phong Tran on 31/12/18.
-//  Copyright © 2018 CousinMango. All rights reserved.
+//  Copyright © 2019 CousinMango. All rights reserved.
 //
 
 import Foundation
