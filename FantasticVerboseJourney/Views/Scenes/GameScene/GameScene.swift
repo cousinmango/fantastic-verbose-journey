@@ -53,26 +53,47 @@ class GameScene: SKScene {
         }
         
         scaleFactor = size.height * 0.25
-        
-        BG.position = CGPoint(x: size.width / 2, y: size.height / 2)
+
+        let midWidth: CGFloat = size.width / 2
+        BG.position = CGPoint(x: midWidth, y: size.height / 2)
         BG.size = CGSize(width: size.height * 1.5, height: size.height * 1.5)//(width: size.width, height: size.height)
         BG.zPosition = -10
         addChild(BG)
         BG.run(SKAction.repeatForever(SKAction.rotate(byAngle: -2 * CGFloat(Double.pi), duration: 4)))
         
-        let edgeMargin: CGFloat = 0.15
-        chickenPosition1 = CGPoint(x: size.width * (1 - edgeMargin), y: size.height * (1 - edgeMargin) + 10)
-        chickenPosition2 = CGPoint(x: size.width * (1 - edgeMargin), y: size.height * edgeMargin + 10)
-        chickenPosition3 = CGPoint(x: size.width * edgeMargin, y: size.height * edgeMargin + 10)
-        chickenPosition4 = CGPoint(x: size.width * edgeMargin, y: size.height * (1 - edgeMargin) + 10)
+
+        // Positioning of chicken spawn points on UI.
+        let edgeMarginDecimalFraction: CGFloat = 0.15
+
+        let safeAreaPadding: CGFloat = 1 - edgeMarginDecimalFraction
+
+        chickenPosition1 = CGPoint(
+            x: size.width * safeAreaPadding,
+            y: size.height * safeAreaPadding + 10
+        )
+        chickenPosition2 = CGPoint(
+            x: size.width * safeAreaPadding,
+            y: size.height * edgeMarginDecimalFraction + 10
+        )
+        chickenPosition3 = CGPoint(
+            x: size.width * edgeMarginDecimalFraction,
+            y: size.height * edgeMarginDecimalFraction + 10
+        )
+        chickenPosition4 = CGPoint(
+            x: size.width * edgeMarginDecimalFraction,
+            y: size.height * safeAreaPadding + 10
+        )
         //print("GameScene:: didMove() start \(view)")
         //print("GameScene:: size", size)
-        
+
+        // - TODO: Standardise design system for safe area, scaling or various game and UI elements.
+        // Refresh ad-hoc scale factors and magic numbers :P
+
         timerNode.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.left
-        timerNode.position = CGPoint(x: size.width/2 - (scaleFactor * 0.05), y: size.height * 0.77)
+        timerNode.position = CGPoint(x: midWidth - (scaleFactor * 0.05), y: size.height * 0.77)
         timerNode.fontName = "DIN Alternate"
         timerNode.fontColor = textColor
-        timerNode.fontSize = scaleFactor * 0.2//30
+        timerNode.fontSize = scaleFactor * 0.2 //30
         timerNode.text = ": \(timeLeft)"
         addChild(timerNode)
         
