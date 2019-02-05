@@ -9,6 +9,9 @@ xcassets:
 #    - Resources/Images.xcassets
 #    - Resources/MoreImages.xcassets
     - FantasticVerboseJourney/Assets.xcassets
+    
   outputs:
     - templateName: swift4
-      output: Generated/assets-images.swift
+      params:
+        publicAccess: true
+      output: FantasticVerboseJourney/ReferencesGenerated/assets-images.swift

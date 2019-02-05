@@ -3,12 +3,12 @@
 
 #if os(OSX)
   import AppKit.NSImage
-  internal typealias AssetColorTypeAlias = NSColor
-  internal typealias AssetImageTypeAlias = NSImage
+  public typealias AssetColorTypeAlias = NSColor
+  public typealias AssetImageTypeAlias = NSImage
 #elseif os(iOS) || os(tvOS) || os(watchOS)
   import UIKit.UIImage
-  internal typealias AssetColorTypeAlias = UIColor
-  internal typealias AssetImageTypeAlias = UIImage
+  public typealias AssetColorTypeAlias = UIColor
+  public typealias AssetImageTypeAlias = UIImage
 #endif
 
 // swiftlint:disable superfluous_disable_command
@@ -17,32 +17,32 @@
 // MARK: - Asset Catalogs
 
 // swiftlint:disable identifier_name line_length nesting type_body_length type_name
-internal enum Asset {
-  internal static let bg = ImageAsset(name: "BG")
-  internal static let arm = ImageAsset(name: "arm")
-  internal static let chicken = ImageAsset(name: "chicken")
-  internal static let duck = ImageAsset(name: "duck")
-  internal static let egg = ImageAsset(name: "egg")
-  internal static let pan = ImageAsset(name: "pan")
-  internal static let peking = ImageAsset(name: "peking")
-  internal static let startButton = ImageAsset(name: "startButton")
-  internal static let timerIcon = ImageAsset(name: "timerIcon")
-  internal static let title = ImageAsset(name: "title")
+public enum Asset {
+  public static let bg = ImageAsset(name: "BG")
+  public static let arm = ImageAsset(name: "arm")
+  public static let chicken = ImageAsset(name: "chicken")
+  public static let duck = ImageAsset(name: "duck")
+  public static let egg = ImageAsset(name: "egg")
+  public static let pan = ImageAsset(name: "pan")
+  public static let peking = ImageAsset(name: "peking")
+  public static let startButton = ImageAsset(name: "startButton")
+  public static let timerIcon = ImageAsset(name: "timerIcon")
+  public static let title = ImageAsset(name: "title")
 }
 // swiftlint:enable identifier_name line_length nesting type_body_length type_name
 
 // MARK: - Implementation Details
 
-internal struct ColorAsset {
-  internal fileprivate(set) var name: String
+public struct ColorAsset {
+  public fileprivate(set) var name: String
 
   @available(iOS 11.0, tvOS 11.0, watchOS 4.0, OSX 10.13, *)
-  internal var color: AssetColorTypeAlias {
+  public var color: AssetColorTypeAlias {
     return AssetColorTypeAlias(asset: self)
   }
 }
 
-internal extension AssetColorTypeAlias {
+public extension AssetColorTypeAlias {
   @available(iOS 11.0, tvOS 11.0, watchOS 4.0, OSX 10.13, *)
   convenience init!(asset: ColorAsset) {
     let bundle = Bundle(for: BundleToken.self)
@@ -56,12 +56,12 @@ internal extension AssetColorTypeAlias {
   }
 }
 
-internal struct DataAsset {
-  internal fileprivate(set) var name: String
+public struct DataAsset {
+  public fileprivate(set) var name: String
 
   #if os(iOS) || os(tvOS) || os(OSX)
   @available(iOS 9.0, tvOS 9.0, OSX 10.11, *)
-  internal var data: NSDataAsset {
+  public var data: NSDataAsset {
     return NSDataAsset(asset: self)
   }
   #endif
@@ -69,7 +69,7 @@ internal struct DataAsset {
 
 #if os(iOS) || os(tvOS) || os(OSX)
 @available(iOS 9.0, tvOS 9.0, OSX 10.11, *)
-internal extension NSDataAsset {
+public extension NSDataAsset {
   convenience init!(asset: DataAsset) {
     let bundle = Bundle(for: BundleToken.self)
     #if os(iOS) || os(tvOS)
@@ -81,10 +81,10 @@ internal extension NSDataAsset {
 }
 #endif
 
-internal struct ImageAsset {
-  internal fileprivate(set) var name: String
+public struct ImageAsset {
+  public fileprivate(set) var name: String
 
-  internal var image: AssetImageTypeAlias {
+  public var image: AssetImageTypeAlias {
     let bundle = Bundle(for: BundleToken.self)
     #if os(iOS) || os(tvOS)
     let image = AssetImageTypeAlias(named: name, in: bundle, compatibleWith: nil)
@@ -98,7 +98,7 @@ internal struct ImageAsset {
   }
 }
 
-internal extension AssetImageTypeAlias {
+public extension AssetImageTypeAlias {
   @available(iOS 1.0, tvOS 1.0, watchOS 1.0, *)
   @available(OSX, deprecated,
     message: "This initializer is unsafe on macOS, please use the ImageAsset.image property")
