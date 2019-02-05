@@ -1,0 +1,14 @@
+#strings:
+#  inputs: Resources/Base.lproj
+#  filter: .+\.strings$
+#  outputs:
+#    - templateName: structured-swift4
+#      output: Generated/strings.swift
+xcassets:
+  inputs:
+#    - Resources/Images.xcassets
+#    - Resources/MoreImages.xcassets
+    - FantasticVerboseJourney/Assets.xcassets
+  outputs:
+    - templateName: swift4
+      output: Generated/assets-images.swift
