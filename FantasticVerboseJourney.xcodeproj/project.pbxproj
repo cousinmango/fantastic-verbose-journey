@@ -23,6 +23,7 @@
 		35E937EE323612406D218DAC /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E93729E6F5C78AD46FD4F2 /* GameScene.swift */; };
 		35E938DD30DE727167B18653 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 35E9369D43FD966046A0C6EA /* LaunchScreen.storyboard */; };
 		35E93A7F622424793C311A9B /* SKView+DebugPerformanceOptimisable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E93FDB35FF04810F9951C7 /* SKView+DebugPerformanceOptimisable.swift */; };
+		35E93BACEE437DEE94830774 /* backgroundAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E9387DC247B9B7702E5771 /* backgroundAnimation.swift */; };
 		35E93EC5AD44C4F5CF23FE1C /* PauseScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E932D20F86DCD84061B40D /* PauseScene.swift */; };
 		35E93EFCED7570BFC8C2812C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 35E93FFAC1AD8A9B74F306F8 /* Main.storyboard */; };
 		553032C421D87F77001DB357 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553032C321D87F77001DB357 /* AppDelegate.swift */; };
@@ -70,6 +71,7 @@
 		35E93729E6F5C78AD46FD4F2 /* GameScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 		35E937C22C223D2838BB1F71 /* GameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		35E93860AC7F6C9650265529 /* SKButtonFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKButtonFactory.swift; sourceTree = "<group>"; };
+		35E9387DC247B9B7702E5771 /* backgroundAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = backgroundAnimation.swift; sourceTree = "<group>"; };
 		35E938A99B0608F569AC32AB /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
 		35E93FDB35FF04810F9951C7 /* SKView+DebugPerformanceOptimisable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SKView+DebugPerformanceOptimisable.swift"; sourceTree = "<group>"; };
 		35E93FFAC1AD8A9B74F306F8 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
@@ -127,6 +129,14 @@
 			path = Audio;
 			sourceTree = "<group>";
 		};
+		35E93155E104883D96B2AF79 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				35E9387DC247B9B7702E5771 /* backgroundAnimation.swift */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
 		35E9355D5D88AF0AB8740E20 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -152,6 +162,7 @@
 				35E93E4C45314108419C4121 /* PauseScene */,
 				35E93FF8363F9B3BC877CEDA /* GameScene */,
 				35E9385178D0041593175FB3 /* HomeMenuScene */,
+				35E93155E104883D96B2AF79 /* Shared */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -467,6 +478,7 @@
 				03BBE9ED21D97F87001CBAE4 /* HudNode.swift in Sources */,
 				55F78D3E21E2D4010098E892 /* SKButton+SKLabelNode.swift in Sources */,
 				35E93175665D1A30DA6E4B26 /* HomeMenuScene.swift in Sources */,
+				35E93BACEE437DEE94830774 /* backgroundAnimation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

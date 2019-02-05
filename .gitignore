@@ -72,3 +72,6 @@ fastlane/test_output
 
 # AppCode
 .idea/workspace.xml
+
+# Added tools
+swiftgen/
