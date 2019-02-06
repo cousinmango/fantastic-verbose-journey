@@ -12,10 +12,10 @@ import struct CoreGraphics.CGGeometry.CGFloat
 infix operator +-: AdditionPrecedence
 infix operator ☺️: AdditionPrecedence // lol
 
-protocol VectorCalculatable  {
+protocol VectorCalculatable {
 
-    static func +(left: Self, right: Self) -> Self
-    static func +-(left: Self, right: Self) -> Self
+    static func + (left: Self, right: Self) -> Self
+    static func +- (left: Self, right: Self) -> Self
     static func -(left: Self, right: Self) -> Self
     //    static func *(left: Self, right: Self) -> Self
     //    static func /(left: Self, right: Self) -> Self
