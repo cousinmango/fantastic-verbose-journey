@@ -1,9 +1,13 @@
 disabled_rules: # rule identifiers to exclude from running
-  - colon
-  - comma
-  - control_statement
+#  - colon
+#  - comma
+#  - control_statement
+ - operator_whitespace
 opt_in_rules: # some rules are only opt-in
   - empty_count
+  - multiline_parameters
+  - multiline_parameters_brackets
+
   # Find all the available rules by running:
   # swiftlint rules
 #included: # paths to include during linting. `--path` is ignored if present.
