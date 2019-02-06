@@ -32,7 +32,6 @@ extension CGPoint: VectorCalculatable {
     }
     #endif
 
-
     func length() -> CGFloat {
         return sqrt(x * x + y * y)
     }

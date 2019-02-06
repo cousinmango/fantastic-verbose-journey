@@ -19,7 +19,7 @@ class GameScene: SKScene {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
-    
+
     struct PhysicsCategory {
         static let none       : UInt32 = 0
         //static let all        : UInt32 = UInt32.max
@@ -35,7 +35,7 @@ class GameScene: SKScene {
 
     let background = SKSpriteNode(texture: Asset.bg.skTextured)
     var textColor = SKColor(red: 0.63, green: 0.16, blue: 0.41, alpha: 1.0)
-    var gameTimer: Timer? = nil
+    var gameTimer: Timer?
     var timeLeft = 30
     var gameMusic: SKAudioNode!
     let timerNode = SKLabelNode(text: "")
@@ -46,13 +46,13 @@ class GameScene: SKScene {
     let duckNode = SKSpriteNode(imageNamed: "duck")
     var duckSuspended: Bool = false
     private var fireballFrames: [SKTexture] = []
-    
+
     override func didMove(to view: SKView) {
         if let musicURL = Bundle.main.url(forResource: "gameMusic", withExtension: "wav") {
             gameMusic = SKAudioNode(url: musicURL)
             addChild(gameMusic)
         }
-        
+
         scaleFactor = size.height * 0.25
 
         let midWidth: CGFloat = size.width / 2
@@ -67,7 +67,6 @@ class GameScene: SKScene {
         background.zPosition = -10
         addChild(background)
         background.run(SKAction.repeatForever(SKAction.rotate(byAngle: -2 * CGFloat(Double.pi), duration: 4)))
-        
 
         // Positioning of chicken spawn points on UI.
         let edgeMarginDecimalFraction: CGFloat = 0.15
@@ -106,7 +105,7 @@ class GameScene: SKScene {
         timerNode.fontSize = scaleFactor * 0.2 //30
         timerNode.text = ": \(timeLeft)"
         addChild(timerNode)
-        
+
         let timerIcon = SKSpriteNode(imageNamed: "timerIcon")
         timerIcon.anchorPoint = CGPoint(
             x: 0.5,
@@ -121,14 +120,14 @@ class GameScene: SKScene {
             height: scaleFactor * 0.15
         )
         addChild(timerIcon)
-        
+
         spawnDuck()
-        
+
         setup()
-        
+
         print("GameScene:: didMove() finished")
-    }    
-    
+    }
+
     // Time of last update(currentTime:) call
     var lastUpdateTime = TimeInterval(0)
     var lastUpdateTime2 = TimeInterval(0)
@@ -138,10 +137,10 @@ class GameScene: SKScene {
     // Seconds before performing next action. Choose a default value
     var timeUntilNextAction = TimeInterval(4)
     var timeUntilNextAction2 = TimeInterval(4)
-    
+
     override func update(_ currentTime: TimeInterval) {
         // Called before each frame is rendered
-        
+
         // Chicken spawn at random time interval
         let delta = currentTime - lastUpdateTime
         lastUpdateTime = currentTime
@@ -154,7 +153,7 @@ class GameScene: SKScene {
             // Randomize seconds until next action
             timeUntilNextAction = Double.random(in: 0 ..< 1)
         }
-        
+
         // Pan spawn at random time interval
         let delta2 = currentTime - lastUpdateTime2
         lastUpdateTime2 = currentTime
@@ -179,7 +178,7 @@ class GameScene: SKScene {
         addChild(duckNode)
         duckNode.run(SKAction.moveBy(x: 0, y: -10, duration: 0.1))
     }
-    
+
     @objc func spawnChickenRandom() {
         let chickenNode = SKSpriteNode(imageNamed: "chicken")//(color: UIColor.yellow, size: CGSize(width: 50, height: 50))
         chickenNode.size = CGSize(width: scaleFactor * 0.8, height: scaleFactor * 0.8)
@@ -202,7 +201,7 @@ class GameScene: SKScene {
             chickenNode.position = chickenPosition1
             print("ERROR: chicken spawn default")
         }
-        
+
         let randomTimeChicken = Int.random(in: 1...timeChickenChance) // chance/frequency of timeChicken
         if randomTimeChicken == 1 {
             chickenNode.physicsBody?.categoryBitMask = PhysicsCategory.timeChicken
@@ -279,7 +278,7 @@ class GameScene: SKScene {
             fireballFrames.append(fireballAtlas.textureNamed(fireballTextureName))
         }
         let firstFrame = fireballFrames[0]
-        
+
         let fireballNode = SKSpriteNode(texture: firstFrame)//color: UIColor.orange, size: CGSize(width: 10, height: 10))
         fireballNode.size = CGSize(width: scaleFactor * 0.5, height: scaleFactor * 0.5)
         fireballNode.physicsBody?.categoryBitMask = PhysicsCategory.fireball
@@ -295,7 +294,7 @@ class GameScene: SKScene {
         fireballNode.run(SKAction.repeatForever(SKAction.animate(with: fireballFrames, timePerFrame: 0.05)))
         // move fireball
         fireballNode.run(SKAction.move(to: destination, duration: 0.5), completion: {fireballNode.removeFromParent()})
-        
+
         // SPAWN ARM
         let arm = SKSpriteNode(imageNamed: "arm")
         arm.size = CGSize(width: scaleFactor * 0.85, height: scaleFactor * 0.85)
@@ -319,19 +318,19 @@ class GameScene: SKScene {
         peking.size = duckNode.size
         duckNode.run(SKAction.sequence([SKAction.moveBy(x: 0, y: 10, duration: 0.05),
                                         SKAction.removeFromParent()]),
-                     completion:{
+                     completion: {
                         self.addChild(peking)
         })
         peking.run(SKAction.sequence([SKAction.moveBy(x: 0, y: -10, duration: 0.1),
                                       SKAction.wait(forDuration: duckSuspendTime),
                                       SKAction.moveBy(x: 0, y: 10, duration: 0.05),
                                       SKAction.removeFromParent()]),
-                   completion:{
+                   completion: {
                     self.spawnDuck()
                     self.duckSuspended = false
         })
     }
-    
+
     func addTime() {
         timerNode.run(SKAction.sequence([SKAction.scale(to: 1.2, duration: 0.05),
                                          SKAction.scale(to: 1, duration: 0.05)]))
@@ -343,12 +342,11 @@ class GameScene: SKScene {
         background.run(SKAction.sequence([SKAction.colorize(with: UIColor(hue: 0.15, saturation: 1, brightness: 0.5, alpha: 1), colorBlendFactor: 0.3, duration: 0),
                                                     SKAction.colorize(with: UIColor.black, colorBlendFactor: 0, duration: 0.5)]))
     }
-    
-    @objc func onTimerFires()
-    {
+
+    @objc func onTimerFires() {
         timeLeft -= 1
         timerNode.text = ": \(timeLeft)"
-        
+
         switch timeLeft {
         case 0..<6:
             timeChickenChance = 2 // ? unused.
@@ -362,7 +360,7 @@ class GameScene: SKScene {
             background.colorBlendFactor = 0
             timeChickenChance = 15
         }
-        
+
         if timeLeft <= 0 {
             gameTimer?.invalidate()
             gameTimer = nil
@@ -397,7 +395,7 @@ extension GameScene {
 
 // - MARK: Touches responders
 extension GameScene {
-    
+
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         //print("GameScene:: touchesBegan() start ", touches)
         if duckSuspended == false {
@@ -443,7 +441,7 @@ extension GameScene {
 
 // - MARK: Physics collision detection
 extension GameScene: SKPhysicsContactDelegate {
-    
+
     func didBegin(_ contact: SKPhysicsContact) {
         var firstBody: SKPhysicsBody
         var secondBody: SKPhysicsBody
@@ -469,7 +467,7 @@ extension GameScene: SKPhysicsContactDelegate {
             if let chicken = firstBody.node as? SKSpriteNode,
                 let timeChicken = secondBody.node as? SKSpriteNode { // pan2 is initial pan
                 //pan.run(SKAction.sequence([SKAction.scale(to: 0, duration: 0.1), SKAction.removeFromParent()]))
-                
+
                 chicken.run(SKAction.sequence([SKAction.moveBy(x: 0, y: 10, duration: 0.05), SKAction.removeFromParent()]))
                 print("time hit chicken")
             }

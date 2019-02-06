@@ -10,7 +10,7 @@ import SpriteKit.SKScene
 import GameplayKit
 
 class HomeMenuScene: SKScene {
-    
+
     let hud = HudNode()
     let gameScene = GameScene()
     var homeMusic: SKAudioNode!
@@ -21,7 +21,7 @@ class HomeMenuScene: SKScene {
     let background = SKSpriteNode(imageNamed: "BG")
     var scaleFactor: CGFloat = 284 // default minumum - change value in didMove(to view
     var startButton: SKButton!
-    
+
     override init() {
         super.init()
     }
@@ -36,7 +36,7 @@ class HomeMenuScene: SKScene {
     func resetDefaults() { // resets high score
         let defaults = UserDefaults.standard
         let dictionary = defaults.dictionaryRepresentation()
-        dictionary.keys.forEach { key in
+        dictionary.keys.forEach { _ in
             defaults.removeObject(forKey: "DUCKMAN_HIGHSCORE")
         }
     }
@@ -46,14 +46,14 @@ class HomeMenuScene: SKScene {
             homeMusic = SKAudioNode(url: musicURL)
             addChild(homeMusic)
         }
-        
+
         scaleFactor = size.height * 0.25 // = 284 on iPhone SE
 
         print("on home screen", hud.score)
         // resetDefaults()
         print("HomeMenuScene:: didMove() start \(view)")
         print("HomeMenuScene:: size", size)
-        
+
         background.position = CGPoint(x: size.width / 2, y: size.height / 2)
         background.size = CGSize(width: size.height * 1.5, height: size.height * 1.5)//(width: size.width, height: size.height)
         background.zPosition = -10
@@ -71,7 +71,6 @@ class HomeMenuScene: SKScene {
                                            SKAction.scale(to: scaleFactor * 0.0015, duration: 0.1),
                                            SKAction.scale(to: scaleFactor * 0.0013, duration: 0.1)]))
 
-        
         let logoNode = SKSpriteNode(imageNamed: "duck")
         logoNode.anchorPoint = CGPoint(x: 0.5, y: 0.4)
         logoNode.position = CGPoint(x: size.width/2, y: size.height/2)
@@ -82,9 +81,8 @@ class HomeMenuScene: SKScene {
         scaleUpDown.timingMode = SKActionTimingMode.easeInEaseOut
         logoNode.run(scaleUpDown)
 
-        
         let defaults = UserDefaults.standard
-        
+
         currentScore = defaults.integer(forKey: currentScoreKey)
         let scoreLabel = SKLabelNode(text: String(currentScore))
         scoreLabel.fontName = "DIN Alternate"
@@ -98,7 +96,6 @@ class HomeMenuScene: SKScene {
                                          SKAction.wait(forDuration: 0.3),
                                          SKAction.scale(to: 1, duration: 0.1)]))
 
-
         highscore = defaults.integer(forKey: scoreKey)
         let highscoreLabel = SKLabelNode(text: "BEST: \(highscore)")//String(highscore))
         highscoreLabel.fontName = "DIN Alternate"
@@ -106,7 +103,7 @@ class HomeMenuScene: SKScene {
         highscoreLabel.fontSize = scaleFactor * 0.15//40
         highscoreLabel.position = CGPoint(x: size.width / 2, y: size.height * 0.32)
         addChild(highscoreLabel)
-        
+
         /* ___________TEMP__________
         
         let tempTitleLabel = SKLabelNode(text: "SILLY DUCKMAN")
@@ -116,7 +113,7 @@ class HomeMenuScene: SKScene {
         addChild(tempTitleLabel)
         
          ^^^^^^^^^^TEMP^^^^^^^^^^ */
-        
+
         setup()
 
         startButton = createSKButtonStart()
@@ -132,7 +129,7 @@ class HomeMenuScene: SKScene {
                                            SKAction.scale(to: scaleFactor * 0.003, duration: 0.1)]))
         print("HomeMenuScene:: didMove() finished")
     }
-    
+
     override func update(_ currentTime: TimeInterval) {
         // Called before each frame is rendered
     }
@@ -141,10 +138,10 @@ class HomeMenuScene: SKScene {
 
 // - MARK: Setup helpers
 extension HomeMenuScene {
-    
+
     private func setup() {
         //backgroundColor = SKColor.yellow
-        
+
         // Setup physics
         physicsWorld.gravity = .zero
         physicsWorld.contactDelegate = self
@@ -153,13 +150,13 @@ extension HomeMenuScene {
 
 // - MARK: Touches responders
 extension HomeMenuScene {
-    
+
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         print("HomeMenuScene:: touchesBegan() start ", touches)
-        
+
         print("HomeMenuScene:: touchesBegan() end")
     }
-    
+
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         print("HomeMenuScene:: touchesEnded begin")
         //        guard let firstTouch = touches.first else { return }
@@ -169,7 +166,7 @@ extension HomeMenuScene {
 
 // - MARK: Physics collision detection
 extension HomeMenuScene: SKPhysicsContactDelegate {
-    
+
     func didBegin(_ contact: SKPhysicsContact) {
         print("Pew pew contact", contact)
         //        let bodyA = contact.bodyA

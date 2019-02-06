@@ -22,10 +22,8 @@ protocol VectorCalculatable {
     static func *(point: Self, scalar: CGFloat) -> Self
     static func /(point: Self, scalar: CGFloat) -> Self
 
-
     func length() -> CGFloat
 
     func normalized() -> CGPoint
 
 }
-

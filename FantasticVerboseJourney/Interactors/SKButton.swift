@@ -10,7 +10,7 @@ import SpriteKit.SKNode
 
 class SKButton: SKSpriteNode {
     weak var delegate: SKButtonDelegate! // avoid strong circular reference
-    
+
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {
         super.init(texture: texture, color: color, size: size)
         self.setup()
@@ -19,16 +19,16 @@ class SKButton: SKSpriteNode {
         super.init(coder: aDecoder)
         self.setup()
     }
-    
+
     private func setup() {
         self.isUserInteractionEnabled = true
     }
-    
+
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         print("SKButton:: touchesBegan()")
         guard let touch: UITouch = touches.first else { return }
         print("SKButton touchesBegan() tap \(touch)")
-        
+
         // Simple touch response effect for button node.
         self.color = SKColor.gray
         self.colorBlendFactor = 0.5

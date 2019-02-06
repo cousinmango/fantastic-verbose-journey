@@ -9,7 +9,7 @@
 import UIKit.UIViewController
 
 extension UIViewController {
-    
+
     #if DEBUG
     @objc func injected() {
         print("UIViewController:: injected() injecting")
