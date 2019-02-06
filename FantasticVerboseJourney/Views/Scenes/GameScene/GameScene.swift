@@ -32,7 +32,8 @@ class GameScene: SKScene {
     private let hud = HudNode()
     var scaleFactor: CGFloat = 1136/2 * 0.25 // change value in didMove(to view
     var timeChickenChance: Int = 15
-    let BG = SKSpriteNode(imageNamed: "BG")
+
+    let bg = SKSpriteNode(texture: Asset.bg.skTextured)
     var textColor = SKColor(red: 0.63, green: 0.16, blue: 0.41, alpha: 1.0)
     var gameTimer: Timer? = nil
     var timeLeft = 30
@@ -55,11 +56,11 @@ class GameScene: SKScene {
         scaleFactor = size.height * 0.25
 
         let midWidth: CGFloat = size.width / 2
-        BG.position = CGPoint(x: midWidth, y: size.height / 2)
-        BG.size = CGSize(width: size.height * 1.5, height: size.height * 1.5)//(width: size.width, height: size.height)
-        BG.zPosition = -10
-        addChild(BG)
-        BG.run(SKAction.repeatForever(SKAction.rotate(byAngle: -2 * CGFloat(Double.pi), duration: 4)))
+        bg.position = CGPoint(x: midWidth, y: size.height / 2)
+        bg.size = CGSize(width: size.height * 1.5, height: size.height * 1.5)//(width: size.width, height: size.height)
+        bg.zPosition = -10
+        addChild(bg)
+        bg.run(SKAction.repeatForever(SKAction.rotate(byAngle: -2 * CGFloat(Double.pi), duration: 4)))
         
 
         // Positioning of chicken spawn points on UI.
@@ -320,8 +321,8 @@ class GameScene: SKScene {
         timerNode.text = ": \(timeLeft)"
     }
 
-    func BGFlash() {
-        BG.run(SKAction.sequence([SKAction.colorize(with: UIColor(hue: 0.15, saturation: 1, brightness: 0.5, alpha: 1), colorBlendFactor: 0.3, duration: 0),
+    func bgFlash() {
+        bg.run(SKAction.sequence([SKAction.colorize(with: UIColor(hue: 0.15, saturation: 1, brightness: 0.5, alpha: 1), colorBlendFactor: 0.3, duration: 0),
                                                     SKAction.colorize(with: UIColor.black, colorBlendFactor: 0, duration: 0.5)]))
     }
     
@@ -333,14 +334,14 @@ class GameScene: SKScene {
         switch timeLeft {
         case 0..<6:
             timeChickenChance = 2 // ? unused.
-            BGFlash()
+            bgFlash()
         case 6..<11:
             timeChickenChance = 4
-            BGFlash()
+            bgFlash()
         case 11..<14:
             timeChickenChance = 5
         default:
-            BG.colorBlendFactor = 0
+            bg.colorBlendFactor = 0
             timeChickenChance = 15
         }
         

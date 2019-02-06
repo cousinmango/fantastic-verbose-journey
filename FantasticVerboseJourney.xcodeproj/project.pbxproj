@@ -32,6 +32,7 @@
 		553032DF21D87F78001DB357 /* FantasticVerboseJourneyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553032DE21D87F78001DB357 /* FantasticVerboseJourneyTests.swift */; };
 		553032EA21D87F78001DB357 /* FantasticVerboseJourneyUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553032E921D87F78001DB357 /* FantasticVerboseJourneyUITests.swift */; };
 		55348E0422098FE5003C6B97 /* assets-images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55348E0322098FE5003C6B97 /* assets-images.swift */; };
+		55348E07220AC793003C6B97 /* ImageAsset+SKTexturable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55348E06220AC793003C6B97 /* ImageAsset+SKTexturable.swift */; };
 		55A4F6EB21D89A3C001C6C16 /* InjectionIiiHotReloadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A4F6EA21D89A3C001C6C16 /* InjectionIiiHotReloadable.swift */; };
 		55A4F6ED21D89A91001C6C16 /* UIViewController+InjectionIiiHotReloadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A4F6EC21D89A91001C6C16 /* UIViewController+InjectionIiiHotReloadable.swift */; };
 		55A4F6EF21D89C47001C6C16 /* SKButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A4F6EE21D89C47001C6C16 /* SKButton.swift */; };
@@ -88,6 +89,7 @@
 		553032E921D87F78001DB357 /* FantasticVerboseJourneyUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FantasticVerboseJourneyUITests.swift; sourceTree = "<group>"; };
 		553032EB21D87F78001DB357 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		55348E0322098FE5003C6B97 /* assets-images.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "assets-images.swift"; sourceTree = "<group>"; };
+		55348E06220AC793003C6B97 /* ImageAsset+SKTexturable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ImageAsset+SKTexturable.swift"; sourceTree = "<group>"; };
 		55A4F6EA21D89A3C001C6C16 /* InjectionIiiHotReloadable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InjectionIiiHotReloadable.swift; sourceTree = "<group>"; };
 		55A4F6EC21D89A91001C6C16 /* UIViewController+InjectionIiiHotReloadable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+InjectionIiiHotReloadable.swift"; sourceTree = "<group>"; };
 		55A4F6EE21D89C47001C6C16 /* SKButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKButton.swift; sourceTree = "<group>"; };
@@ -243,6 +245,7 @@
 				5562217021D8869100BA22BB /* Delegates */,
 				553032C721D87F77001DB357 /* Actions.sks */,
 				55348E0222098FE5003C6B97 /* ReferencesGenerated */,
+				55348E05220AC744003C6B97 /* ReferencesCustom */,
 				03DA720D21FBFC84001D4BC4 /* Audio */,
 				553032D021D87F78001DB357 /* Assets.xcassets */,
 				553032D521D87F78001DB357 /* Info.plist */,
@@ -277,6 +280,14 @@
 				55348E0322098FE5003C6B97 /* assets-images.swift */,
 			);
 			path = ReferencesGenerated;
+			sourceTree = "<group>";
+		};
+		55348E05220AC744003C6B97 /* ReferencesCustom */ = {
+			isa = PBXGroup;
+			children = (
+				55348E06220AC793003C6B97 /* ImageAsset+SKTexturable.swift */,
+			);
+			path = ReferencesCustom;
 			sourceTree = "<group>";
 		};
 		5562217021D8869100BA22BB /* Delegates */ = {
@@ -476,6 +487,7 @@
 				553032C421D87F77001DB357 /* AppDelegate.swift in Sources */,
 				55A4F6F321D89CD7001C6C16 /* SKButtonDelegate.swift in Sources */,
 				35E93A7F622424793C311A9B /* SKView+DebugPerformanceOptimisable.swift in Sources */,
+				55348E07220AC793003C6B97 /* ImageAsset+SKTexturable.swift in Sources */,
 				35E933A7B94BD6A90B670AF5 /* VectorCalculatable.swift in Sources */,
 				35E936BBB8FB3F84078B77B1 /* CGPoint+VectorCalculatable.swift in Sources */,
 				55A4F6ED21D89A91001C6C16 /* UIViewController+InjectionIiiHotReloadable.swift in Sources */,
