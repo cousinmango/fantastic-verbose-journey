@@ -26,8 +26,8 @@ class SKButton: SKSpriteNode {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         print("SKButton:: touchesBegan()")
-        guard let tap: UITouch = touches.first else { return }
-        print("SKButton touchesBegan() tap \(tap)")
+        guard let touch: UITouch = touches.first else { return }
+        print("SKButton touchesBegan() tap \(touch)")
         
         // Simple touch response effect for button node.
         self.color = SKColor.gray

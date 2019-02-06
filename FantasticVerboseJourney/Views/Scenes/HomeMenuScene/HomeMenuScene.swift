@@ -18,7 +18,7 @@ class HomeMenuScene: SKScene {
     private var highscore: Int = 0
     private let currentScoreKey = "CURRENT_SCORE"
     private var currentScore: Int = 0
-    let BG = SKSpriteNode(imageNamed: "BG")
+    let background = SKSpriteNode(imageNamed: "BG")
     var scaleFactor: CGFloat = 284 // default minumum - change value in didMove(to view
     var startButton: SKButton!
     
@@ -54,11 +54,11 @@ class HomeMenuScene: SKScene {
         print("HomeMenuScene:: didMove() start \(view)")
         print("HomeMenuScene:: size", size)
         
-        BG.position = CGPoint(x: size.width / 2, y: size.height / 2)
-        BG.size = CGSize(width: size.height * 1.5, height: size.height * 1.5)//(width: size.width, height: size.height)
-        BG.zPosition = -10
-        addChild(BG)
-        BG.run(SKAction.repeatForever(SKAction.rotate(byAngle: -2 * CGFloat(Double.pi), duration: 25)))
+        background.position = CGPoint(x: size.width / 2, y: size.height / 2)
+        background.size = CGSize(width: size.height * 1.5, height: size.height * 1.5)//(width: size.width, height: size.height)
+        background.zPosition = -10
+        addChild(background)
+        background.run(SKAction.repeatForever(SKAction.rotate(byAngle: -2 * CGFloat(Double.pi), duration: 25)))
 
         // title setup
         let titleNode = SKSpriteNode(imageNamed: "title")//color: UIColor.red, size: CGSize(width: 300, height: 150))
