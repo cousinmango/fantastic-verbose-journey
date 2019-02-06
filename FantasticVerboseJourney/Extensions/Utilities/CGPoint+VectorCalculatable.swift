@@ -27,8 +27,8 @@ extension CGPoint: VectorCalculatable {
     }
 
     #if !(arch(x86_64) || arch(arm64))
-    func sqrt(a: CGFloat) -> CGFloat {
-        return CGFloat(sqrtf(Float(a)))
+    func sqrt(decimalNumber: CGFloat) -> CGFloat {
+        return CGFloat(sqrtf(Float(decimalNumber)))
     }
     #endif
 
