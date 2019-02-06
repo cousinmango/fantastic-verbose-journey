@@ -17,10 +17,8 @@ class GameViewController: UIViewController {
         print("GameViewController:: viewDidLoad()")
 
         // Load ref to storyboard view... lame vs programmatic
-        guard let skView = self.view as! SKView? else { return }
-        skView.showsNodeCount = false
 
-//         skView.showsPhysics = false
+        guard let skView = self.view as? SKView else { return }
 
         let homeMenuScene = HomeMenuScene(size: view.bounds.size)
         // homeMenuScene.scaleMode = .aspectFit
@@ -31,7 +29,10 @@ class GameViewController: UIViewController {
 
         skView.presentScene(
             homeMenuScene,
-            transition: SKTransition.reveal(with: .down, duration: 1.0)
+            transition: SKTransition.reveal(
+                with: .down,
+                duration: 1.0
+            )
         )
 
     }

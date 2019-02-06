@@ -295,7 +295,7 @@ class GameScene: SKScene {
         // start fireball animation
         fireballNode.run(SKAction.repeatForever(SKAction.animate(with: fireballFrames, timePerFrame: 0.05)))
         // move fireball
-        fireballNode.run(SKAction.move(to: destination, duration: 0.5), completion: {fireballNode.removeFromParent()})
+        fireballNode.run(SKAction.move(to: destination, duration: 0.5), completion: { fireballNode.removeFromParent() })
         
         // SPAWN ARM
         let duckArm = SKSpriteNode(imageNamed: "arm")
@@ -335,17 +335,18 @@ class GameScene: SKScene {
                 self.addChild(peking)
         }
         )
-        peking.run(SKAction.sequence(
-            [
-                SKAction.moveBy(x: 0, y: -10, duration: 0.1),
-                SKAction.wait(forDuration: duckSuspendTime),
-                SKAction.moveBy(x: 0, y: 10, duration: 0.05),
-                SKAction.removeFromParent()
-            ]
+        peking.run(
+            SKAction.sequence(
+                [
+                    SKAction.moveBy(x: 0, y: -10, duration: 0.1),
+                    SKAction.wait(forDuration: duckSuspendTime),
+                    SKAction.moveBy(x: 0, y: 10, duration: 0.05),
+                    SKAction.removeFromParent()
+                ]
             ),
-                   completion: {
-                    self.spawnDuck()
-                    self.duckSuspended = false
+            completion: {
+                self.spawnDuck()
+                self.duckSuspended = false
         }
         )
     }
@@ -417,8 +418,14 @@ class GameScene: SKScene {
             let homeMenuScene = HomeMenuScene(size: size)
             print("before home screen", hudOverlay.score)
             hudOverlay.saveCurrentScore()
-            let homeSceneTransition = SKTransition.push(with: .down, duration: 0.5)
-            self.view?.presentScene(homeMenuScene, transition: homeSceneTransition)
+            let homeSceneTransition = SKTransition.push(
+                with: .down,
+                duration: 0.5
+            )
+            self.view?.presentScene(
+                homeMenuScene,
+                transition: homeSceneTransition
+            )
             
         }
     }
@@ -429,16 +436,23 @@ extension GameScene {
     
     private func setup() {
         backgroundColor = SKColor.darkGray
-        gameTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(onTimerFires), userInfo: nil, repeats: true)
+        gameTimer = Timer.scheduledTimer(
+            timeInterval: 1.0,
+            target: self,
+            selector: #selector(onTimerFires),
+            userInfo: nil,
+            repeats: true
+        )
         
         // Setup physics
         physicsWorld.gravity = .zero
         physicsWorld.contactDelegate = self
-        // hud setup
+        
+        // HUD setup
         hudOverlay.setup(size: size)
         addChild(hudOverlay)
         hudOverlay.resetPoints()
-        //addSKButton()
+        
     }
 }
 
@@ -446,7 +460,6 @@ extension GameScene {
 extension GameScene {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        //print("GameScene:: touchesBegan() start ", touches)
         if duckSuspended == false {
             for touch in touches {
                 let touchLocation = touch.location(in: self)
@@ -455,32 +468,32 @@ extension GameScene {
                 case (size.width/2..<size.width, size.height/2..<size.height):
                     orientAngle = CGFloat(tanh(size.height / size.width))
                     duckNode.run(SKAction.rotate(toAngle: orientAngle, duration: 0.08, shortestUnitArc: true))
-                    spawnFireball(position: CGPoint(x: size.width/2, y: size.height/2), destination: CGPoint(x: size.width, y: size.height), angle: orientAngle)//chickenPosition1)//CGPoint(x: size.width - size.width * 0.2, y: size.height - size.width * 0.2))
+                    spawnFireball(position: CGPoint(x: size.width/2, y: size.height/2), destination: CGPoint(x: size.width, y: size.height), angle: orientAngle)
                     print("touch in top right")
                 case (size.width/2..<size.width, 0..<size.height/2):
                     orientAngle = CGFloat(-tanh(size.height / size.width))
                     duckNode.run(SKAction.rotate(toAngle: orientAngle, duration: 0.08, shortestUnitArc: true))
-                    spawnFireball(position: CGPoint(x: size.width/2, y: size.height/2), destination: CGPoint(x: size.width, y: 0), angle: orientAngle)// chickenPosition2)//CGPoint(x: size.width - size.width * 0.2, y: size.width * 0.2))
+                    spawnFireball(position: CGPoint(x: size.width/2, y: size.height/2), destination: CGPoint(x: size.width, y: 0), angle: orientAngle)
                     print("touch in bottom right")
                 case (0..<size.width/2, 0..<size.height/2):
                     orientAngle = CGFloat(tanh(size.height / size.width) + CGFloat(Double.pi))
                     duckNode.run(SKAction.rotate(toAngle: orientAngle, duration: 0.08, shortestUnitArc: true))
-                    spawnFireball(position: CGPoint(x: size.width/2, y: size.height/2), destination: CGPoint(x: 0, y: 0), angle: orientAngle)//chickenPosition3)//CGPoint(x: size.width * 0.2, y: size.width * 0.2))
+                    spawnFireball(position: CGPoint(x: size.width/2, y: size.height/2), destination: CGPoint(x: 0, y: 0), angle: orientAngle)
                     print("touch in bottom left")
                 case (0..<size.width/2, size.height/2..<size.height):
                     orientAngle = CGFloat(-tanh(size.height / size.width) + CGFloat(Double.pi))
                     duckNode.run(SKAction.rotate(toAngle: orientAngle, duration: 0.08, shortestUnitArc: true))
-                    spawnFireball(position: CGPoint(x: size.width/2, y: size.height/2), destination: CGPoint(x: 0, y: size.height), angle: orientAngle)//chickenPosition4)//CGPoint(x: size.width * 0.2, y: size.height - size.width * 0.2))
+                    spawnFireball(position: CGPoint(x: size.width/2, y: size.height/2), destination: CGPoint(x: 0, y: size.height), angle: orientAngle)
                     print("touch in top left")
                 default:
                     print("touch in no quadrants")
                 }
             }
-            duckNode.run(SKAction.sequence(
-                [SKAction.scale(to: 1.2, duration: 0.05), SKAction.scale(to: 1, duration: 0.1)]
+            duckNode.run(
+                SKAction.sequence(
+                    [SKAction.scale(to: 1.2, duration: 0.05), SKAction.scale(to: 1, duration: 0.1)]
             ))
         }
-        //print("GameScene:: touchesBegan() end")
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -490,9 +503,11 @@ extension GameScene {
     }
 }
 
+
 // - MARK: Physics collision detection
 extension GameScene: SKPhysicsContactDelegate {
-    
+    // - TODO Refactor massive monolithic function
+    // swiftlint:disable function_body_length
     func didBegin(_ contact: SKPhysicsContact) {
         var firstBody: SKPhysicsBody
         var secondBody: SKPhysicsBody
@@ -503,15 +518,16 @@ extension GameScene: SKPhysicsContactDelegate {
             firstBody = contact.bodyB
             secondBody = contact.bodyA
         }
-        // - TODO: Very large multi if else if branching statement to refactor.
+        // - TODO: Very large multi if-else-if branching statement to refactor.
         // when a chicken spawns in same position as existing chicken
         if (
             (firstBody.categoryBitMask == PhysicsCategory.chicken) &&
                 (secondBody.categoryBitMask == PhysicsCategory.chicken)) {
             if let chicken = firstBody.node as? SKSpriteNode,
                 let chicken2 = secondBody.node as? SKSpriteNode { //chicken2 is the initial chicken
-                chicken2.run(SKAction.sequence(
-                    [SKAction.moveBy(x: 0, y: 10, duration: 0.05), SKAction.removeFromParent()]
+                chicken2.run(
+                    SKAction.sequence(
+                        [SKAction.moveBy(x: 0, y: 10, duration: 0.05), SKAction.removeFromParent()]
                 ))
                 
                 //chicken.removeFromParent()
@@ -523,8 +539,9 @@ extension GameScene: SKPhysicsContactDelegate {
             if let chicken = firstBody.node as? SKSpriteNode,
                 let timeChicken = secondBody.node as? SKSpriteNode { // pan2 is initial pan
                 
-                chicken.run(SKAction.sequence(
-                [SKAction.moveBy(x: 0, y: 10, duration: 0.05), SKAction.removeFromParent()]
+                chicken.run(
+                    SKAction.sequence(
+                        [SKAction.moveBy(x: 0, y: 10, duration: 0.05), SKAction.removeFromParent()]
                 ))
                 print("time hit chicken")
             }
@@ -533,8 +550,9 @@ extension GameScene: SKPhysicsContactDelegate {
                 (secondBody.categoryBitMask == PhysicsCategory.timeChicken)) {
             if let timeChicken = firstBody.node as? SKSpriteNode,
                 let timeChicken2 = secondBody.node as? SKSpriteNode { //chicken2 is the initial chicken
-                timeChicken2.run(SKAction.sequence(
-                    [SKAction.moveBy(x: 0, y: 10, duration: 0.05), SKAction.removeFromParent()]
+                timeChicken2.run(
+                    SKAction.sequence(
+                        [SKAction.moveBy(x: 0, y: 10, duration: 0.05), SKAction.removeFromParent()]
                 ))
                 print("time hit time")
             }
@@ -564,12 +582,16 @@ extension GameScene: SKPhysicsContactDelegate {
             if let chicken = firstBody.node as? SKSpriteNode,
                 let fireball = secondBody.node as? SKSpriteNode {
                 fireball.removeFromParent()
-                chicken.run(SKAction.sequence(
-                    [
-                        SKAction.playSoundFileNamed("chickenhitSound.wav", waitForCompletion: false),
-                        SKAction.moveBy(x: 0, y: 10, duration: 0.05),
-                        SKAction.setTexture(SKTexture(imageNamed: "egg")),
-                        SKAction.moveBy(x: 0, y: -10, duration: 0.1)]
+                chicken.run(
+                    SKAction.sequence(
+                        [
+                            SKAction.playSoundFileNamed(
+                                "chickenhitSound.wav",
+                                waitForCompletion: false
+                            ),
+                            SKAction.moveBy(x: 0, y: 10, duration: 0.05),
+                            SKAction.setTexture(Asset.egg.skTextured),
+                            SKAction.moveBy(x: 0, y: -10, duration: 0.1)]
                 ))
                 hudOverlay.addPoint()
                 print("HIT CHICKEN!")
@@ -582,11 +604,12 @@ extension GameScene: SKPhysicsContactDelegate {
             if let timeChicken = firstBody.node as? SKSpriteNode,
                 let fireball = secondBody.node as? SKSpriteNode {
                 fireball.removeFromParent()
-                timeChicken.run(SKAction.sequence(
-                    [SKAction.playSoundFileNamed("chickenhitSound.wav", waitForCompletion: false),
-                     SKAction.scale(to: 1.2, duration: 0.05),
-                     SKAction.scale(to: 1, duration: 0.1)
-                    ]
+                timeChicken.run(
+                    SKAction.sequence(
+                        [SKAction.playSoundFileNamed("chickenhitSound.wav", waitForCompletion: false),
+                         SKAction.scale(to: 1.2, duration: 0.05),
+                         SKAction.scale(to: 1, duration: 0.1)
+                        ]
                     )
                 )
                 addTime()

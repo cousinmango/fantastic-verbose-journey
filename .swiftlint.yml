@@ -7,7 +7,8 @@ opt_in_rules: # some rules are only opt-in
   - empty_count
   - multiline_parameters
   - multiline_parameters_brackets
-
+  - closure_end_indentation
+  - closure_spacing
   # Find all the available rules by running:
   # swiftlint rules
 #included: # paths to include during linting. `--path` is ignored if present.
@@ -25,7 +26,7 @@ force_try:
   severity: warning # explicitly
 # rules that have both warning and error levels, can set just the warning level
 # implicitly
-line_length: 110
+line_length: 140
 # they can set both implicitly with an array
 type_body_length:
   - 300 # warning

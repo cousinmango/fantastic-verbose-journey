@@ -104,24 +104,10 @@ class HomeMenuScene: SKScene {
         highscoreLabel.position = CGPoint(x: size.width / 2, y: size.height * 0.32)
         addChild(highscoreLabel)
 
-        /* ___________TEMP__________
-        
-        let tempTitleLabel = SKLabelNode(text: "SILLY DUCKMAN")
-        tempTitleLabel.fontName = "DIN Alternate"
-        tempTitleLabel.fontSize = 40
-        tempTitleLabel.position = CGPoint(x: titleNode.position.x, y: titleNode.position.y - 15)
-        addChild(tempTitleLabel)
-        
-         ^^^^^^^^^^TEMP^^^^^^^^^^ */
-
         setup()
 
         startButton = createSKButtonStart()
-        /*let startButtonLabel = SKLabelNode(text: "START")
-        startButtonLabel.fontName = "DIN Alternate"
-        startButtonLabel.fontSize = 30*/
-        //startButton.size = CGSize(width: startButton.width * scaleFactor, height: startButton.height * scaleFactor)
-        //startButton.addChild(startButtonLabel)
+
         addChild(startButton)
         startButton.run(SKAction.sequence([SKAction.scale(to: 0, duration: 0),
                                            SKAction.wait(forDuration: 1.1),
@@ -183,9 +169,8 @@ extension HomeMenuScene {
         button.texture = SKTexture(imageNamed: "startButton")
         button.position = CGPoint(x: size.width/2, y: size.height * 0.18)
         button.zPosition = -3
-        //button.color = SKColor.blue
-        //button.size = CGSize(width: 250, height: 100)
-        button.setScale(scaleFactor * 0.003)//CGSize(width: button.size.width * scaleFactor * 0.003, height: button.size.height * scaleFactor * 0.003)
+
+        button.setScale(scaleFactor * 0.003)
 
         return button
     }
