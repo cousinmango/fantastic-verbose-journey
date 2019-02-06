@@ -11,7 +11,7 @@ import GameplayKit
 
 class HomeMenuScene: SKScene {
 
-    let hud = HudNode()
+    let hudOverlay = HudNode()
     let gameScene = GameScene()
     var homeMusic: SKAudioNode!
     private let scoreKey = "DUCKMAN_HIGHSCORE"
@@ -49,7 +49,7 @@ class HomeMenuScene: SKScene {
 
         scaleFactor = size.height * 0.25 // = 284 on iPhone SE
 
-        print("on home screen", hud.score)
+        print("on home screen", hudOverlay.score)
         // resetDefaults()
         print("HomeMenuScene:: didMove() start \(view)")
         print("HomeMenuScene:: size", size)

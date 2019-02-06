@@ -21,12 +21,13 @@ class GameScene: SKScene {
     }
 
     struct PhysicsCategory {
-        static let none       : UInt32 = 0
+        // swiftlint:disable colon
+        static let none         : UInt32 = 0
         //static let all        : UInt32 = UInt32.max
-        static let chicken    : UInt32 = 0b1       // 1
-        static let pan        : UInt32 = 0b10      // 2
-        static let fireball   : UInt32 = 0b11      // 3
-        static let timeChicken: UInt32 = 0b100
+        static let chicken      : UInt32 = 0b1       // 1
+        static let fryingPan    : UInt32 = 0b10      // 2
+        static let fireball     : UInt32 = 0b11      // 3
+        static let timeChicken  : UInt32 = 0b100
     }
 
     private let hudOverlay = HudNode()
@@ -232,7 +233,7 @@ class GameScene: SKScene {
         let panNode = SKSpriteNode(imageNamed: "pan")//color: UIColor.lightGray, size: CGSize(width: 50, height: 50))
         panNode.size = CGSize(width: scaleFactor * 0.8, height: scaleFactor * 0.8)
         panNode.physicsBody = SKPhysicsBody(circleOfRadius: panNode.size.height/6)
-        panNode.physicsBody?.categoryBitMask = PhysicsCategory.pan
+        panNode.physicsBody?.categoryBitMask = PhysicsCategory.fryingPan
         panNode.physicsBody?.contactTestBitMask = PhysicsCategory.fireball
         panNode.physicsBody?.collisionBitMask = PhysicsCategory.none
 
@@ -273,8 +274,9 @@ class GameScene: SKScene {
         let fireballAtlas = SKTextureAtlas(named: "fire")
         var fireballFrames: [SKTexture] = []
         let numFrames = fireballAtlas.textureNames.count
-        for i in 1...numFrames {
-            let fireballTextureName = "fire\(i)"
+        // ... fire1 fire2 fire3.
+        for fireSpriteAtlasAssetNameIdSuffix in 1...numFrames {
+            let fireballTextureName = "fire\(fireSpriteAtlasAssetNameIdSuffix)"
             fireballFrames.append(fireballAtlas.textureNamed(fireballTextureName))
         }
         let firstFrame = fireballFrames[0]
@@ -296,17 +298,23 @@ class GameScene: SKScene {
         fireballNode.run(SKAction.move(to: destination, duration: 0.5), completion: {fireballNode.removeFromParent()})
 
         // SPAWN ARM
-        let arm = SKSpriteNode(imageNamed: "arm")
-        arm.size = CGSize(width: scaleFactor * 0.85, height: scaleFactor * 0.85)
-        arm.anchorPoint = CGPoint(x: 0, y: 0.5)
-        arm.position = CGPoint(x: size.width/2, y: size.height/2)
-        arm.zPosition = 5
-        arm.zRotation = angle
-        addChild(arm)
-        arm.run(SKAction.sequence([SKAction.scale(to: 0, duration: 0),
-                                   SKAction.scale(to: 1, duration: 0.1),
-                                   SKAction.scale(to: 0, duration: 0.1),
-                                   SKAction.removeFromParent()]))
+        let duckArm = SKSpriteNode(imageNamed: "arm")
+        duckArm.size = CGSize(width: scaleFactor * 0.85, height: scaleFactor * 0.85)
+        duckArm.anchorPoint = CGPoint(x: 0, y: 0.5)
+        duckArm.position = CGPoint(x: size.width/2, y: size.height/2)
+        duckArm.zPosition = 5
+        duckArm.zRotation = angle
+        addChild(duckArm)
+        duckArm.run(
+            SKAction.sequence(
+                [
+                    SKAction.scale(to: 0, duration: 0),
+                    SKAction.scale(to: 1, duration: 0.1),
+                    SKAction.scale(to: 0, duration: 0.1),
+                    SKAction.removeFromParent()
+                ]
+            )
+        )
 
     }
 
@@ -480,20 +488,20 @@ extension GameScene: SKPhysicsContactDelegate {
                 }
 
         // when pan spawns in same position as existing pan
-        } else if ((firstBody.categoryBitMask == PhysicsCategory.pan) &&
-            (secondBody.categoryBitMask == PhysicsCategory.pan)) {
-            if let pan = firstBody.node as? SKSpriteNode,
-                let pan2 = secondBody.node as? SKSpriteNode { // pan2 is initial pan
+        } else if ((firstBody.categoryBitMask == PhysicsCategory.fryingPan) &&
+            (secondBody.categoryBitMask == PhysicsCategory.fryingPan)) {
+            if let fryingPan = firstBody.node as? SKSpriteNode,
+                let fryingPan2 = secondBody.node as? SKSpriteNode { // pan2 is initial pan
                 //pan.run(SKAction.sequence([SKAction.scale(to: 0, duration: 0.1), SKAction.removeFromParent()]))
 
-                pan.removeFromParent()
+                fryingPan.removeFromParent()
                 print("pan hit pan")
             }
         // when pans or chickens spawn on each other (only on smaller screens) - doesn't do anything except handle exception - DON'T REMOVE
         } else if ((firstBody.categoryBitMask == PhysicsCategory.chicken) &&
-            (secondBody.categoryBitMask == PhysicsCategory.pan)) {
+            (secondBody.categoryBitMask == PhysicsCategory.fryingPan)) {
             if let chicken = firstBody.node as? SKSpriteNode,
-                let pan = secondBody.node as? SKSpriteNode {
+                let fryingPan = secondBody.node as? SKSpriteNode {
                 //print("pan hit chicken")
             }
         // chicken hit by fireball
@@ -523,15 +531,15 @@ extension GameScene: SKPhysicsContactDelegate {
             }
 
         // pan hit by fireball
-        } else if ((firstBody.categoryBitMask & PhysicsCategory.pan != 0) &&
+        } else if ((firstBody.categoryBitMask & PhysicsCategory.fryingPan != 0) &&
             (secondBody.categoryBitMask & PhysicsCategory.fireball != 0)) {
-            if let pan = firstBody.node as? SKSpriteNode,
+            if let fryingPan = firstBody.node as? SKSpriteNode,
                 let fireball = secondBody.node as? SKSpriteNode {
                 fireball.run(SKAction.sequence([SKAction.rotate(byAngle: CGFloat(Double.pi), duration: 0),
                                                 //SKAction.scale(to: 0.6, duration: 0),
                                                 SKAction.move(to: duckNode.position, duration: 0.15)]),
                              completion: {fireball.removeFromParent()}) // fireball bounce back
-                pan.run(SKAction.sequence([SKAction.playSoundFileNamed("panhitSound.wav", waitForCompletion: false),
+                fryingPan.run(SKAction.sequence([SKAction.playSoundFileNamed("panhitSound.wav", waitForCompletion: false),
                                            SKAction.scale(to: 1.3, duration: 0.05),
                                            SKAction.scale(to: 1, duration: 0.1)]))
                 //pan.run(SKAction.move(to: CGPoint(x: (pan.position.x + duckNode.position.x) / 2, y: (pan.position.y + duckNode.position.y) / 2), duration: 0.2))
