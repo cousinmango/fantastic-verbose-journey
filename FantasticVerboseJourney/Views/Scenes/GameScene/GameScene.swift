@@ -56,8 +56,14 @@ class GameScene: SKScene {
         scaleFactor = size.height * 0.25
 
         let midWidth: CGFloat = size.width / 2
-        bg.position = CGPoint(x: midWidth, y: size.height / 2)
-        bg.size = CGSize(width: size.height * 1.5, height: size.height * 1.5)//(width: size.width, height: size.height)
+        bg.position = CGPoint(
+            x: midWidth,
+            y: size.height / 2
+        )
+        bg.size = CGSize(
+            width: size.height * 1.5,
+            height: size.height * 1.5
+        )//(width: size.width, height: size.height)
         bg.zPosition = -10
         addChild(bg)
         bg.run(SKAction.repeatForever(SKAction.rotate(byAngle: -2 * CGFloat(Double.pi), duration: 4)))
@@ -91,7 +97,10 @@ class GameScene: SKScene {
         // Refresh ad-hoc scale factors and magic numbers :P
 
         timerNode.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.left
-        timerNode.position = CGPoint(x: midWidth - (scaleFactor * 0.05), y: size.height * 0.77)
+        timerNode.position = CGPoint(
+            x: midWidth - (scaleFactor * 0.05),
+            y: size.height * 0.77
+        )
         timerNode.fontName = "DIN Alternate"
         timerNode.fontColor = textColor
         timerNode.fontSize = scaleFactor * 0.2 //30
@@ -99,9 +108,18 @@ class GameScene: SKScene {
         addChild(timerNode)
         
         let timerIcon = SKSpriteNode(imageNamed: "timerIcon")
-        timerIcon.anchorPoint = CGPoint(x: 0.5, y: 0)
-        timerIcon.position = CGPoint(x: timerNode.position.x - (scaleFactor * 0.11), y: timerNode.position.y)
-        timerIcon.size = CGSize(width: scaleFactor * 0.15, height: scaleFactor * 0.15)
+        timerIcon.anchorPoint = CGPoint(
+            x: 0.5,
+            y: 0
+        )
+        timerIcon.position = CGPoint(
+            x: timerNode.position.x - (scaleFactor * 0.11),
+            y: timerNode.position.y
+        )
+        timerIcon.size = CGSize(
+            width: scaleFactor * 0.15,
+            height: scaleFactor * 0.15
+        )
         addChild(timerIcon)
         
         spawnDuck()
