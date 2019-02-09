@@ -10,6 +10,17 @@ opt_in_rules: # some rules are only opt-in
   - multiline_parameters_brackets
   - closure_end_indentation
   - closure_spacing
+  - first_where
+  - force_cast
+  - force_unwrapping
+  - implicitly_unwrapped_optional
+  - missing_docs
+  - multiline_parameters
+  - multiple_empty_lines
+  - nesting
+  - number_separator
+  - operator_usage_whitespace
+  - overridden_super_call
   # Find all the available rules by running:
   # swiftlint rules
 #included: # paths to include during linting. `--path` is ignored if present.
