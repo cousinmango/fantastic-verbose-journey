@@ -24,10 +24,10 @@ class GameScene: SKScene {
         // swiftlint:disable colon
         static let none         : UInt32 = 0
         //static let all        : UInt32 = UInt32.max
-        static let chicken      : UInt32 = 0b1
-        static let fryingPan    : UInt32 = 0b10
-        static let fireball     : UInt32 = 0b11
-        static let timeHourglass  : UInt32 = 0b100
+        static let chicken      : UInt32 = 0b1          // 1
+        static let fryingPan    : UInt32 = 0b10         // 2
+        static let fireball     : UInt32 = 0b11         // 3
+        static let timeHourglass: UInt32 = 0b100        // 4
     }
 
     private let hudOverlay = HudNode()
@@ -45,6 +45,8 @@ class GameScene: SKScene {
     var timeLeft = 30
     var gameMusic: SKAudioNode!
     let timerNode = SKLabelNode(text: "")
+    
+    // - FIXME: ChickenPositioning logic.
     var chickenPosition1: CGPoint = CGPoint(
         x: 0,
         y: 0
@@ -128,7 +130,7 @@ class GameScene: SKScene {
         )
         timerNode.fontName = "DIN Alternate"
         timerNode.fontColor = textColor
-        timerNode.fontSize = scaleFactor * 0.2 //30
+        timerNode.fontSize = scaleFactor * 0.2 // 30
         timerNode.text = ": \(timeLeft)"
         addChild(timerNode)
 
@@ -193,7 +195,7 @@ class GameScene: SKScene {
             timeUntilNextAction2 = Double.random(in: 0 ..< 3)
         }
     }
-
+    
     func spawnDuck() {
         // duck setup
         duckNode.size = CGSize(
@@ -211,13 +213,14 @@ class GameScene: SKScene {
         duckNode.zPosition = 5
         duckNode.zRotation = 0
         addChild(duckNode)
-        duckNode.run(SKAction.moveBy(
-            x: 0,
-            y: -10,
-            duration: 0.1
+        duckNode.run(
+            SKAction.moveBy(
+                x: 0,
+                y: -10,
+                duration: 0.1
+            ) // Design system: Make it look like the duck spawns by dropping onto the floor a few pixels.
         )
-        )
-
+        
     }
 
     @objc func spawnChickenRandom() {
@@ -251,8 +254,8 @@ class GameScene: SKScene {
         // because 15 is not the chance, and the larger the `timeHourglassChance` is, the less likely it is to have a
         // timeHourglass spawn?
         // Intention: TODO: Change to be more straightforward and with less side effects
-        let randomtimeHourglass = Int.random(in: 1...timeHourglassChance) // chance/frequency of timeHourglass
-        if randomtimeHourglass == 1 {
+        let randomTimeHourglass = Int.random(in: 1...timeHourglassChance) // chance/frequency of timeHourglass
+        if randomTimeHourglass == 1 {
             chickenNode.physicsBody?.categoryBitMask = PhysicsCategory.timeHourglass
             chickenNode.texture = SKTexture(imageNamed: "timerIcon")
             chickenNode.size = CGSize(
@@ -783,11 +786,13 @@ extension GameScene: SKPhysicsContactDelegate {
         // Large physics collision detection based on bit operations.
         // when a chicken spawns in same position as existing chicken
 
-        let isFirstBodyChickenPhysics: Bool = firstBody.categoryBitMask == PhysicsCategory.chicken
-        let isSecondBodyChickenPhysics: Bool = secondBody.categoryBitMask == PhysicsCategory.chicken
-        let isChickenCollidingWithChicken: Bool = isFirstBodyChickenPhysics && isSecondBodyChickenPhysics
+        let firstBodyIsChickenPhysics: Bool = firstBody.categoryBitMask == PhysicsCategory.chicken
+        let secondBodyIsChickenPhysics: Bool = secondBody.categoryBitMask == PhysicsCategory.chicken
+        let isChickenCollidingWithChicken: Bool = firstBodyIsChickenPhysics && secondBodyIsChickenPhysics
 
         // "in a world where two chickens collide..."
+        let firstBodyIsTimeHourglass: (Bool) = (firstBody.categoryBitMask == PhysicsCategory.timeHourglass)
+        let secondBodyIsTimeHourglass: Bool = secondBody.categoryBitMask == PhysicsCategory.timeHourglass
         if ( isChickenCollidingWithChicken )
         {
             if let chicken = firstBody.node as? SKSpriteNode, let chicken2 = secondBody.node as? SKSpriteNode { //chicken2 is the initial chicken
@@ -808,10 +813,7 @@ extension GameScene: SKPhysicsContactDelegate {
                 //chicken.removeFromParent()
                 print("chicken hit chicken")
             }
-        } else if (
-                      isFirstBodyChickenPhysics &&
-                          (secondBody.categoryBitMask == PhysicsCategory.timeHourglass)
-                  )
+        } else if (firstBodyIsChickenPhysics && (secondBody.categoryBitMask == PhysicsCategory.timeHourglass))
         {
             if let chicken = firstBody.node as? SKSpriteNode,
                let timeHourglass = secondBody.node as? SKSpriteNode { // pan2 is initial pan
@@ -831,11 +833,7 @@ extension GameScene: SKPhysicsContactDelegate {
 
                 print("time hit chicken")
             }
-        } else if (
-                      (firstBody.categoryBitMask == PhysicsCategory.timeHourglass) &&
-                          (secondBody.categoryBitMask == PhysicsCategory.timeHourglass)
-                  )
-        {
+        } else if (firstBodyIsTimeHourglass && secondBodyIsTimeHourglass) {
             if let timeHourglass = firstBody.node as? SKSpriteNode,
                let timeHourglass2 = secondBody.node as? SKSpriteNode { //chicken2 is the initial chicken
                 timeHourglass2.run(
@@ -868,7 +866,7 @@ extension GameScene: SKPhysicsContactDelegate {
             }
             // when pans or chickens spawn on each other (only on smaller screens) - doesn't do anything except handle exception - DON'T REMOVE
         } else if (
-                      isFirstBodyChickenPhysics &&
+                      firstBodyIsChickenPhysics &&
                           (secondBody.categoryBitMask == PhysicsCategory.fryingPan)
                   )
         {
