@@ -45,14 +45,22 @@ class GameScene: SKScene {
     var timeLeft = 30
     var gameMusic: SKAudioNode!
     let timerNode = SKLabelNode(text: "")
-    var chickenPosition1: CGPoint = CGPoint(x: 0,
-                                            y: 0 )
-    var chickenPosition2: CGPoint = CGPoint(x: 0,
-                                            y: 0 )
-    var chickenPosition3: CGPoint = CGPoint(x: 0,
-                                            y: 0 )
-    var chickenPosition4: CGPoint = CGPoint(x: 0,
-                                            y: 0 )
+    var chickenPosition1: CGPoint = CGPoint(
+        x: 0,
+                                            y: 0
+    )
+    var chickenPosition2: CGPoint = CGPoint(
+        x: 0,
+                                            y: 0
+    )
+    var chickenPosition3: CGPoint = CGPoint(
+        x: 0,
+                                            y: 0
+    )
+    var chickenPosition4: CGPoint = CGPoint(
+        x: 0,
+                                            y: 0
+    )
     let duckNode = SKSpriteNode(imageNamed: "duck")
     var duckSuspended: Bool = false
     private var fireballFrames: [SKTexture] = []
@@ -186,8 +194,10 @@ class GameScene: SKScene {
     
     func spawnDuck() {
         // duck setup
-        duckNode.size = CGSize(width: scaleFactor,
-                               height: scaleFactor)
+        duckNode.size = CGSize(
+            width: scaleFactor,
+                               height: scaleFactor
+        )
         duckNode.anchorPoint = CGPoint(
             x: 0.5,
                                        y: 0.4
@@ -766,9 +776,12 @@ extension GameScene: SKPhysicsContactDelegate {
             if let chicken = firstBody.node as? SKSpriteNode, let chicken2 = secondBody.node as? SKSpriteNode { //chicken2 is the initial chicken
                 chicken2.run(
                     SKAction.sequence(
-                        [SKAction.moveBy(x: 0,
+                        [
+                            SKAction.moveBy(
+                                x: 0,
                                          y: 10,
-                                         duration: 0.05),
+                                         duration: 0.05
+                            ),
                          SKAction.removeFromParent()
 ]
                 )
@@ -788,9 +801,12 @@ extension GameScene: SKPhysicsContactDelegate {
                 
                 chicken.run(
                     SKAction.sequence(
-                        [SKAction.moveBy(x: 0,
+                        [
+                            SKAction.moveBy(
+                                x: 0,
                                          y: 10,
-                                         duration: 0.05),
+                                         duration: 0.05
+                            ),
                          SKAction.removeFromParent()
 ]
                 )
@@ -807,7 +823,8 @@ extension GameScene: SKPhysicsContactDelegate {
                 let timeChicken2 = secondBody.node as? SKSpriteNode { //chicken2 is the initial chicken
                 timeChicken2.run(
                     SKAction.sequence(
-                        [SKAction.moveBy(
+                        [
+                            SKAction.moveBy(
                             x: 0,
                             y: 10,
                             duration: 0.05
