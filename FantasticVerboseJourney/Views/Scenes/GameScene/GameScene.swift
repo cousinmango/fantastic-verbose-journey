@@ -31,6 +31,10 @@ class GameScene: SKScene {
     }
 
     private let hudOverlay = HudNode()
+    
+    // ? Too much mutation and coupling
+    // scaleFactor is redundant if it is all tuned with variable values everywhere else?
+    // Especially if it isn't a constant.
     var scaleFactor: CGFloat = 1136/2 * 0.25 // change value in didMove(to view
     var timeHourglassChance: Int = 15
 
@@ -103,6 +107,11 @@ class GameScene: SKScene {
 
         let safeAreaPadding: CGFloat = 1 - edgeMarginDecimalFraction
 
+        // - TODO: Standardise the coordinate and design system
+        // e.g. pop in pop out SKAction and SKSequence builder reused
+        // the 4 spawn positions and slightly inwards-placed position for pans.
+        // should all be derived from a central design system
+        //
         chickenPosition1 = CGPoint(
             x: size.width * safeAreaPadding,
             y: size.height * safeAreaPadding + 10
@@ -166,6 +175,16 @@ class GameScene: SKScene {
     var timeUntilNextAction = TimeInterval(4)
     var timeUntilNextAction2 = TimeInterval(4)
 
+    // - FIXME: ? don't need to calculate things on every single frame update.
+    // Calculate based on seconds timer somewhere else
+    // calculation handler
+    // spawn handler? chance timing
+    // the update can then retrieve the computed variable (keeps polling/pinging)
+    // ~slightly less performance impact?
+    // Does not need to contain calculate logic for every update.
+    // Extend gamescene to conform to the SpawnHandler delegate?
+    // or separate even further with a gamestate handler
+    
     override func update(_ currentTime: TimeInterval) {
         // Called before each frame is rendered
 
