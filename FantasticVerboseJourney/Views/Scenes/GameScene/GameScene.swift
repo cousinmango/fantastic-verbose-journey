@@ -27,12 +27,12 @@ class GameScene: SKScene {
         static let chicken      : UInt32 = 0b1
         static let fryingPan    : UInt32 = 0b10
         static let fireball     : UInt32 = 0b11
-        static let timeChicken  : UInt32 = 0b100
+        static let timeHourglass  : UInt32 = 0b100
     }
 
     private let hudOverlay = HudNode()
     var scaleFactor: CGFloat = 1136/2 * 0.25 // change value in didMove(to view
-    var timeChickenChance: Int = 15
+    var timeHourglassChance: Int = 15
 
     let background = SKSpriteNode(texture: Asset.bg.skTextured)
     var textColor = SKColor(
@@ -244,12 +244,21 @@ class GameScene: SKScene {
             print("ERROR: chicken spawn default")
         }
 
-        let randomTimeChicken = Int.random(in: 1...timeChickenChance) // chance/frequency of timeChicken
-        if randomTimeChicken == 1 {
-            chickenNode.physicsBody?.categoryBitMask = PhysicsCategory.timeChicken
+        // using timeHourglassChance value as an inverse chance for calculation?
+        // activates morphing of a spawned chickenNode to be a timeHourglass
+        // but only when the randomised number in the range of 1...timeHourglassInverseChance is 1.
+        // e.g. 1 out of 15. (Samuel thought this was an extra step counter-intuitive to reading the code.
+        // because 15 is not the chance, and the larger the `timeHourglassChance` is, the less likely it is to have a
+        // timeHourglass spawn?
+        // Intention: TODO: Change to be more straightforward and with less side effects
+        let randomtimeHourglass = Int.random(in: 1...timeHourglassChance) // chance/frequency of timeHourglass
+        if randomtimeHourglass == 1 {
+            chickenNode.physicsBody?.categoryBitMask = PhysicsCategory.timeHourglass
             chickenNode.texture = SKTexture(imageNamed: "timerIcon")
-            chickenNode.size = CGSize(width: scaleFactor * 0.3,
-                height: scaleFactor * 0.3)
+            chickenNode.size = CGSize(
+                width: scaleFactor * 0.3,
+                height: scaleFactor * 0.3
+            )
             chickenNode.run(
                 SKAction.repeatForever(
                     SKAction.rotate(
@@ -563,16 +572,16 @@ class GameScene: SKScene {
 
         switch timeLeft {
         case 0..<6:
-            timeChickenChance = 2 // ? unused.
+            timeHourglassChance = 2 // ? unused.
             bgFlash()
         case 6..<11:
-            timeChickenChance = 4
+            timeHourglassChance = 4
             bgFlash()
         case 11..<14:
-            timeChickenChance = 5
+            timeHourglassChance = 5
         default:
             background.colorBlendFactor = 0
-            timeChickenChance = 15
+            timeHourglassChance = 15
         }
 
         if timeLeft <= 0 {
@@ -639,9 +648,12 @@ extension GameScene {
                     orientAngle = CGFloat(tanh(size.height / size.width)
                     )
 
-                    duckNode.run(SKAction.rotate(toAngle: orientAngle,
-                        duration: 0.08,
-                        shortestUnitArc: true)
+                    duckNode.run(
+                        SKAction.rotate(
+                            toAngle: orientAngle,
+                            duration: 0.08,
+                            shortestUnitArc: true
+                        )
                     )
 
                     spawnFireball(position: CGPoint(x: size.width/2,
@@ -770,18 +782,19 @@ extension GameScene: SKPhysicsContactDelegate {
         // - TODO: Very large multi if-else-if branching statement to refactor.
         // Large physics collision detection based on bit operations.
         // when a chicken spawns in same position as existing chicken
-        let isFirstBodyChickenPhysicsBody: Bool = firstBody.categoryBitMask == PhysicsCategory.chicken
-        let isSecondBodyChickenPhysicsBody: Bool = secondBody.categoryBitMask == PhysicsCategory.chicken
-        if (
-               isFirstBodyChickenPhysicsBody &&
-                   isSecondBodyChickenPhysicsBody
-           )
+
+        let isFirstBodyChickenPhysics: Bool = firstBody.categoryBitMask == PhysicsCategory.chicken
+        let isSecondBodyChickenPhysics: Bool = secondBody.categoryBitMask == PhysicsCategory.chicken
+        let isChickenCollidingWithChicken: Bool = isFirstBodyChickenPhysics && isSecondBodyChickenPhysics
+
+        // "in a world where two chickens collide..."
+        if ( isChickenCollidingWithChicken )
         {
             if let chicken = firstBody.node as? SKSpriteNode, let chicken2 = secondBody.node as? SKSpriteNode { //chicken2 is the initial chicken
                 chicken2.run(
                     SKAction.sequence(
                         [
-                            SKAction.moveBy(
+                            SKAction.moveBy( // What is this case for? Side effects of having randomly spawning nodes??
                                 x: 0,
                                 y: 10,
                                 duration: 0.05
@@ -796,12 +809,12 @@ extension GameScene: SKPhysicsContactDelegate {
                 print("chicken hit chicken")
             }
         } else if (
-                      isFirstBodyChickenPhysicsBody &&
-                          (secondBody.categoryBitMask == PhysicsCategory.timeChicken)
+                      isFirstBodyChickenPhysics &&
+                          (secondBody.categoryBitMask == PhysicsCategory.timeHourglass)
                   )
         {
             if let chicken = firstBody.node as? SKSpriteNode,
-               let timeChicken = secondBody.node as? SKSpriteNode { // pan2 is initial pan
+               let timeHourglass = secondBody.node as? SKSpriteNode { // pan2 is initial pan
 
                 chicken.run(
                     SKAction.sequence(
@@ -819,13 +832,13 @@ extension GameScene: SKPhysicsContactDelegate {
                 print("time hit chicken")
             }
         } else if (
-                      (firstBody.categoryBitMask == PhysicsCategory.timeChicken) &&
-                          (secondBody.categoryBitMask == PhysicsCategory.timeChicken)
+                      (firstBody.categoryBitMask == PhysicsCategory.timeHourglass) &&
+                          (secondBody.categoryBitMask == PhysicsCategory.timeHourglass)
                   )
         {
-            if let timeChicken = firstBody.node as? SKSpriteNode,
-               let timeChicken2 = secondBody.node as? SKSpriteNode { //chicken2 is the initial chicken
-                timeChicken2.run(
+            if let timeHourglass = firstBody.node as? SKSpriteNode,
+               let timeHourglass2 = secondBody.node as? SKSpriteNode { //chicken2 is the initial chicken
+                timeHourglass2.run(
                     SKAction.sequence(
                         [
                             SKAction.moveBy(
@@ -855,7 +868,7 @@ extension GameScene: SKPhysicsContactDelegate {
             }
             // when pans or chickens spawn on each other (only on smaller screens) - doesn't do anything except handle exception - DON'T REMOVE
         } else if (
-                      isFirstBodyChickenPhysicsBody &&
+                      isFirstBodyChickenPhysics &&
                           (secondBody.categoryBitMask == PhysicsCategory.fryingPan)
                   )
         {
@@ -897,15 +910,15 @@ extension GameScene: SKPhysicsContactDelegate {
                 hudOverlay.addPoint()
                 print("HIT CHICKEN!")
             }
-            // timeChicken hit by fireball
-        } else if ((firstBody.categoryBitMask & PhysicsCategory.timeChicken != 0) &&
+            // timeHourglass hit by fireball
+        } else if ((firstBody.categoryBitMask & PhysicsCategory.timeHourglass != 0) &&
             (                    secondBody.categoryBitMask & PhysicsCategory.fireball != 0
             )
                   ) {
-            if let timeChicken = firstBody.node as? SKSpriteNode,
+            if let timeHourglass = firstBody.node as? SKSpriteNode,
                let fireball = secondBody.node as? SKSpriteNode {
                 fireball.removeFromParent()
-                timeChicken.run(
+                timeHourglass.run(
                     SKAction.sequence(
                         [
                             SKAction.playSoundFileNamed(
@@ -924,7 +937,7 @@ extension GameScene: SKPhysicsContactDelegate {
                     )
                 )
                 addTime()
-                print("HIT TIMECHICKEN!")
+                print("HIT timeHourglass!")
             }
 
             // pan hit by fireball
