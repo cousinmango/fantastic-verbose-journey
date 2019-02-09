@@ -24,9 +24,9 @@ class GameScene: SKScene {
         // swiftlint:disable colon
         static let none         : UInt32 = 0
         //static let all        : UInt32 = UInt32.max
-        static let chicken      : UInt32 = 0b1       // 1
-        static let fryingPan    : UInt32 = 0b10      // 2
-        static let fireball     : UInt32 = 0b11      // 3
+        static let chicken      : UInt32 = 0b1
+        static let fryingPan    : UInt32 = 0b10
+        static let fireball     : UInt32 = 0b11
         static let timeChicken  : UInt32 = 0b100
     }
 
@@ -66,8 +66,10 @@ class GameScene: SKScene {
     private var fireballFrames: [SKTexture] = []
 
     override func didMove(to view: SKView) {
-        if let musicURL = Bundle.main.url(forResource: "gameMusic",
-            withExtension: "wav") {
+        if let musicURL = Bundle.main.url(
+            forResource: "gameMusic",
+            withExtension: "wav"
+        ) {
             gameMusic = SKAudioNode(url: musicURL)
             addChild(gameMusic)
         }
@@ -223,7 +225,7 @@ class GameScene: SKScene {
         chickenNode.size = CGSize(width: scaleFactor * 0.8,
             height: scaleFactor * 0.8)
         chickenNode.zPosition = 1
-        chickenNode.physicsBody = SKPhysicsBody(circleOfRadius: chickenNode.size.height / 4)// rectangleOf: chickenNode.size)
+        chickenNode.physicsBody = SKPhysicsBody(circleOfRadius: chickenNode.size.height / 4)
         chickenNode.physicsBody?.categoryBitMask = PhysicsCategory.chicken
         chickenNode.physicsBody?.contactTestBitMask = PhysicsCategory.fireball
         chickenNode.physicsBody?.collisionBitMask = PhysicsCategory.none
@@ -768,9 +770,11 @@ extension GameScene: SKPhysicsContactDelegate {
         // - TODO: Very large multi if-else-if branching statement to refactor.
         // Large physics collision detection based on bit operations.
         // when a chicken spawns in same position as existing chicken
+        let isFirstBodyChickenPhysicsBody: Bool = firstBody.categoryBitMask == PhysicsCategory.chicken
+        let isSecondBodyChickenPhysicsBody: Bool = secondBody.categoryBitMask == PhysicsCategory.chicken
         if (
-               (firstBody.categoryBitMask == PhysicsCategory.chicken) &&
-                   (secondBody.categoryBitMask == PhysicsCategory.chicken)
+               isFirstBodyChickenPhysicsBody &&
+                   isSecondBodyChickenPhysicsBody
            )
         {
             if let chicken = firstBody.node as? SKSpriteNode, let chicken2 = secondBody.node as? SKSpriteNode { //chicken2 is the initial chicken
@@ -792,7 +796,7 @@ extension GameScene: SKPhysicsContactDelegate {
                 print("chicken hit chicken")
             }
         } else if (
-                      (firstBody.categoryBitMask == PhysicsCategory.chicken) &&
+                      isFirstBodyChickenPhysicsBody &&
                           (secondBody.categoryBitMask == PhysicsCategory.timeChicken)
                   )
         {
@@ -851,7 +855,7 @@ extension GameScene: SKPhysicsContactDelegate {
             }
             // when pans or chickens spawn on each other (only on smaller screens) - doesn't do anything except handle exception - DON'T REMOVE
         } else if (
-                      (firstBody.categoryBitMask == PhysicsCategory.chicken) &&
+                      isFirstBodyChickenPhysicsBody &&
                           (secondBody.categoryBitMask == PhysicsCategory.fryingPan)
                   )
         {
