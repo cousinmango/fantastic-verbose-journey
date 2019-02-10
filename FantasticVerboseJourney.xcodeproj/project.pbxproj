@@ -37,6 +37,13 @@
 		55A4F6ED21D89A91001C6C16 /* UIViewController+InjectionIiiHotReloadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A4F6EC21D89A91001C6C16 /* UIViewController+InjectionIiiHotReloadable.swift */; };
 		55A4F6EF21D89C47001C6C16 /* SKButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A4F6EE21D89C47001C6C16 /* SKButton.swift */; };
 		55A4F6F321D89CD7001C6C16 /* SKButtonDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A4F6F221D89CD7001C6C16 /* SKButtonDelegate.swift */; };
+		55D279D7220FDF43009BC56D /* SpawnManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55D279D6220FDF43009BC56D /* SpawnManager.swift */; };
+		55D279D9220FDF7D009BC56D /* SpawnPositions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55D279D8220FDF7D009BC56D /* SpawnPositions.swift */; };
+		55D279DB220FDFCE009BC56D /* GameScene+SKPhysicsContactDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55D279DA220FDFCE009BC56D /* GameScene+SKPhysicsContactDelegate.swift */; };
+		55D279DD220FE014009BC56D /* Mob.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55D279DC220FE014009BC56D /* Mob.swift */; };
+		55D279DF220FE12E009BC56D /* PhysicsCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55D279DE220FE12E009BC56D /* PhysicsCategory.swift */; };
+		55D279E1220FE1A4009BC56D /* ItemChancer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55D279E0220FE1A4009BC56D /* ItemChancer.swift */; };
+		55D279E3220FE1F4009BC56D /* Colours.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55D279E2220FE1F4009BC56D /* Colours.swift */; };
 		55F78D3E21E2D4010098E892 /* SKButton+SKLabelNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F78D3D21E2D4010098E892 /* SKButton+SKLabelNode.swift */; };
 /* End PBXBuildFile section */
 
@@ -94,6 +101,13 @@
 		55A4F6EC21D89A91001C6C16 /* UIViewController+InjectionIiiHotReloadable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+InjectionIiiHotReloadable.swift"; sourceTree = "<group>"; };
 		55A4F6EE21D89C47001C6C16 /* SKButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKButton.swift; sourceTree = "<group>"; };
 		55A4F6F221D89CD7001C6C16 /* SKButtonDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKButtonDelegate.swift; sourceTree = "<group>"; };
+		55D279D6220FDF43009BC56D /* SpawnManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpawnManager.swift; sourceTree = "<group>"; };
+		55D279D8220FDF7D009BC56D /* SpawnPositions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpawnPositions.swift; sourceTree = "<group>"; };
+		55D279DA220FDFCE009BC56D /* GameScene+SKPhysicsContactDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameScene+SKPhysicsContactDelegate.swift"; sourceTree = "<group>"; };
+		55D279DC220FE014009BC56D /* Mob.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mob.swift; sourceTree = "<group>"; };
+		55D279DE220FE12E009BC56D /* PhysicsCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhysicsCategory.swift; sourceTree = "<group>"; };
+		55D279E0220FE1A4009BC56D /* ItemChancer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemChancer.swift; sourceTree = "<group>"; };
+		55D279E2220FE1F4009BC56D /* Colours.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colours.swift; sourceTree = "<group>"; };
 		55F78D3D21E2D4010098E892 /* SKButton+SKLabelNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SKButton+SKLabelNode.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -212,9 +226,11 @@
 		35E93FF8363F9B3BC877CEDA /* GameScene */ = {
 			isa = PBXGroup;
 			children = (
+				55D279D5220FDF03009BC56D /* Managers */,
 				35E938A99B0608F569AC32AB /* GameScene.sks */,
 				03BBE9EC21D97F87001CBAE4 /* HudNode.swift */,
 				35E93729E6F5C78AD46FD4F2 /* GameScene.swift */,
+				55D279DA220FDFCE009BC56D /* GameScene+SKPhysicsContactDelegate.swift */,
 			);
 			path = GameScene;
 			sourceTree = "<group>";
@@ -323,6 +339,19 @@
 				55A4F6F221D89CD7001C6C16 /* SKButtonDelegate.swift */,
 			);
 			path = Protocols;
+			sourceTree = "<group>";
+		};
+		55D279D5220FDF03009BC56D /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				55D279D6220FDF43009BC56D /* SpawnManager.swift */,
+				55D279D8220FDF7D009BC56D /* SpawnPositions.swift */,
+				55D279DC220FE014009BC56D /* Mob.swift */,
+				55D279DE220FE12E009BC56D /* PhysicsCategory.swift */,
+				55D279E0220FE1A4009BC56D /* ItemChancer.swift */,
+				55D279E2220FE1F4009BC56D /* Colours.swift */,
+			);
+			path = Managers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -487,22 +516,29 @@
 				553032C421D87F77001DB357 /* AppDelegate.swift in Sources */,
 				55A4F6F321D89CD7001C6C16 /* SKButtonDelegate.swift in Sources */,
 				35E93A7F622424793C311A9B /* SKView+DebugPerformanceOptimisable.swift in Sources */,
+				55D279E3220FE1F4009BC56D /* Colours.swift in Sources */,
 				55348E07220AC793003C6B97 /* ImageAsset+SKTexturable.swift in Sources */,
 				35E933A7B94BD6A90B670AF5 /* VectorCalculatable.swift in Sources */,
 				35E936BBB8FB3F84078B77B1 /* CGPoint+VectorCalculatable.swift in Sources */,
 				55A4F6ED21D89A91001C6C16 /* UIViewController+InjectionIiiHotReloadable.swift in Sources */,
 				55348E0422098FE5003C6B97 /* assets-images.swift in Sources */,
 				55A4F6EF21D89C47001C6C16 /* SKButton.swift in Sources */,
+				55D279DF220FE12E009BC56D /* PhysicsCategory.swift in Sources */,
+				55D279D7220FDF43009BC56D /* SpawnManager.swift in Sources */,
 				55A4F6EB21D89A3C001C6C16 /* InjectionIiiHotReloadable.swift in Sources */,
 				35E937E24C532B083A63CD46 /* DebugPerformanceOptimisable.swift in Sources */,
 				35E93118FC69ADBF864D8512 /* GameViewController.swift in Sources */,
+				55D279D9220FDF7D009BC56D /* SpawnPositions.swift in Sources */,
 				35E934D3A210667EB592ACC3 /* SKButtonFactory.swift in Sources */,
 				35E93EC5AD44C4F5CF23FE1C /* PauseScene.swift in Sources */,
 				35E937EE323612406D218DAC /* GameScene.swift in Sources */,
 				03BBE9ED21D97F87001CBAE4 /* HudNode.swift in Sources */,
+				55D279DB220FDFCE009BC56D /* GameScene+SKPhysicsContactDelegate.swift in Sources */,
 				55F78D3E21E2D4010098E892 /* SKButton+SKLabelNode.swift in Sources */,
+				55D279DD220FE014009BC56D /* Mob.swift in Sources */,
 				35E93175665D1A30DA6E4B26 /* HomeMenuScene.swift in Sources */,
 				35E93BACEE437DEE94830774 /* backgroundAnimation.swift in Sources */,
+				55D279E1220FE1A4009BC56D /* ItemChancer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

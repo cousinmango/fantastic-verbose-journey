@@ -10,27 +10,9 @@ import SpriteKit
 import GameplayKit
 
 class GameScene: SKScene {
-    override init() {
-        super.init()
-    }
-    override init(size: CGSize) {
-        super.init(size: size)
-    }
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-    }
 
-    struct PhysicsCategory {
-        // swiftlint:disable colon
-        static let none         : UInt32 = 0
-        //static let all        : UInt32 = UInt32.max
-        static let chicken      : UInt32 = 0b1          // 1
-        static let fryingPan    : UInt32 = 0b10         // 2
-        static let fireball     : UInt32 = 0b11         // 3
-        static let timeHourglass: UInt32 = 0b100        // 4
-    }
 
-    private let hudOverlay = HudNode()
+    let hudOverlay = HudNode()
     
     // ? Too much mutation and coupling
     // scaleFactor is redundant if it is all tuned with variable values everywhere else?
@@ -71,6 +53,28 @@ class GameScene: SKScene {
     var duckSuspended: Bool = false
     private var fireballFrames: [SKTexture] = []
 
+    // Time of last update(currentTime:) call
+    var lastUpdateTime = TimeInterval(0)
+    var lastUpdateTime2 = TimeInterval(0)
+    // Seconds elapsed since last action
+    var timeSinceLastAction = TimeInterval(0)
+    var timeSinceLastAction2 = TimeInterval(0)
+    // Seconds before performing next action. Choose a default value
+    var timeUntilNextAction = TimeInterval(4)
+    var timeUntilNextAction2 = TimeInterval(4)
+
+    
+    
+    override init() {
+        super.init()
+    }
+    override init(size: CGSize) {
+        super.init(size: size)
+    }
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+    
     override func didMove(to view: SKView) {
         if let musicURL = Bundle.main.url(
             forResource: "gameMusic",
@@ -164,16 +168,6 @@ class GameScene: SKScene {
 
         print("GameScene:: didMove() finished")
     }
-
-    // Time of last update(currentTime:) call
-    var lastUpdateTime = TimeInterval(0)
-    var lastUpdateTime2 = TimeInterval(0)
-    // Seconds elapsed since last action
-    var timeSinceLastAction = TimeInterval(0)
-    var timeSinceLastAction2 = TimeInterval(0)
-    // Seconds before performing next action. Choose a default value
-    var timeUntilNextAction = TimeInterval(4)
-    var timeUntilNextAction2 = TimeInterval(4)
 
     // - FIXME: ? don't need to calculate things on every single frame update.
     // Calculate based on seconds timer somewhere else
@@ -787,227 +781,7 @@ extension GameScene {
     }
 }
 
-// - MARK: Physics collision detection
-extension GameScene: SKPhysicsContactDelegate {
-    // - TODO Refactor massive monolithic function
-    // swiftlint:disable function_body_length
-    func didBegin(_ contact: SKPhysicsContact) {
-        var firstBody: SKPhysicsBody
-        var secondBody: SKPhysicsBody
-        if contact.bodyA.categoryBitMask < contact.bodyB.categoryBitMask {
-            firstBody = contact.bodyA
-            secondBody = contact.bodyB
-        } else {
-            firstBody = contact.bodyB
-            secondBody = contact.bodyA
-        }
-        // - TODO: Very large multi if-else-if branching statement to refactor.
-        // Large physics collision detection based on bit operations.
-        // when a chicken spawns in same position as existing chicken
 
-        let firstBodyIsChickenPhysics: Bool = firstBody.categoryBitMask == PhysicsCategory.chicken
-        let secondBodyIsChickenPhysics: Bool = secondBody.categoryBitMask == PhysicsCategory.chicken
-        let isChickenCollidingWithChicken: Bool = firstBodyIsChickenPhysics && secondBodyIsChickenPhysics
-
-        // "in a world where two chickens collide..."
-        let firstBodyIsTimeHourglass: (Bool) = (firstBody.categoryBitMask == PhysicsCategory.timeHourglass)
-        let secondBodyIsTimeHourglass: Bool = secondBody.categoryBitMask == PhysicsCategory.timeHourglass
-        if ( isChickenCollidingWithChicken )
-        {
-            if let chicken = firstBody.node as? SKSpriteNode, let chicken2 = secondBody.node as? SKSpriteNode { //chicken2 is the initial chicken
-                chicken2.run(
-                    SKAction.sequence(
-                        [
-                            SKAction.moveBy( // What is this case for? Side effects of having randomly spawning nodes??
-                                x: 0,
-                                y: 10,
-                                duration: 0.05
-                            ),
-                            SKAction.removeFromParent()
-                        ]
-                    )
-                )
-
-
-                //chicken.removeFromParent()
-                print("chicken hit chicken")
-            }
-        } else if (firstBodyIsChickenPhysics && (secondBody.categoryBitMask == PhysicsCategory.timeHourglass))
-        {
-            if let chicken = firstBody.node as? SKSpriteNode,
-               let timeHourglass = secondBody.node as? SKSpriteNode { // pan2 is initial pan
-
-                chicken.run(
-                    SKAction.sequence(
-                        [
-                            SKAction.moveBy(
-                                x: 0,
-                                y: 10,
-                                duration: 0.05
-                            ),
-                            SKAction.removeFromParent()
-                        ]
-                    )
-                )
-
-                print("time hit chicken")
-            }
-        } else if (firstBodyIsTimeHourglass && secondBodyIsTimeHourglass) {
-            if let timeHourglass = firstBody.node as? SKSpriteNode,
-               let timeHourglass2 = secondBody.node as? SKSpriteNode { //chicken2 is the initial chicken
-                timeHourglass2.run(
-                    SKAction.sequence(
-                        [
-                            SKAction.moveBy(
-                                x: 0,
-                                y: 10,
-                                duration: 0.05
-                            ),
-                            SKAction.removeFromParent()
-                        ]
-                    )
-                )
-
-                print("time hit time")
-            }
-
-            // when pan spawns in same position as existing pan
-        } else if (
-                      (firstBody.categoryBitMask == PhysicsCategory.fryingPan) &&
-                          (secondBody.categoryBitMask == PhysicsCategory.fryingPan)
-                  )
-        {
-            if let fryingPan = firstBody.node as? SKSpriteNode,
-               let fryingPan2 = secondBody.node as? SKSpriteNode { // pan2 is initial pan
-
-                fryingPan.removeFromParent()
-                print("pan hit pan")
-            }
-            // when pans or chickens spawn on each other (only on smaller screens) - doesn't do anything except handle exception - DON'T REMOVE
-        } else if (
-                      firstBodyIsChickenPhysics &&
-                          (secondBody.categoryBitMask == PhysicsCategory.fryingPan)
-                  )
-        {
-            if let chicken = firstBody.node as? SKSpriteNode,
-               let fryingPan = secondBody.node as? SKSpriteNode {
-                //print("pan hit chicken")
-            }
-            // chicken hit by fireball
-        } else if (
-                      (firstBody.categoryBitMask & PhysicsCategory.chicken != 0) &&
-                          (secondBody.categoryBitMask & PhysicsCategory.fireball != 0)
-                  )
-        {
-            if let chicken = firstBody.node as? SKSpriteNode,
-               let fireball = secondBody.node as? SKSpriteNode {
-                fireball.removeFromParent()
-                chicken.run(
-                    SKAction.sequence(
-                        [
-                            SKAction.playSoundFileNamed(
-                                "chickenhitSound.wav",
-                                waitForCompletion: false
-                            ),
-                            SKAction.moveBy(
-                                x: 0,
-                                y: 10,
-                                duration: 0.05
-                            ),
-                            SKAction.setTexture(Asset.egg.skTextured),
-                            SKAction.moveBy(
-                                x: 0,
-                                y: -10,
-                                duration: 0.1
-                            )
-                        ]
-                    )
-                )
-
-                hudOverlay.addPoint()
-                print("HIT CHICKEN!")
-            }
-            // timeHourglass hit by fireball
-        } else if ((firstBody.categoryBitMask & PhysicsCategory.timeHourglass != 0) &&
-            (                    secondBody.categoryBitMask & PhysicsCategory.fireball != 0
-            )
-                  ) {
-            if let timeHourglass = firstBody.node as? SKSpriteNode,
-               let fireball = secondBody.node as? SKSpriteNode {
-                fireball.removeFromParent()
-                timeHourglass.run(
-                    SKAction.sequence(
-                        [
-                            SKAction.playSoundFileNamed(
-                                "chickenhitSound.wav",
-                                waitForCompletion: false
-                            ),
-                            SKAction.scale(
-                                to: 1.2,
-                                duration: 0.05
-                            ),
-                            SKAction.scale(
-                                to: 1,
-                                duration: 0.1
-                            )
-                        ]
-                    )
-                )
-                addTime()
-                print("HIT timeHourglass!")
-            }
-
-            // pan hit by fireball
-        } else if (
-                      (firstBody.categoryBitMask & PhysicsCategory.fryingPan != 0) &&
-                          (secondBody.categoryBitMask & PhysicsCategory.fireball != 0)
-                  ) {
-            if let fryingPan = firstBody.node as? SKSpriteNode,
-               let fireball = secondBody.node as? SKSpriteNode {
-                fireball.run(
-                    SKAction.sequence(
-                        [
-                            SKAction.rotate(
-                                byAngle: CGFloat(Double.pi),
-                                duration: 0
-                            ),
-
-                            SKAction.move(
-                                to: duckNode.position,
-                                duration: 0.15
-                            )
-                        ]
-                    ),
-                    completion: {
-                        fireball.removeFromParent()
-                    }
-                ) // fireball bounce back
-                fryingPan.run(
-                    SKAction.sequence(
-                        [
-                            SKAction.playSoundFileNamed(
-                                "panhitSound.wav",
-                                waitForCompletion: false
-                            ),
-                            SKAction.scale(
-                                to: 1.3,
-                                duration: 0.05
-                            ),
-                            SKAction.scale(
-                                to: 1,
-                                duration: 0.1
-                            )
-                        ]
-                    )
-                )
-                if duckSuspended == false {
-                    duckHit()
-                }
-                print("HIT PAN!")
-            }
-        }
-    }
-}
 
 // - MARK: - Buttons
 
