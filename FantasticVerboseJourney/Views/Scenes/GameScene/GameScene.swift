@@ -11,13 +11,12 @@ import GameplayKit
 
 class GameScene: SKScene {
 
-
     let hudOverlay = HudNode()
-    
+
     // ? Too much mutation and coupling
     // scaleFactor is redundant if it is all tuned with variable values everywhere else?
     // Especially if it isn't a constant.
-    var scaleFactor: CGFloat = 1136/2 * 0.25 // change value in didMove(to view
+    var scaleFactor: CGFloat = 1_136 / 2 * 0.25 // change value in didMove(to view
     var timeHourglassChance: Int = 15
 
     let background = SKSpriteNode(texture: Asset.bg.skTextured)
@@ -31,7 +30,7 @@ class GameScene: SKScene {
     var timeLeft = 30
     var gameMusic: SKAudioNode!
     let timerNode = SKLabelNode(text: "")
-    
+
     // - FIXME: ChickenPositioning logic.
     var chickenPosition1: CGPoint = CGPoint(
         x: 0,
@@ -63,8 +62,6 @@ class GameScene: SKScene {
     var timeUntilNextAction = TimeInterval(4)
     var timeUntilNextAction2 = TimeInterval(4)
 
-    
-    
     override init() {
         super.init()
     }
@@ -74,7 +71,7 @@ class GameScene: SKScene {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
-    
+
     override func didMove(to view: SKView) {
         if let musicURL = Bundle.main.url(
             forResource: "gameMusic",
@@ -178,7 +175,7 @@ class GameScene: SKScene {
     // Does not need to contain calculate logic for every update.
     // Extend gamescene to conform to the SpawnHandler delegate?
     // or separate even further with a gamestate handler
-    
+
     override func update(_ currentTime: TimeInterval) {
         // Called before each frame is rendered
 
@@ -208,7 +205,7 @@ class GameScene: SKScene {
             timeUntilNextAction2 = Double.random(in: 0 ..< 3)
         }
     }
-    
+
     func spawnDuck() {
         // duck setup
         duckNode.size = CGSize(
@@ -220,8 +217,8 @@ class GameScene: SKScene {
             y: 0.4
         )
         duckNode.position = CGPoint(
-            x: size.width/2,
-            y: size.height/2 + 10
+            x: size.width / 2,
+            y: size.height / 2 + 10
         )
         duckNode.zPosition = 5
         duckNode.zRotation = 0
@@ -233,7 +230,7 @@ class GameScene: SKScene {
                 duration: 0.1
             ) // Design system: Make it look like the duck spawns by dropping onto the floor a few pixels.
         )
-        
+
     }
 
     @objc func spawnChickenRandom() {
@@ -323,7 +320,7 @@ class GameScene: SKScene {
             width: scaleFactor * 0.8,
             height: scaleFactor * 0.8
         )
-        panNode.physicsBody = SKPhysicsBody(circleOfRadius: panNode.size.height/6)
+        panNode.physicsBody = SKPhysicsBody(circleOfRadius: panNode.size.height / 6)
         panNode.physicsBody?.categoryBitMask = PhysicsCategory.fryingPan
         panNode.physicsBody?.contactTestBitMask = PhysicsCategory.fireball
         panNode.physicsBody?.collisionBitMask = PhysicsCategory.none
@@ -452,7 +449,6 @@ class GameScene: SKScene {
             }
         )
 
-
         // SPAWN ARM
         let duckArm = SKSpriteNode(imageNamed: "arm")
         duckArm.size = CGSize(
@@ -464,8 +460,8 @@ class GameScene: SKScene {
             y: 0.5
         )
         duckArm.position = CGPoint(
-            x: size.width/2,
-            y: size.height/2
+            x: size.width / 2,
+            y: size.height / 2
         )
         duckArm.zPosition = 5
         duckArm.zRotation = angle
@@ -660,7 +656,7 @@ extension GameScene {
 
                 switch (touchLocation.x, touchLocation.y) {
 
-                case (size.width/2..<size.width, size.height/2..<size.height):
+                case (size.width / 2..<size.width, size.height / 2..<size.height):
                     orientAngle = CGFloat(tanh(size.height / size.width)
                     )
 
@@ -672,13 +668,13 @@ extension GameScene {
                         )
                     )
 
-                    spawnFireball(position: CGPoint(x: size.width/2,
-                        y: size.height/2),
+                    spawnFireball(position: CGPoint(x: size.width / 2,
+                        y: size.height / 2),
                         destination: CGPoint(x: size.width,
                             y: size.height),
                         angle: orientAngle)
                     print("touch in top right")
-                case (size.width/2..<size.width, 0..<size.height/2):
+                case (size.width / 2..<size.width, 0..<size.height / 2):
                     orientAngle = CGFloat(-tanh(size.height / size.width)
                     )
 
@@ -692,8 +688,8 @@ extension GameScene {
 
                     spawnFireball(
                         position: CGPoint(
-                            x: size.width/2,
-                            y: size.height/2
+                            x: size.width / 2,
+                            y: size.height / 2
                         ),
                         destination: CGPoint(
                             x: size.width,
@@ -702,7 +698,7 @@ extension GameScene {
                         angle: orientAngle
                     )
                     print("touch in bottom right")
-                case (0..<size.width/2, 0..<size.height/2):
+                case (0..<size.width / 2, 0..<size.height / 2):
                     orientAngle = CGFloat(
                         tanh(size.height / size.width) + CGFloat(Double.pi)
                     )
@@ -717,8 +713,8 @@ extension GameScene {
 
                     spawnFireball(
                         position: CGPoint(
-                            x: size.width/2,
-                            y: size.height/2
+                            x: size.width / 2,
+                            y: size.height / 2
                         ),
                         destination: CGPoint(
                             x: 0,
@@ -727,7 +723,7 @@ extension GameScene {
                         angle: orientAngle
                     )
                     print("touch in bottom left")
-                case (0..<size.width/2, size.height/2..<size.height):
+                case (0..<size.width / 2, size.height / 2..<size.height):
                     orientAngle = CGFloat(
                         -tanh(size.height / size.width) + CGFloat(Double.pi)
                     )
@@ -742,8 +738,8 @@ extension GameScene {
 
                     spawnFireball(
                         position: CGPoint(
-                            x: size.width/2,
-                            y: size.height/2
+                            x: size.width / 2,
+                            y: size.height / 2
                         ),
                         destination: CGPoint(
                             x: 0,
@@ -780,8 +776,6 @@ extension GameScene {
         //        let touchLocationInScene = firstTouch.location(in: self)
     }
 }
-
-
 
 // - MARK: - Buttons
 

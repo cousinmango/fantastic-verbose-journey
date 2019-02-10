@@ -43,9 +43,9 @@
 		55D279DD220FE014009BC56D /* Mob.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55D279DC220FE014009BC56D /* Mob.swift */; };
 		55D279DF220FE12E009BC56D /* PhysicsCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55D279DE220FE12E009BC56D /* PhysicsCategory.swift */; };
 		55D279E1220FE1A4009BC56D /* ItemChancer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55D279E0220FE1A4009BC56D /* ItemChancer.swift */; };
-		55D279E3220FE1F4009BC56D /* SillyColours.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55D279E2220FE1F4009BC56D /* SillyColours.swift */; };
 		55D279E5220FE322009BC56D /* TimeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55D279E4220FE322009BC56D /* TimeManager.swift */; };
-		55D279E7220FEA2F009BC56D /* SillyAnimations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55D279E6220FEA2F009BC56D /* SillyAnimations.swift */; };
+		55D279EA220FEB68009BC56D /* SillyAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55D279E8220FEB68009BC56D /* SillyAnimation.swift */; };
+		55D279EB220FEB68009BC56D /* SillyColour.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55D279E9220FEB68009BC56D /* SillyColour.swift */; };
 		55F78D3E21E2D4010098E892 /* SKButton+SKLabelNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F78D3D21E2D4010098E892 /* SKButton+SKLabelNode.swift */; };
 /* End PBXBuildFile section */
 
@@ -109,9 +109,9 @@
 		55D279DC220FE014009BC56D /* Mob.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mob.swift; sourceTree = "<group>"; };
 		55D279DE220FE12E009BC56D /* PhysicsCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhysicsCategory.swift; sourceTree = "<group>"; };
 		55D279E0220FE1A4009BC56D /* ItemChancer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemChancer.swift; sourceTree = "<group>"; };
-		55D279E2220FE1F4009BC56D /* SillyColours.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SillyColours.swift; sourceTree = "<group>"; };
 		55D279E4220FE322009BC56D /* TimeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeManager.swift; sourceTree = "<group>"; };
-		55D279E6220FEA2F009BC56D /* SillyAnimations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SillyAnimations.swift; sourceTree = "<group>"; };
+		55D279E8220FEB68009BC56D /* SillyAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SillyAnimation.swift; sourceTree = "<group>"; };
+		55D279E9220FEB68009BC56D /* SillyColour.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SillyColour.swift; sourceTree = "<group>"; };
 		55F78D3D21E2D4010098E892 /* SKButton+SKLabelNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SKButton+SKLabelNode.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -353,8 +353,8 @@
 				55D279DC220FE014009BC56D /* Mob.swift */,
 				55D279DE220FE12E009BC56D /* PhysicsCategory.swift */,
 				55D279E0220FE1A4009BC56D /* ItemChancer.swift */,
-				55D279E2220FE1F4009BC56D /* SillyColours.swift */,
-				55D279E6220FEA2F009BC56D /* SillyAnimations.swift */,
+				55D279E8220FEB68009BC56D /* SillyAnimation.swift */,
+				55D279E9220FEB68009BC56D /* SillyColour.swift */,
 				55D279E4220FE322009BC56D /* TimeManager.swift */,
 			);
 			path = Managers;
@@ -522,8 +522,7 @@
 				553032C421D87F77001DB357 /* AppDelegate.swift in Sources */,
 				55A4F6F321D89CD7001C6C16 /* SKButtonDelegate.swift in Sources */,
 				35E93A7F622424793C311A9B /* SKView+DebugPerformanceOptimisable.swift in Sources */,
-				55D279E3220FE1F4009BC56D /* SillyColours.swift in Sources */,
-				55D279E7220FEA2F009BC56D /* SillyAnimations.swift in Sources */,
+				55D279EA220FEB68009BC56D /* SillyAnimation.swift in Sources */,
 				55348E07220AC793003C6B97 /* ImageAsset+SKTexturable.swift in Sources */,
 				35E933A7B94BD6A90B670AF5 /* VectorCalculatable.swift in Sources */,
 				35E936BBB8FB3F84078B77B1 /* CGPoint+VectorCalculatable.swift in Sources */,
@@ -535,6 +534,7 @@
 				55A4F6EB21D89A3C001C6C16 /* InjectionIiiHotReloadable.swift in Sources */,
 				35E937E24C532B083A63CD46 /* DebugPerformanceOptimisable.swift in Sources */,
 				55D279E5220FE322009BC56D /* TimeManager.swift in Sources */,
+				55D279EB220FEB68009BC56D /* SillyColour.swift in Sources */,
 				35E93118FC69ADBF864D8512 /* GameViewController.swift in Sources */,
 				55D279D9220FDF7D009BC56D /* SpawnPositions.swift in Sources */,
 				35E934D3A210667EB592ACC3 /* SKButtonFactory.swift in Sources */,

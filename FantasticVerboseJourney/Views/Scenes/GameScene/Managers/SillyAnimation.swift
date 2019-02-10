@@ -9,11 +9,15 @@
 import SpriteKit.SKAction
 
 // Centralised design system for animations to aid refactoring later
-struct SillyAnimations {
-    static let boopAnimation: SKAction = SKAction.moveBy(
+struct SillyAnimation {
+    static let boopUpAnimation: SKAction = SKAction.moveBy(
         x: 0,
         y: 10,
         duration: 0.05
     )
-
+    static let boopDownAnimation: SKAction = SKAction.moveBy(
+        x: 0,
+        y: -10,
+        duration: 0.1
+    )
 }

@@ -62,18 +62,18 @@ class HomeMenuScene: SKScene {
 
         // title setup
         let titleNode = SKSpriteNode(imageNamed: "title")//color: UIColor.red, size: CGSize(width: 300, height: 150))
-        titleNode.position = CGPoint(x: size.width/2, y: size.height * 0.85)
-        titleNode.setScale(scaleFactor * 0.0013)
+        titleNode.position = CGPoint(x: size.width / 2, y: size.height * 0.85)
+        titleNode.setScale(scaleFactor * 0.001_3)
         //titleNode.size = CGSize(width: scaleFactor * 3, height: titleNode.size.y * scaleFactor)
         addChild(titleNode)
         titleNode.run(SKAction.sequence([SKAction.scale(to: 0, duration: 0),
                                          SKAction.wait(forDuration: 0.8),
-                                           SKAction.scale(to: scaleFactor * 0.0015, duration: 0.1),
-                                           SKAction.scale(to: scaleFactor * 0.0013, duration: 0.1)]))
+                                           SKAction.scale(to: scaleFactor * 0.001_5, duration: 0.1),
+                                           SKAction.scale(to: scaleFactor * 0.001_3, duration: 0.1)]))
 
         let logoNode = SKSpriteNode(imageNamed: "duck")
         logoNode.anchorPoint = CGPoint(x: 0.5, y: 0.4)
-        logoNode.position = CGPoint(x: size.width/2, y: size.height/2)
+        logoNode.position = CGPoint(x: size.width / 2, y: size.height / 2)
         logoNode.size = CGSize(width: scaleFactor, height: scaleFactor)
         addChild(logoNode)
         logoNode.run(SKAction.repeatForever(SKAction.rotate(byAngle: -2 * CGFloat(Double.pi), duration: 4)))
@@ -111,7 +111,7 @@ class HomeMenuScene: SKScene {
         addChild(startButton)
         startButton.run(SKAction.sequence([SKAction.scale(to: 0, duration: 0),
                                            SKAction.wait(forDuration: 1.1),
-                                           SKAction.scale(to: scaleFactor * 0.0035, duration: 0.1),
+                                           SKAction.scale(to: scaleFactor * 0.003_5, duration: 0.1),
                                            SKAction.scale(to: scaleFactor * 0.003, duration: 0.1)]))
         print("HomeMenuScene:: didMove() finished")
     }
@@ -167,7 +167,7 @@ extension HomeMenuScene {
     func createSKButtonStart() -> SKButton {
         let button: SKButton = SKButtonFactory.getButton(delegate: self)
         button.texture = SKTexture(imageNamed: "startButton")
-        button.position = CGPoint(x: size.width/2, y: size.height * 0.18)
+        button.position = CGPoint(x: size.width / 2, y: size.height * 0.18)
         button.zPosition = -3
 
         button.setScale(scaleFactor * 0.003)

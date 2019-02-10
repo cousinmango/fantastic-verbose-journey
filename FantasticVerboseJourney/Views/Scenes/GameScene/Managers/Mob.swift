@@ -11,4 +11,3 @@ import Foundation
 // Characteristics
 // Common animation
 // See design system commonalities?
-
