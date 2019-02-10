@@ -224,11 +224,7 @@ class GameScene: SKScene {
         duckNode.zRotation = 0
         addChild(duckNode)
         duckNode.run(
-            SKAction.moveBy(
-                x: 0,
-                y: -10,
-                duration: 0.1
-            ) // Design system: Make it look like the duck spawns by dropping onto the floor a few pixels.
+            SillyAnimation.boopDownAnimation
         )
 
     }
@@ -295,11 +291,7 @@ class GameScene: SKScene {
                         to: 1,
                         duration: 0.1
                     ),
-                    SKAction.moveBy(
-                        x: 0,
-                        y: -10,
-                        duration: 0.1
-                    ),
+                    SillyAnimation.boopDownAnimation,
                     SKAction.run {
                         chickenNode.zPosition = CGFloat(2)
                     },
@@ -383,6 +375,45 @@ class GameScene: SKScene {
         )
     }
 
+    fileprivate func spawnDuckArm(_ angle: CGFloat) {
+        // SPAWN ARM
+        let duckArm = SKSpriteNode(imageNamed: "arm")
+        duckArm.size = CGSize(
+            width: scaleFactor * 0.85,
+            height: scaleFactor * 0.85
+        )
+        duckArm.anchorPoint = CGPoint(
+            x: 0,
+            y: 0.5
+        )
+        duckArm.position = CGPoint(
+            x: size.width / 2,
+            y: size.height / 2
+        )
+        duckArm.zPosition = 5
+        duckArm.zRotation = angle
+        addChild(duckArm)
+        duckArm.run(
+            SKAction.sequence(
+                [
+                    SKAction.scale(
+                        to: 0,
+                        duration: 0
+                    ),
+                    SKAction.scale(
+                        to: 1,
+                        duration: 0.1
+                    ),
+                    SKAction.scale(
+                        to: 0,
+                        duration: 0.1
+                    ),
+                    SKAction.removeFromParent()
+                ]
+            )
+        )
+    }
+    
     func spawnFireball(
         position: CGPoint,
         destination: CGPoint,
@@ -449,46 +480,12 @@ class GameScene: SKScene {
             }
         )
 
-        // SPAWN ARM
-        let duckArm = SKSpriteNode(imageNamed: "arm")
-        duckArm.size = CGSize(
-            width: scaleFactor * 0.85,
-            height: scaleFactor * 0.85
-        )
-        duckArm.anchorPoint = CGPoint(
-            x: 0,
-            y: 0.5
-        )
-        duckArm.position = CGPoint(
-            x: size.width / 2,
-            y: size.height / 2
-        )
-        duckArm.zPosition = 5
-        duckArm.zRotation = angle
-        addChild(duckArm)
-        duckArm.run(
-            SKAction.sequence(
-                [
-                    SKAction.scale(
-                        to: 0,
-                        duration: 0
-                    ),
-                    SKAction.scale(
-                        to: 1,
-                        duration: 0.1
-                    ),
-                    SKAction.scale(
-                        to: 0,
-                        duration: 0.1
-                    ),
-                    SKAction.removeFromParent()
-                ]
-            )
-        )
+        spawnDuckArm(angle) // - FIXME: coupling + temporal coupling. spawnDuckArm and fireball not dependent on each other..
 
     }
 
-    func duckHit() {
+    // duck gets hit by a fireball, becomes fried, into a roast peking duck
+    func duckHitIntoARoastPekingDuck() {
         duckSuspended = true
         let peking = SKSpriteNode(imageNamed: "peking")
         let duckSuspendTime: Double = 1
@@ -500,11 +497,7 @@ class GameScene: SKScene {
         duckNode.run(
             SKAction.sequence(
                 [
-                    SKAction.moveBy(
-                        x: 0,
-                        y: 10,
-                        duration: 0.05
-                    ),
+                    SillyAnimation.boopUpAnimation,
                     SKAction.removeFromParent()
                 ]
             ),
@@ -515,11 +508,7 @@ class GameScene: SKScene {
         peking.run(
             SKAction.sequence(
                 [
-                    SKAction.moveBy(
-                        x: 0,
-                        y: -10,
-                        duration: 0.1
-                    ),
+                    SillyAnimation.boopDownAnimation,
                     SKAction.wait(forDuration: duckSuspendTime),
                     SKAction.moveBy(
                         x: 0,

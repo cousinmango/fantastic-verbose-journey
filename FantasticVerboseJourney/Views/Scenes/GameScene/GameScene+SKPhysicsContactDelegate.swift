@@ -215,7 +215,7 @@ extension GameScene: SKPhysicsContactDelegate {
                 )
             )
             if duckSuspended == false {
-                duckHit()
+                duckHitIntoARoastPekingDuck()
             }
             print("HIT PAN!")
 
