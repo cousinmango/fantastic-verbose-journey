@@ -188,19 +188,14 @@ extension GameScene: SKPhysicsContactDelegate {
                 duration: 0.15
             )
             
-            // bounce the fireball back
-            
-            fireball.run(
-                SKAction.sequence(
-                    [
-                        flipRotateBack,
-                        moveTowardsDuck
-                    ]
-                ),
-                completion: {
-                    fireball.removeFromParent()
+            // bounce the fireball back and despawn
+            fireball.qRun(
+                actions: flipRotateBack, moveTowardsDuck,
+                onCompletion: { fireball.removeFromParent()
+                    // ? using this despawn instead of the physics collision...
                 }
-            ) // fireball bounce back
+            )
+            
             fryingPan.run(
                 SKAction.sequence(
                     [
