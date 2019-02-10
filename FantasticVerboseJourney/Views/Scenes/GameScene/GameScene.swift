@@ -229,6 +229,7 @@ class GameScene: SKScene {
 
     }
 
+    // -- FIXME: spawnChickenRandom does more than spawn a chicken...
     @objc func spawnChickenRandom() {
         let chickenNode = SKSpriteNode(imageNamed: "chicken")
         chickenNode.size = CGSize(width: scaleFactor * 0.8,
@@ -238,20 +239,9 @@ class GameScene: SKScene {
         chickenNode.physicsBody?.categoryBitMask = PhysicsCategory.chicken
         chickenNode.physicsBody?.contactTestBitMask = PhysicsCategory.fireball
         chickenNode.physicsBody?.collisionBitMask = PhysicsCategory.none
-        let randomInt = Int.random(in: 1...4)
-        switch randomInt {
-        case 1:
-            chickenNode.position = chickenPosition1
-        case 2:
-            chickenNode.position = chickenPosition2
-        case 3:
-            chickenNode.position = chickenPosition3
-        case 4:
-            chickenNode.position = chickenPosition4
-        default:
-            chickenNode.position = chickenPosition1
-            print("ERROR: chicken spawn default")
-        }
+        
+        let mobSpawnPositions = [chickenPosition1, chickenPosition2, chickenPosition3, chickenPosition3]
+        chickenNode.position = mobSpawnPositions.randomElement() ?? chickenPosition1
 
         // using timeHourglassChance value as an inverse chance for calculation?
         // activates morphing of a spawned chickenNode to be a timeHourglass
@@ -484,7 +474,7 @@ class GameScene: SKScene {
 
     }
 
-    // duck gets hit by a fireball, becomes fried, into a roast peking duck
+    // duck gets hit by a fireball, becomes fried into a roast peking duck
     func duckHitIntoARoastPekingDuck() {
         duckSuspended = true
         let peking = SKSpriteNode(imageNamed: "peking")
