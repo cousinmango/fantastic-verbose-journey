@@ -46,6 +46,7 @@
 		55D279E5220FE322009BC56D /* TimeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55D279E4220FE322009BC56D /* TimeManager.swift */; };
 		55D279EA220FEB68009BC56D /* SillyAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55D279E8220FEB68009BC56D /* SillyAnimation.swift */; };
 		55D279EB220FEB68009BC56D /* SillyColour.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55D279E9220FEB68009BC56D /* SillyColour.swift */; };
+		55D279ED220FF42C009BC56D /* SKSpriteNode+ConvenientActionSequenceRunnable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55D279EC220FF42C009BC56D /* SKSpriteNode+ConvenientActionSequenceRunnable.swift */; };
 		55F78D3E21E2D4010098E892 /* SKButton+SKLabelNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F78D3D21E2D4010098E892 /* SKButton+SKLabelNode.swift */; };
 /* End PBXBuildFile section */
 
@@ -112,6 +113,7 @@
 		55D279E4220FE322009BC56D /* TimeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeManager.swift; sourceTree = "<group>"; };
 		55D279E8220FEB68009BC56D /* SillyAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SillyAnimation.swift; sourceTree = "<group>"; };
 		55D279E9220FEB68009BC56D /* SillyColour.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SillyColour.swift; sourceTree = "<group>"; };
+		55D279EC220FF42C009BC56D /* SKSpriteNode+ConvenientActionSequenceRunnable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SKSpriteNode+ConvenientActionSequenceRunnable.swift"; sourceTree = "<group>"; };
 		55F78D3D21E2D4010098E892 /* SKButton+SKLabelNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SKButton+SKLabelNode.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -155,6 +157,7 @@
 			isa = PBXGroup;
 			children = (
 				35E9387DC247B9B7702E5771 /* backgroundAnimation.swift */,
+				55D279EC220FF42C009BC56D /* SKSpriteNode+ConvenientActionSequenceRunnable.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -544,6 +547,7 @@
 				55D279DB220FDFCE009BC56D /* GameScene+SKPhysicsContactDelegate.swift in Sources */,
 				55F78D3E21E2D4010098E892 /* SKButton+SKLabelNode.swift in Sources */,
 				55D279DD220FE014009BC56D /* Mob.swift in Sources */,
+				55D279ED220FF42C009BC56D /* SKSpriteNode+ConvenientActionSequenceRunnable.swift in Sources */,
 				35E93175665D1A30DA6E4B26 /* HomeMenuScene.swift in Sources */,
 				35E93BACEE437DEE94830774 /* backgroundAnimation.swift in Sources */,
 				55D279E1220FE1A4009BC56D /* ItemChancer.swift in Sources */,

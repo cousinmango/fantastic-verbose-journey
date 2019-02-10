@@ -12,21 +12,19 @@ import SpriteKit
 extension GameScene: SKPhysicsContactDelegate {
 
     func didBegin(_ contact: SKPhysicsContact) {
-        var firstBody: SKPhysicsBody // ??
-        var secondBody: SKPhysicsBody
-        if contact.bodyA.categoryBitMask < contact.bodyB.categoryBitMask {
-            firstBody = contact.bodyA
-            secondBody = contact.bodyB
-        } else {
-            firstBody = contact.bodyB
-            secondBody = contact.bodyA
-        }
+        
+        // ?? Validate this. Why does categoryBitMask determine which is "first"
+        // Stable? Seems volatile or unintended behaviour-prone.
+        let aIsFirst: Bool = contact.bodyA.categoryBitMask < contact.bodyB.categoryBitMask
+        let bIsSecond: Bool = aIsFirst // self-describing vars...
+        let firstBody: SKPhysicsBody = aIsFirst ? contact.bodyA : contact.bodyB
+        let secondBody: SKPhysicsBody = bIsSecond ? contact.bodyB : contact.bodyA
 
         hitCollisionBehaviourCalcDoStuff(firstBody, secondBody)
     }
 
     // - TODO Refactor massive monolithic function
-    // swiftlint:disable function_body_length
+    // swiftlint:disable function_body_length cyclomatic_complexity
     fileprivate func hitCollisionBehaviourCalcDoStuff(_ firstBody: SKPhysicsBody, _ secondBody: SKPhysicsBody) {
         // - TODO: Very large multi if-else-if branching statement to refactor.
         // Large physics collision detection based on bit operations.
@@ -108,14 +106,13 @@ extension GameScene: SKPhysicsContactDelegate {
             // when pans or chickens spawn on each other (only on smaller screens) - doesn't do anything except handle exception - DON'T REMOVE
         } else if (firstBodyIsChickenPhysics && secondBodyIsFryingPan) {
             print("Hit: 1 chicken 2 fryingPan")
-            if let chicken = firstBody.node as? SKSpriteNode,
-                let fryingPan = secondBody.node as? SKSpriteNode {
-
-            }
-            // chicken hit by fireball
+            guard let chicken = firstBody.node as? SKSpriteNode else { return }
+            guard let fryingPan = secondBody.node as? SKSpriteNode else { return }
+            
         } else if (
             (firstBody.categoryBitMask & PhysicsCategory.chicken != 0) && (secondBody.categoryBitMask & PhysicsCategory.fireball != 0)
             ) {
+            // chicken hit by fireball
             print("Hit: 1 bANDchickenNotZero 2 bANDFireballNotZero")
             if let chicken = firstBody.node as? SKSpriteNode,
                 let fireball = secondBody.node as? SKSpriteNode {
@@ -137,11 +134,9 @@ extension GameScene: SKPhysicsContactDelegate {
                 hudOverlay.addPoint()
                 print("HIT CHICKEN!")
             }
+            
+        } else if (firstBodyMaskBitAndTimeHourglass != 0 && secondBodyMaskBitAndFryingPan != 0) {
             // timeHourglass hit by fireball
-        } else if (
-            firstBodyMaskBitAndTimeHourglass != 0 &&
-                secondBodyMaskBitAndFryingPan != 0
-            ) {
 
             if let timeHourglass = firstBody.node as? SKSpriteNode,
                 let fireball = secondBody.node as? SKSpriteNode {
@@ -169,26 +164,37 @@ extension GameScene: SKPhysicsContactDelegate {
             }
 
             // pan hit by fireball
-        } else if (
-            (firstBody.categoryBitMask & PhysicsCategory.fryingPan != 0) &&
+        } else if ((firstBody.categoryBitMask & PhysicsCategory.fryingPan != 0) &&
                 (secondBody.categoryBitMask & PhysicsCategory.fireball != 0)
             ) {
-            print("??something1st hit pan, 2nd thing not a fireball??")
+            print("??something1st hit fryingpan, 2nd thing not a fireball??")
             let firstBodyBitAndFryingPan = firstBody.categoryBitMask & PhysicsCategory.fryingPan
             print(firstBody.categoryBitMask, PhysicsCategory.fryingPan, "BIT AND", firstBodyBitAndFryingPan)
             guard let fryingPan = firstBody.node as? SKSpriteNode else { return }
             guard let fireball = secondBody.node as? SKSpriteNode else { return }
+            
+            /// Orientation of fireball is rotated 180 degrees
+            /// pi3.14 radians is 180 degrees.
+            /// Fireball continues its velocity.
+            /// Rotate by pi rotates 180deg 1. fireball -> pan direction
+            /// 2. reflected back -> duck direction
+
+            let flipRotateBack: SKAction = SKAction.rotate(
+                    byAngle: CGFloat(Double.pi),
+                    duration: 0
+            )
+            let moveTowardsDuck: SKAction = SKAction.move(
+                to: duckNode.position,
+                duration: 0.15
+            )
+            
+            // bounce the fireball back
+            
             fireball.run(
                 SKAction.sequence(
                     [
-                        SKAction.rotate(
-                            byAngle: CGFloat(Double.pi),
-                            duration: 0
-                        ),
-                        SKAction.move(
-                            to: duckNode.position,
-                            duration: 0.15
-                        )
+                        flipRotateBack,
+                        moveTowardsDuck
                     ]
                 ),
                 completion: {

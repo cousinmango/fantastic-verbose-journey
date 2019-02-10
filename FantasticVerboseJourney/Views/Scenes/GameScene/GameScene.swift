@@ -647,8 +647,10 @@ extension GameScene {
 // - MARK: Touches responders
 extension GameScene {
 
-    override func touchesBegan(_ touches: Set<UITouch>,
-                               with event: UIEvent?) {
+    override func touchesBegan(
+        _ touches: Set<UITouch>,
+        with event: UIEvent?
+    ) {
         if duckSuspended == false {
             for touch in touches {
                 let touchLocation = touch.location(in: self)
@@ -769,8 +771,10 @@ extension GameScene {
         }
     }
 
-    override func touchesEnded(_ touches: Set<UITouch>,
-                               with event: UIEvent?) {
+    override func touchesEnded(
+        _ touches: Set<UITouch>,
+        with event: UIEvent?
+    ) {
         //print("GameScene:: touchesEnded begin")
         //        guard let firstTouch = touches.first else { return }
         //        let touchLocationInScene = firstTouch.location(in: self)
