@@ -55,7 +55,7 @@ struct SillyAnimation {
     )
     
     static let rotateFasterSpeed = SKAction.rotate(
-        byAngle: -2 * CGFloat(Double.pi),
-        duration: 4
+        byAngle: -2 * CGFloat.pi,
+        duration: 4 // feels too fast. It's much faster than MenuScene
     )
 }
