@@ -55,8 +55,8 @@ struct SillyAnimation {
     )
     
     static let rotateFasterSpeed = SKAction.rotate(
-        byAngle: -2 * CGFloat.pi,
-        duration: 4 // feels too fast. It's much faster than MenuScene
+        byAngle: -CGFloat.pi,
+        duration: 2 // feels too fast. It's much faster than MenuScene
         // Using your angle vs duration
         // Which is a more consistent way of determining speed
         // isn't -2 * pi in 4 seconds the same as -pi in 2 seconds..?
