@@ -96,10 +96,7 @@ class GameScene: SKScene {
         addChild(background)
         background.run(
             SKAction.repeatForever(
-                SKAction.rotate(
-                    byAngle: -2 * CGFloat(Double.pi),
-                    duration: 4
-                )
+                SillyAnimation.rotateFasterSpeed
             )
         )
 
@@ -270,26 +267,18 @@ class GameScene: SKScene {
         }
 
         addChild(chickenNode)
+
         chickenNode.run(
             SKAction.sequence(
                 [
-                    SKAction.scale(
-                        to: 0,
-                        duration: 0
-                    ),
-                    SKAction.scale(
-                        to: 1,
-                        duration: 0.1
-                    ),
+                    SillyAnimation.scaleSizeToZeroInstant,
+                    SillyAnimation.scaleSizeToNormal,
                     SillyAnimation.boopDownAnimation,
                     SKAction.run {
                         chickenNode.zPosition = CGFloat(2)
                     },
                     SKAction.wait(forDuration: 1),
-                    SKAction.scale(
-                        to: 0,
-                        duration: 0.1
-                    ),
+                    SillyAnimation.scaleSizeToZero,
                     SKAction.removeFromParent()
                 ]
             )
@@ -346,19 +335,10 @@ class GameScene: SKScene {
         panNode.run(
             SKAction.sequence(
                 [
-                    SKAction.scale(
-                        to: 0,
-                        duration: 0
-                    ),
-                    SKAction.scale(
-                        to: 1,
-                        duration: 0.1
-                    ),
+                    SillyAnimation.scaleSizeToZeroInstant,
+                    SillyAnimation.scaleSizeToNormal,
                     SKAction.wait(forDuration: 1),
-                    SKAction.scale(
-                        to: 0,
-                        duration: 0.1
-                    ),
+                    SillyAnimation.scaleSizeToZero,
                     SKAction.removeFromParent()
                 ]
             )
@@ -386,18 +366,9 @@ class GameScene: SKScene {
         duckArm.run(
             SKAction.sequence(
                 [
-                    SKAction.scale(
-                        to: 0,
-                        duration: 0
-                    ),
-                    SKAction.scale(
-                        to: 1,
-                        duration: 0.1
-                    ),
-                    SKAction.scale(
-                        to: 0,
-                        duration: 0.1
-                    ),
+                    SillyAnimation.scaleSizeToZeroInstant,
+                    SillyAnimation.scaleSizeToNormal,
+                    SillyAnimation.scaleSizeToZero,
                     SKAction.removeFromParent()
                 ]
             )
@@ -500,11 +471,7 @@ class GameScene: SKScene {
                 [
                     SillyAnimation.boopDownAnimation,
                     SKAction.wait(forDuration: duckSuspendTime),
-                    SKAction.moveBy(
-                        x: 0,
-                        y: 10,
-                        duration: 0.05
-                    ),
+                    SillyAnimation.boopUpAnimation,
                     SKAction.removeFromParent()
                 ]
             ),
@@ -740,10 +707,7 @@ extension GameScene {
                             to: 1.2,
                             duration: 0.05
                         ),
-                        SKAction.scale(
-                            to: 1,
-                            duration: 0.1
-                        )
+                        SillyAnimation.scaleSizeToNormal
                     ]
                 )
             )
