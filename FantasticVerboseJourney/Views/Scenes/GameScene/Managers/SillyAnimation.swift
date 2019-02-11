@@ -54,6 +54,11 @@ struct SillyAnimation {
         duration: 0
     )
     
+    static let scaleSizeEmbiggen = SKAction.scale(
+        to: 1.2,
+        duration: 0.05
+    )
+    
     static let rotateFasterSpeed = SKAction.rotate(
         byAngle: -CGFloat.pi,
         duration: 2 // feels too fast. It's much faster than MenuScene

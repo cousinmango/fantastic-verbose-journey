@@ -486,10 +486,7 @@ class GameScene: SKScene {
         timerNode.run(
             SKAction.sequence(
                 [
-                    SKAction.scale(
-                        to: 1.2,
-                        duration: 0.05
-                    ),
+                    SillyAnimation.scaleSizeEmbiggen,
                     SKAction.scale(
                         to: 1,
                         duration: 0.05)
@@ -703,10 +700,7 @@ extension GameScene {
             duckNode.run(
                 SKAction.sequence(
                     [
-                        SKAction.scale(
-                            to: 1.2,
-                            duration: 0.05
-                        ),
+                        SillyAnimation.scaleSizeEmbiggen,
                         SillyAnimation.scaleSizeToNormal
                     ]
                 )

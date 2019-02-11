@@ -148,14 +148,8 @@ extension GameScene: SKPhysicsContactDelegate {
                                 "chickenhitSound.wav",
                                 waitForCompletion: false
                             ),
-                            SKAction.scale(
-                                to: 1.2,
-                                duration: 0.05
-                            ),
-                            SKAction.scale(
-                                to: 1,
-                                duration: 0.1
-                            )
+                            SillyAnimation.scaleSizeEmbiggen,
+                            SillyAnimation.scaleSizeToNormal
                         ]
                     )
                 )
@@ -207,10 +201,7 @@ extension GameScene: SKPhysicsContactDelegate {
                             to: 1.3,
                             duration: 0.05
                         ),
-                        SKAction.scale(
-                            to: 1,
-                            duration: 0.1
-                        )
+                        SillyAnimation.scaleSizeToNormal
                     ]
                 )
             )
