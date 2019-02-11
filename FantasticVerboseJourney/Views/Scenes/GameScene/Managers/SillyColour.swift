@@ -10,7 +10,6 @@ import typealias SpriteKit.SKColor
 
 // Initially centralising colours visuals configs for refactor opportunities
 // later
-
 struct SillyColour {
     static let textColour = SKColor(
         red: 0.63,

@@ -86,7 +86,7 @@ class HomeMenuScene: SKScene {
         currentScore = defaults.integer(forKey: currentScoreKey)
         let scoreLabel = SKLabelNode(text: String(currentScore))
         scoreLabel.fontName = "DIN Alternate"
-        scoreLabel.fontColor = SKColor(red: 0.63, green: 0.16, blue: 0.41, alpha: 1.0)
+        scoreLabel.fontColor = SillyColour.textColour
         scoreLabel.fontSize = scaleFactor * 0.4//80
         scoreLabel.position = CGPoint(x: size.width / 2, y: size.height * 0.64)
         addChild(scoreLabel)
@@ -99,7 +99,7 @@ class HomeMenuScene: SKScene {
         highscore = defaults.integer(forKey: scoreKey)
         let highscoreLabel = SKLabelNode(text: "BEST: \(highscore)")//String(highscore))
         highscoreLabel.fontName = "DIN Alternate"
-        highscoreLabel.fontColor = SKColor(red: 0.63, green: 0.16, blue: 0.41, alpha: 1.0)
+        highscoreLabel.fontColor = SillyColour.textColour
         highscoreLabel.fontSize = scaleFactor * 0.15//40
         highscoreLabel.position = CGPoint(x: size.width / 2, y: size.height * 0.32)
         addChild(highscoreLabel)
@@ -126,7 +126,6 @@ class HomeMenuScene: SKScene {
 extension HomeMenuScene {
 
     private func setup() {
-        //backgroundColor = SKColor.yellow
 
         // Setup physics
         physicsWorld.gravity = .zero

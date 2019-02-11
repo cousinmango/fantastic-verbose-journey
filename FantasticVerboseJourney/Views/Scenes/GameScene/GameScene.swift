@@ -20,12 +20,6 @@ class GameScene: SKScene {
     var timeHourglassChance: Int = 15
 
     let background = SKSpriteNode(texture: Asset.bg.skTextured)
-    var textColor = SKColor(
-        red: 0.63,
-        green: 0.16,
-        blue: 0.41,
-        alpha: 1.0
-    )
     var gameTimer: Timer?
     var timeLeft = 30
     var gameMusic: SKAudioNode!
@@ -136,7 +130,7 @@ class GameScene: SKScene {
             y: size.height * 0.77
         )
         timerNode.fontName = "DIN Alternate"
-        timerNode.fontColor = textColor
+        timerNode.fontColor = SillyColour.textColour
         timerNode.fontSize = scaleFactor * 0.2 // 30
         timerNode.text = ": \(timeLeft)"
         addChild(timerNode)
@@ -542,7 +536,7 @@ class GameScene: SKScene {
         if timeLeft <= 0 {
             gameTimer?.invalidate()
             gameTimer = nil
-            //self.removeAllChildren() // clear -- TODO: Move this code to the hot reload injection refresher.
+
             let homeMenuScene = HomeMenuScene(size: size)
             print(
                 "before home screen",
@@ -598,12 +592,11 @@ extension GameScene {
             for touch in touches {
                 let touchLocation = touch.location(in: self)
                 var orientAngle: CGFloat
-
                 switch (touchLocation.x, touchLocation.y) {
 
                 case (size.width / 2..<size.width, size.height / 2..<size.height):
-                    orientAngle = CGFloat(tanh(size.height / size.width)
-                    )
+                    
+                    orientAngle = CGFloat(tanh(size.height / size.width))
 
                     duckNode.run(
                         SKAction.rotate(
@@ -642,6 +635,7 @@ extension GameScene {
                         ),
                         angle: orientAngle
                     )
+                    
                     print("touch in bottom right")
                 case (0..<size.width / 2, 0..<size.height / 2):
                     orientAngle = CGFloat(
@@ -668,6 +662,7 @@ extension GameScene {
                         angle: orientAngle
                     )
                     print("touch in bottom left")
+                    
                 case (0..<size.width / 2, size.height / 2..<size.height):
                     orientAngle = CGFloat(
                         -tanh(size.height / size.width) + CGFloat(Double.pi)
@@ -697,6 +692,8 @@ extension GameScene {
                     print("touch in no quadrants")
                 }
             }
+            
+            
             duckNode.run(
                 SKAction.sequence(
                     [
@@ -705,6 +702,7 @@ extension GameScene {
                     ]
                 )
             )
+            
         }
     }
 
