@@ -232,7 +232,7 @@ class GameScene: SKScene {
         chickenNode.zPosition = 1
         chickenNode.physicsBody = SKPhysicsBody(circleOfRadius: chickenNode.size.height / 4)
         chickenNode.physicsBody?.categoryBitMask = PhysicsCategory.chicken
-        chickenNode.physicsBody?.contactTestBitMask = PhysicsCategory.fireball
+        chickenNode.physicsBody?.contactTestBitMask = PhysicsCategory.fireball // ? is this still being used? The contact test result was commented out somewhere later.. i think.
         chickenNode.physicsBody?.collisionBitMask = PhysicsCategory.none
         
         let mobSpawnPositions = [chickenPosition1, chickenPosition2, chickenPosition3, chickenPosition3]
