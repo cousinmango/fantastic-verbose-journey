@@ -65,15 +65,16 @@ class GameScene: SKScene {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
-
+    
     fileprivate func startMusic() {
-        if let musicURL = Bundle.main.url(
+        guard let musicURL: URL = Bundle.main.url(
             forResource: "gameMusic",
             withExtension: "wav"
-            ) {
-            gameMusic = SKAudioNode(url: musicURL)
-            addChild(gameMusic)
-        }
+        ) else { return }
+        
+        gameMusic = SKAudioNode(url: musicURL)
+        addChild(gameMusic)
+        
     }
     
     override func didMove(to view: SKView) {
