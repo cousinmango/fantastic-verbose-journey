@@ -10,7 +10,7 @@ import Foundation
 import SpriteKit
 
 class HudNode: SKNode {
-    var textColor = SKColor(red: 0.63, green: 0.16, blue: 0.41, alpha: 1.0)
+    var textColor = SillyColour.textColour
     private let scoreKey = "DUCKMAN_HIGHSCORE"
     private let currentScoreKey = "CURRENT_SCORE"
     private let scoreNode = SKLabelNode(fontNamed: "DIN Alternate")
