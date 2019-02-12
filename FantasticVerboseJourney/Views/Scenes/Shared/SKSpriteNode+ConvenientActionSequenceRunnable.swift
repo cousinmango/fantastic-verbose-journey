@@ -43,7 +43,7 @@ extension SKSpriteNode {
 //            SKAction.sequence(
 //                [
 //                    SKAction.playSoundFileNamed(
-//                        "panhitSound.wav",
+//                        "panHitSound.wav",
 //                        waitForCompletion: false
 //                    ),
 //                    SKAction.scale(
@@ -61,7 +61,7 @@ extension SKSpriteNode {
 //        fireball.qRun( flipRotateBack, moveTowardsDuck )
 //        fryingPan.run(
 //            SKAction.playSoundFileNamed(
-//                "panhitSound.wav",
+//                "panHitSound.wav",
 //                waitForCompletion: false
 //            ),
 //            SKAction.scale(

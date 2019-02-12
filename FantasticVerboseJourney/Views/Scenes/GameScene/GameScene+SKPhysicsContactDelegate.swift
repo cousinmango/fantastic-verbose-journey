@@ -122,7 +122,7 @@ extension GameScene: SKPhysicsContactDelegate {
                 SKAction.sequence(
                     [
                         SKAction.playSoundFileNamed(
-                            "chickenhitSound.wav",
+                            "chickenHitSound.wav",
                             waitForCompletion: false
                         ),
                         SillyAnimation.boopUpAnimation,
@@ -146,7 +146,7 @@ extension GameScene: SKPhysicsContactDelegate {
                 SKAction.sequence(
                     [
                         SKAction.playSoundFileNamed(
-                            "chickenhitSound.wav",
+                            "chickenHitSound.wav",
                             waitForCompletion: false
                         ),
                         SillyAnimation.scaleSizeEmbiggen,
@@ -195,7 +195,7 @@ extension GameScene: SKPhysicsContactDelegate {
                 SKAction.sequence(
                     [
                         SKAction.playSoundFileNamed(
-                            "panhitSound.wav",
+                            "panHitSound.wav",
                             waitForCompletion: false
                         ),
                         SKAction.scale(

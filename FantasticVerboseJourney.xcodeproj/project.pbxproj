@@ -11,8 +11,8 @@
 		03BBE9ED21D97F87001CBAE4 /* HudNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03BBE9EC21D97F87001CBAE4 /* HudNode.swift */; };
 		03DA721221FBFD0B001D4BC4 /* homeMusic.wav in Resources */ = {isa = PBXBuildFile; fileRef = 03DA720E21FBFD0A001D4BC4 /* homeMusic.wav */; };
 		03DA721321FBFD0B001D4BC4 /* gameMusic.wav in Resources */ = {isa = PBXBuildFile; fileRef = 03DA720F21FBFD0B001D4BC4 /* gameMusic.wav */; };
-		03DA721421FBFD0B001D4BC4 /* panhitSound.wav in Resources */ = {isa = PBXBuildFile; fileRef = 03DA721021FBFD0B001D4BC4 /* panhitSound.wav */; };
-		03DA721521FBFD0B001D4BC4 /* chickenhitSound.wav in Resources */ = {isa = PBXBuildFile; fileRef = 03DA721121FBFD0B001D4BC4 /* chickenhitSound.wav */; };
+		03DA721421FBFD0B001D4BC4 /* panHitSound.wav in Resources */ = {isa = PBXBuildFile; fileRef = 03DA721021FBFD0B001D4BC4 /* panHitSound.wav */; };
+		03DA721521FBFD0B001D4BC4 /* chickenHitSound.wav in Resources */ = {isa = PBXBuildFile; fileRef = 03DA721121FBFD0B001D4BC4 /* chickenHitSound.wav */; };
 		35E93118FC69ADBF864D8512 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E937C22C223D2838BB1F71 /* GameViewController.swift */; };
 		35E93175665D1A30DA6E4B26 /* HomeMenuScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E9345A0BA1F8BF2778FDA9 /* HomeMenuScene.swift */; };
 		35E9330A7FF414B71890071D /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 35E938A99B0608F569AC32AB /* GameScene.sks */; };
@@ -34,6 +34,7 @@
 		55348E0422098FE5003C6B97 /* assets-images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55348E0322098FE5003C6B97 /* assets-images.swift */; };
 		55348E07220AC793003C6B97 /* ImageAsset+SKTexturable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55348E06220AC793003C6B97 /* ImageAsset+SKTexturable.swift */; };
 		558D4E032212B1AA00291953 /* SoundAsset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558D4E022212B1AA00291953 /* SoundAsset.swift */; };
+		558D4E052212B61700291953 /* SillyActionSound.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558D4E042212B61700291953 /* SillyActionSound.swift */; };
 		55A4F6EB21D89A3C001C6C16 /* InjectionIiiHotReloadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A4F6EA21D89A3C001C6C16 /* InjectionIiiHotReloadable.swift */; };
 		55A4F6ED21D89A91001C6C16 /* UIViewController+InjectionIiiHotReloadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A4F6EC21D89A91001C6C16 /* UIViewController+InjectionIiiHotReloadable.swift */; };
 		55A4F6EF21D89C47001C6C16 /* SKButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A4F6EE21D89C47001C6C16 /* SKButton.swift */; };
@@ -74,8 +75,8 @@
 		03BBE9EC21D97F87001CBAE4 /* HudNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HudNode.swift; sourceTree = "<group>"; };
 		03DA720E21FBFD0A001D4BC4 /* homeMusic.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = homeMusic.wav; sourceTree = "<group>"; };
 		03DA720F21FBFD0B001D4BC4 /* gameMusic.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = gameMusic.wav; sourceTree = "<group>"; };
-		03DA721021FBFD0B001D4BC4 /* panhitSound.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = panhitSound.wav; sourceTree = "<group>"; };
-		03DA721121FBFD0B001D4BC4 /* chickenhitSound.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = chickenhitSound.wav; sourceTree = "<group>"; };
+		03DA721021FBFD0B001D4BC4 /* panHitSound.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = panHitSound.wav; sourceTree = "<group>"; };
+		03DA721121FBFD0B001D4BC4 /* chickenHitSound.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = chickenHitSound.wav; sourceTree = "<group>"; };
 		35E932D20F86DCD84061B40D /* PauseScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PauseScene.swift; sourceTree = "<group>"; };
 		35E9345A0BA1F8BF2778FDA9 /* HomeMenuScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeMenuScene.swift; sourceTree = "<group>"; };
 		35E9354863941805D65056D0 /* CGPoint+VectorCalculatable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGPoint+VectorCalculatable.swift"; sourceTree = "<group>"; };
@@ -103,6 +104,7 @@
 		55348E0322098FE5003C6B97 /* assets-images.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "assets-images.swift"; sourceTree = "<group>"; };
 		55348E06220AC793003C6B97 /* ImageAsset+SKTexturable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ImageAsset+SKTexturable.swift"; sourceTree = "<group>"; };
 		558D4E022212B1AA00291953 /* SoundAsset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundAsset.swift; sourceTree = "<group>"; };
+		558D4E042212B61700291953 /* SillyActionSound.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SillyActionSound.swift; sourceTree = "<group>"; };
 		55A4F6EA21D89A3C001C6C16 /* InjectionIiiHotReloadable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InjectionIiiHotReloadable.swift; sourceTree = "<group>"; };
 		55A4F6EC21D89A91001C6C16 /* UIViewController+InjectionIiiHotReloadable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+InjectionIiiHotReloadable.swift"; sourceTree = "<group>"; };
 		55A4F6EE21D89C47001C6C16 /* SKButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKButton.swift; sourceTree = "<group>"; };
@@ -149,10 +151,10 @@
 		03DA720D21FBFC84001D4BC4 /* Audio */ = {
 			isa = PBXGroup;
 			children = (
-				03DA721121FBFD0B001D4BC4 /* chickenhitSound.wav */,
+				03DA721121FBFD0B001D4BC4 /* chickenHitSound.wav */,
 				03DA720F21FBFD0B001D4BC4 /* gameMusic.wav */,
 				03DA720E21FBFD0A001D4BC4 /* homeMusic.wav */,
-				03DA721021FBFD0B001D4BC4 /* panhitSound.wav */,
+				03DA721021FBFD0B001D4BC4 /* panHitSound.wav */,
 			);
 			path = Audio;
 			sourceTree = "<group>";
@@ -315,6 +317,7 @@
 			children = (
 				55348E06220AC793003C6B97 /* ImageAsset+SKTexturable.swift */,
 				558D4E022212B1AA00291953 /* SoundAsset.swift */,
+				558D4E042212B61700291953 /* SillyActionSound.swift */,
 			);
 			path = ReferencesCustom;
 			sourceTree = "<group>";
@@ -474,9 +477,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				03DA721421FBFD0B001D4BC4 /* panhitSound.wav in Resources */,
+				03DA721421FBFD0B001D4BC4 /* panHitSound.wav in Resources */,
 				553032D121D87F78001DB357 /* Assets.xcassets in Resources */,
-				03DA721521FBFD0B001D4BC4 /* chickenhitSound.wav in Resources */,
+				03DA721521FBFD0B001D4BC4 /* chickenHitSound.wav in Resources */,
 				03DA721221FBFD0B001D4BC4 /* homeMusic.wav in Resources */,
 				553032C821D87F77001DB357 /* Actions.sks in Resources */,
 				03BBE9EB21D8B90E001CBAE4 /* HomeMenuScene.sks in Resources */,
@@ -533,6 +536,7 @@
 				35E93A7F622424793C311A9B /* SKView+DebugPerformanceOptimisable.swift in Sources */,
 				55D279EA220FEB68009BC56D /* SillyAnimation.swift in Sources */,
 				55348E07220AC793003C6B97 /* ImageAsset+SKTexturable.swift in Sources */,
+				558D4E052212B61700291953 /* SillyActionSound.swift in Sources */,
 				35E933A7B94BD6A90B670AF5 /* VectorCalculatable.swift in Sources */,
 				35E936BBB8FB3F84078B77B1 /* CGPoint+VectorCalculatable.swift in Sources */,
 				55A4F6ED21D89A91001C6C16 /* UIViewController+InjectionIiiHotReloadable.swift in Sources */,
