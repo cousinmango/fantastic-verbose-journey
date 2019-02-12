@@ -121,10 +121,7 @@ extension GameScene: SKPhysicsContactDelegate {
             chicken.run(
                 SKAction.sequence(
                     [
-                        SKAction.playSoundFileNamed(
-                            "chickenHitSound.wav",
-                            waitForCompletion: false
-                        ),
+                        SillyActionSound.chickenHit,
                         SillyAnimation.boopUpAnimation,
                         SKAction.setTexture(Asset.egg.skTextured),
                         SillyAnimation.boopDownAnimation
@@ -145,10 +142,7 @@ extension GameScene: SKPhysicsContactDelegate {
             timeHourglass.run(
                 SKAction.sequence(
                     [
-                        SKAction.playSoundFileNamed(
-                            "chickenHitSound.wav",
-                            waitForCompletion: false
-                        ),
+                        SillyActionSound.chickenHit,
                         SillyAnimation.scaleSizeEmbiggen,
                         SillyAnimation.scaleSizeToNormal
                     ]
@@ -173,10 +167,10 @@ extension GameScene: SKPhysicsContactDelegate {
             /// Fireball continues its velocity.
             /// Rotate by pi rotates 180deg 1. fireball -> pan direction
             /// 2. reflected back -> duck direction
-
+            
             let flipRotateBack: SKAction = SKAction.rotate(
-                    byAngle: CGFloat(Double.pi),
-                    duration: 0
+                byAngle: CGFloat(Double.pi),
+                duration: 0
             )
             let moveTowardsDuck: SKAction = SKAction.move(
                 to: duckNode.position,
@@ -194,10 +188,7 @@ extension GameScene: SKPhysicsContactDelegate {
             fryingPan.run(
                 SKAction.sequence(
                     [
-                        SKAction.playSoundFileNamed(
-                            "panHitSound.wav",
-                            waitForCompletion: false
-                        ),
+                        SillyActionSound.panHit,
                         SKAction.scale(
                             to: 1.3,
                             duration: 0.05
