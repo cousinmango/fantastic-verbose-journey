@@ -114,48 +114,49 @@ extension GameScene: SKPhysicsContactDelegate {
             ) {
             // chicken hit by fireball
             print("Hit: 1 bANDchickenNotZero 2 bANDFireballNotZero")
-            if let chicken = firstBody.node as? SKSpriteNode,
-                let fireball = secondBody.node as? SKSpriteNode {
-                fireball.removeFromParent()
-                chicken.run(
-                    SKAction.sequence(
-                        [
-                            SKAction.playSoundFileNamed(
-                                "chickenhitSound.wav",
-                                waitForCompletion: false
-                            ),
-                            SillyAnimation.boopUpAnimation,
-                            SKAction.setTexture(Asset.egg.skTextured),
-                            SillyAnimation.boopDownAnimation
-                        ]
-                    )
+            guard let chicken = firstBody.node as? SKSpriteNode else { return }
+            guard let fireball = secondBody.node as? SKSpriteNode else { return }
+            
+            fireball.removeFromParent()
+            chicken.run(
+                SKAction.sequence(
+                    [
+                        SKAction.playSoundFileNamed(
+                            "chickenhitSound.wav",
+                            waitForCompletion: false
+                        ),
+                        SillyAnimation.boopUpAnimation,
+                        SKAction.setTexture(Asset.egg.skTextured),
+                        SillyAnimation.boopDownAnimation
+                    ]
                 )
-
-                hudOverlay.addPoint()
-                print("HIT CHICKEN!")
-            }
+            )
+            
+            hudOverlay.addPoint()
+            print("HIT CHICKEN!")
+            
             
         } else if (firstBodyMaskBitAndTimeHourglass != 0 && secondBodyMaskBitAndFryingPan != 0) {
             // timeHourglass hit by fireball
-
-            if let timeHourglass = firstBody.node as? SKSpriteNode,
-                let fireball = secondBody.node as? SKSpriteNode {
-                fireball.removeFromParent()
-                timeHourglass.run(
-                    SKAction.sequence(
-                        [
-                            SKAction.playSoundFileNamed(
-                                "chickenhitSound.wav",
-                                waitForCompletion: false
-                            ),
-                            SillyAnimation.scaleSizeEmbiggen,
-                            SillyAnimation.scaleSizeToNormal
-                        ]
-                    )
+            
+            guard let timeHourglass = firstBody.node as? SKSpriteNode else { return }
+            guard let fireball = secondBody.node as? SKSpriteNode else { return }
+            fireball.removeFromParent()
+            timeHourglass.run(
+                SKAction.sequence(
+                    [
+                        SKAction.playSoundFileNamed(
+                            "chickenhitSound.wav",
+                            waitForCompletion: false
+                        ),
+                        SillyAnimation.scaleSizeEmbiggen,
+                        SillyAnimation.scaleSizeToNormal
+                    ]
                 )
-                addTime()
-                print("HIT timeHourglass!")
-            }
+            )
+            addTime()
+            print("HIT timeHourglass!")
+            
 
             // pan hit by fireball
         } else if ((firstBody.categoryBitMask & PhysicsCategory.fryingPan != 0) &&
