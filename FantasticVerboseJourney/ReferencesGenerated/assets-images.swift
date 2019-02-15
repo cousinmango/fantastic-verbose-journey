@@ -58,6 +58,7 @@ public extension AssetColorTypeAlias {
 
 public struct DataAsset {
   public fileprivate(set) var name: String
+
   #if os(iOS) || os(tvOS) || os(OSX)
   @available(iOS 9.0, tvOS 9.0, OSX 10.11, *)
   public var data: NSDataAsset {

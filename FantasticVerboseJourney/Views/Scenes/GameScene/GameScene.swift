@@ -67,12 +67,9 @@ class GameScene: SKScene {
     }
     
     fileprivate func startMusic() {
-        guard let musicURL: URL = Bundle.main.url(
-            forResource: "gameMusic",
-            withExtension: "wav"
-        ) else { return }
+        guard let musicUrl = SoundAssetUrl.gameMusicUrl else { return }
         
-        gameMusic = SKAudioNode(url: musicURL)
+        gameMusic = SKAudioNode(url: musicUrl)
         addChild(gameMusic)
         
     }
