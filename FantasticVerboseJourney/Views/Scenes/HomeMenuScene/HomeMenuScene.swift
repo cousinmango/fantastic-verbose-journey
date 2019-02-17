@@ -250,6 +250,5 @@ extension HomeMenuScene: SKButtonDelegate {
         let gameScene = GameScene(size: size)
         gameScene.scaleMode = .aspectFit
         self.view?.presentScene(gameScene, transition: gameSceneTransition)
-        //self.removeAllChildren() // clear -- TODO: Move this code to the hot reload injection refresher.
     }
 }

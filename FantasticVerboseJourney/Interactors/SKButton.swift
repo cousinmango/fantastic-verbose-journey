@@ -9,7 +9,7 @@
 import SpriteKit.SKNode
 
 class SKButton: SKSpriteNode {
-    weak var delegate: SKButtonDelegate! // avoid strong circular reference
+    weak var delegate: SKButtonDelegate!
 
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {
         super.init(texture: texture, color: color, size: size)
