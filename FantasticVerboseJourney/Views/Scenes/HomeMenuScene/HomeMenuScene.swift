@@ -78,6 +78,37 @@ class HomeMenuScene: SKScene {
         logoNode.run(scaleUpDown)
     }
 
+    fileprivate func scoreLabelSetup(_ defaults: UserDefaults) {
+        currentScore = defaults.integer(forKey: currentScoreKey)
+        let scoreLabel = SKLabelNode(text: String(currentScore))
+        scoreLabel.fontName = "DIN Alternate"
+        scoreLabel.fontColor = SillyColour.textColour
+        scoreLabel.fontSize = scaleFactor * 0.4//80
+        scoreLabel.position = CGPoint(x: size.width / 2, y: size.height * 0.64)
+        addChild(scoreLabel)
+        scoreLabel.run(
+            SKAction.sequence(
+                [
+                    SKAction.scale(to: 1, duration: 0),
+                    SKAction.wait(forDuration: 0.2),
+                    SKAction.scale(to: 1.4, duration: 0.1),
+                    SKAction.wait(forDuration: 0.3),
+                    SKAction.scale(to: 1, duration: 0.1)
+                ]
+            )
+        )
+    }
+
+    fileprivate func highScoreLabelSetup(_ defaults: UserDefaults) {
+        highscore = defaults.integer(forKey: scoreKey)
+        let highscoreLabel = SKLabelNode(text: "BEST: \(highscore)")//String(highscore))
+        highscoreLabel.fontName = "DIN Alternate"
+        highscoreLabel.fontColor = SillyColour.textColour
+        highscoreLabel.fontSize = scaleFactor * 0.15//40
+        highscoreLabel.position = CGPoint(x: size.width / 2, y: size.height * 0.32)
+        addChild(highscoreLabel)
+    }
+
     override func didMove(to view: SKView) {
         setupStartMusic()
 
@@ -121,26 +152,9 @@ class HomeMenuScene: SKScene {
 
         let defaults = UserDefaults.standard
 
-        currentScore = defaults.integer(forKey: currentScoreKey)
-        let scoreLabel = SKLabelNode(text: String(currentScore))
-        scoreLabel.fontName = "DIN Alternate"
-        scoreLabel.fontColor = SillyColour.textColour
-        scoreLabel.fontSize = scaleFactor * 0.4//80
-        scoreLabel.position = CGPoint(x: size.width / 2, y: size.height * 0.64)
-        addChild(scoreLabel)
-        scoreLabel.run(SKAction.sequence([SKAction.scale(to: 1, duration: 0),
-                                         SKAction.wait(forDuration: 0.2),
-                                         SKAction.scale(to: 1.4, duration: 0.1),
-                                         SKAction.wait(forDuration: 0.3),
-                                         SKAction.scale(to: 1, duration: 0.1)]))
+        scoreLabelSetup(defaults)
 
-        highscore = defaults.integer(forKey: scoreKey)
-        let highscoreLabel = SKLabelNode(text: "BEST: \(highscore)")//String(highscore))
-        highscoreLabel.fontName = "DIN Alternate"
-        highscoreLabel.fontColor = SillyColour.textColour
-        highscoreLabel.fontSize = scaleFactor * 0.15//40
-        highscoreLabel.position = CGPoint(x: size.width / 2, y: size.height * 0.32)
-        addChild(highscoreLabel)
+        highScoreLabelSetup(defaults)
 
         setup()
 
