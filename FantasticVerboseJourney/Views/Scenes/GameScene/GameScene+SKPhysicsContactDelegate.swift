@@ -12,7 +12,7 @@ import SpriteKit
 extension GameScene: SKPhysicsContactDelegate {
 
     func didBegin(_ contact: SKPhysicsContact) {
-        
+
         // Random dodgy code.
         // ?? Validate this. Why does categoryBitMask determine which is "first"
         // Stable? Seems volatile or unintended behaviour-prone.
@@ -23,11 +23,11 @@ extension GameScene: SKPhysicsContactDelegate {
 
         hitCollisionBehaviourCalcDoStuff(firstBody, secondBody)
     }
-    
+
     // - TODO Refactor massive monolithic function
     // swiftlint:disable function_body_length cyclomatic_complexity
     fileprivate func hitCollisionBehaviourCalcDoStuff(_ firstBody: SKPhysicsBody, _ secondBody: SKPhysicsBody) {
-        
+
     }
-    
+
 }

@@ -40,7 +40,7 @@ class HomeMenuScene: SKScene {
             defaults.removeObject(forKey: "DUCKMAN_HIGHSCORE")
         }
     }
-    
+
     override func didMove(to view: SKView) {
         guard let musicURL = Bundle.main.url(
             forResource: "homeMusic",
@@ -48,7 +48,6 @@ class HomeMenuScene: SKScene {
         ) else { return }
         homeMusic = SKAudioNode(url: musicURL)
         addChild(homeMusic)
-        
 
         scaleFactor = size.height * 0.25 // = 284 on iPhone SE
 

@@ -15,14 +15,14 @@ extension SKSpriteNode {
         let sequenceOfActionsAsAction = SKAction.sequence(actions)
         self.run(sequenceOfActionsAsAction)
     }
-    
+
     func qRun(actions: SKAction..., onCompletion completion: @escaping () -> Void) {
         let sequenceOfActionsAsAction = SKAction.sequence(actions)
         self.run(
             sequenceOfActionsAsAction,
             completion: completion
         )
-        
+
     }
 }
 

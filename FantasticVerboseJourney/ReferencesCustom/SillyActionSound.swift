@@ -8,7 +8,6 @@
 
 import SpriteKit.SKAction
 
-
 struct SillyActionSound {
     static let homeMusic = SKAction.playSoundFileNamed(
         SoundAssetFileName.homeMusic,

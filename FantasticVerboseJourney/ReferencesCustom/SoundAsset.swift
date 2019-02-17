@@ -36,4 +36,3 @@ public enum SoundAssetUrl {
         withExtension: "wav"
     )
 }
-

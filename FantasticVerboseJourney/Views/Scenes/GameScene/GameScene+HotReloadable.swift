@@ -8,7 +8,7 @@
 import Foundation
 
 extension GameScene {
-    
+
     #if DEBUG
     @objc func injected() {
         print("GameScene:: injected() injecting")
@@ -19,6 +19,5 @@ extension GameScene {
         print("GameScene:: viewDidLoad activated")
     }
     #endif
-    
-}
 
+}
