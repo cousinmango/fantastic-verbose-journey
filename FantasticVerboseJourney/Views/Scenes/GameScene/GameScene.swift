@@ -42,15 +42,6 @@ class GameScene: SKScene {
 
     }
 
-    func spawnDuck() {
-
-    }
-
-    // -- FIXME: spawnChickenRandom does more than spawn a chicken...
-    @objc func spawnChickenRandom() {
-
-    }
-
     // Could have a reusable spawner with an overarching coordinate guidance
     // too much for each object to maintain an infinite number of possible spawn locations
     // e.g. pan with 4 cases an extra 40 lines of code doubles the class complexity?

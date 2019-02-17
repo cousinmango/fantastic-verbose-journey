@@ -13,14 +13,12 @@ class HomeMenuScene: SKScene {
 
     let hudOverlay = HudNode()
     let gameScene = GameScene()
-    var homeMusic: SKAudioNode!
     private let scoreKey = "DUCKMAN_HIGHSCORE"
     private var highscore: Int = 0
     private let currentScoreKey = "CURRENT_SCORE"
     private var currentScore: Int = 0
     let background = SKSpriteNode(imageNamed: "BG")
     var scaleFactor: CGFloat = 284 // default minumum - change value in didMove(to view
-    var startButton: SKButton!
 
     override init() {
         super.init()
@@ -41,13 +39,28 @@ class HomeMenuScene: SKScene {
         }
     }
 
-    override func didMove(to view: SKView) {
+    func setupStartMusic() {
         guard let musicURL = Bundle.main.url(
             forResource: "homeMusic",
             withExtension: "wav"
-        ) else { return }
-        homeMusic = SKAudioNode(url: musicURL)
+            ) else { return }
+        let homeMusic = SKAudioNode(url: musicURL)
         addChild(homeMusic)
+    }
+    fileprivate func setupLogo() {
+        let logoNode = SKSpriteNode(imageNamed: "duck")
+        logoNode.anchorPoint = CGPoint(x: 0.5, y: 0.4)
+        logoNode.position = CGPoint(x: size.width / 2, y: size.height / 2)
+        logoNode.size = CGSize(width: scaleFactor, height: scaleFactor)
+        addChild(logoNode)
+        logoNode.run(SKAction.repeatForever(SKAction.rotate(byAngle: -2 * CGFloat(Double.pi), duration: 4)))
+        let scaleUpDown = SKAction.repeatForever(SKAction.sequence([SKAction.scale(to: 0.85, duration: 0.8), SKAction.scale(to: 1, duration: 0.8)]))
+        scaleUpDown.timingMode = SKActionTimingMode.easeInEaseOut
+        logoNode.run(scaleUpDown)
+    }
+
+    override func didMove(to view: SKView) {
+        setupStartMusic()
 
         scaleFactor = size.height * 0.25 // = 284 on iPhone SE
 
@@ -68,20 +81,24 @@ class HomeMenuScene: SKScene {
         titleNode.setScale(scaleFactor * 0.001_3)
         //titleNode.size = CGSize(width: scaleFactor * 3, height: titleNode.size.y * scaleFactor)
         addChild(titleNode)
-        titleNode.run(SKAction.sequence([SKAction.scale(to: 0, duration: 0),
-                                         SKAction.wait(forDuration: 0.8),
-                                           SKAction.scale(to: scaleFactor * 0.001_5, duration: 0.1),
-                                           SKAction.scale(to: scaleFactor * 0.001_3, duration: 0.1)]))
+        titleNode.run(
+            SKAction.sequence(
+                [
+                    SillyAnimation.scaleSizeToZeroInstant,
+                    SKAction.wait(forDuration: 0.8),
+                    SKAction.scale(
+                        to: scaleFactor * 0.001_5,
+                        duration: 0.1
+                    ),
+                    SKAction.scale(
+                        to: scaleFactor * 0.001_3,
+                        duration: 0.1
+                    )
+                ]
+            )
+        )
 
-        let logoNode = SKSpriteNode(imageNamed: "duck")
-        logoNode.anchorPoint = CGPoint(x: 0.5, y: 0.4)
-        logoNode.position = CGPoint(x: size.width / 2, y: size.height / 2)
-        logoNode.size = CGSize(width: scaleFactor, height: scaleFactor)
-        addChild(logoNode)
-        logoNode.run(SKAction.repeatForever(SKAction.rotate(byAngle: -2 * CGFloat(Double.pi), duration: 4)))
-        let scaleUpDown = SKAction.repeatForever(SKAction.sequence([SKAction.scale(to: 0.85, duration: 0.8), SKAction.scale(to: 1, duration: 0.8)]))
-        scaleUpDown.timingMode = SKActionTimingMode.easeInEaseOut
-        logoNode.run(scaleUpDown)
+        setupLogo()
 
         let defaults = UserDefaults.standard
 
@@ -105,16 +122,29 @@ class HomeMenuScene: SKScene {
         highscoreLabel.fontSize = scaleFactor * 0.15//40
         highscoreLabel.position = CGPoint(x: size.width / 2, y: size.height * 0.32)
         addChild(highscoreLabel)
-
+        
         setup()
-
-        startButton = createSKButtonStart()
-
+        
+        let startButton = createSKButtonStart()
+        
         addChild(startButton)
-        startButton.run(SKAction.sequence([SKAction.scale(to: 0, duration: 0),
-                                           SKAction.wait(forDuration: 1.1),
-                                           SKAction.scale(to: scaleFactor * 0.003_5, duration: 0.1),
-                                           SKAction.scale(to: scaleFactor * 0.003, duration: 0.1)]))
+        startButton.run(
+            SKAction.sequence(
+                [
+                    SillyAnimation.scaleSizeToZeroInstant,
+                    SKAction.wait(
+                        forDuration: 1.1
+                    ),
+                    SKAction.scale(
+                        to: scaleFactor * 0.003_5,
+                        duration: 0.1),
+                    SKAction.scale(
+                        to: scaleFactor * 0.003,
+                        duration: 0.1
+                    )
+                ]
+            )
+        )
         print("HomeMenuScene:: didMove() finished")
     }
 

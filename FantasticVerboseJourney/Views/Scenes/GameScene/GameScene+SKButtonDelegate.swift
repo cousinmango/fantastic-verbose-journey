@@ -26,7 +26,7 @@ extension GameScene: SKButtonDelegate {
               sender)
 
         // - DEBUG:
-        self.removeAllChildren() // clear -- TODO: Move this code to the hot reload injection refresher.
+        self.removeAllChildren()
         let pauseGGScene = PauseScene(returnScene: self)
 
         self.view?.presentScene(pauseGGScene)

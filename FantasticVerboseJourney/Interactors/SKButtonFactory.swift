@@ -16,7 +16,7 @@ class SKButtonFactory {
         texture: SKTexture? = nil,
         color colour: UIColor = .cyan,
         delegate buttonDelegate: SKButtonDelegate,
-        size buttonSize: CGSize = CGSize(width: 504, height: 200), // hard coded size TODO: need to fix
+        size buttonSize: CGSize = CGSize(width: 504, height: 200),
         positionForScreen buttonPosition: CGPoint = CGPoint(x: 0, y: 0)
     ) -> SKButton {
         let button = SKButton(texture: texture, color: colour, size: buttonSize)
