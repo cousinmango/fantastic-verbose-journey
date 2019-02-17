@@ -13,7 +13,6 @@ extension GameScene {
     @objc func injected() {
         print("GameScene:: injected() injecting")
         // self.removeAllChildren()
-        // -- TODO: Add remove scene child nodes as well to refresh SpriteKit scenes.
         let homeMenuScene = HomeMenuScene(size: size)
         self.view?.presentScene(homeMenuScene)
         print("GameScene:: viewDidLoad activated")

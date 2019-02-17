@@ -53,8 +53,27 @@ class HomeMenuScene: SKScene {
         logoNode.position = CGPoint(x: size.width / 2, y: size.height / 2)
         logoNode.size = CGSize(width: scaleFactor, height: scaleFactor)
         addChild(logoNode)
-        logoNode.run(SKAction.repeatForever(SKAction.rotate(byAngle: -2 * CGFloat(Double.pi), duration: 4)))
-        let scaleUpDown = SKAction.repeatForever(SKAction.sequence([SKAction.scale(to: 0.85, duration: 0.8), SKAction.scale(to: 1, duration: 0.8)]))
+        logoNode.run(
+            SKAction.repeatForever(
+                SKAction.rotate(
+                    byAngle: -2 * CGFloat(Double.pi),
+                    duration: 4
+                )
+            )
+        )
+        let scaleUpDown = SKAction.repeatForever(
+            SKAction.sequence(
+                [
+                    SKAction.scale(
+                        to: 0.85,
+                        duration: 0.8),
+                    SKAction.scale(
+                        to: 1,
+                        duration: 0.8
+                    )
+                ]
+            )
+        )
         scaleUpDown.timingMode = SKActionTimingMode.easeInEaseOut
         logoNode.run(scaleUpDown)
     }
@@ -122,11 +141,11 @@ class HomeMenuScene: SKScene {
         highscoreLabel.fontSize = scaleFactor * 0.15//40
         highscoreLabel.position = CGPoint(x: size.width / 2, y: size.height * 0.32)
         addChild(highscoreLabel)
-        
+
         setup()
-        
+
         let startButton = createSKButtonStart()
-        
+
         addChild(startButton)
         startButton.run(
             SKAction.sequence(
