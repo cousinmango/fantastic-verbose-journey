@@ -23,12 +23,7 @@ class GameScene: SKScene {
         super.init(coder: aDecoder)
     }
 
-    fileprivate func startMusic() {
-        guard let musicUrl = SoundAssetUrl.gameMusicUrl else { return }
 
-        let gameMusic = SKAudioNode(url: musicUrl)
-        addChild(gameMusic)
-    }
     override func sceneDidLoad() {
 
         let scaleFactor = size.height * 0.25
@@ -42,16 +37,23 @@ class GameScene: SKScene {
 
     }
 
-    // Could have a reusable spawner with an overarching coordinate guidance
-    // too much for each object to maintain an infinite number of possible spawn locations
-    // e.g. pan with 4 cases an extra 40 lines of code doubles the class complexity?
+}
 
+extension GameScene {
+
+    fileprivate func startMusic() {
+        guard let musicUrl = SoundAssetUrl.gameMusicUrl else { return }
+
+        let gameMusic = SKAudioNode(url: musicUrl)
+        addChild(gameMusic)
+    }
+
+    
     func spawnFireball(
         position: CGPoint,
         destination: CGPoint,
         angle: CGFloat
         ) {
-
     }
 
     func createBackgroundAnimation() -> SKAction {
@@ -79,7 +81,6 @@ class GameScene: SKScene {
     }
 
 }
-
 // - MARK: Setup helpers
 extension GameScene {
 

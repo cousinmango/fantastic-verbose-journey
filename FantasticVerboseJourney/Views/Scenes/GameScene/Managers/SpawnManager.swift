@@ -7,3 +7,10 @@
 //
 
 import Foundation
+
+// Only need to know the initial position
+
+struct SpawnManager {
+    
+}
+

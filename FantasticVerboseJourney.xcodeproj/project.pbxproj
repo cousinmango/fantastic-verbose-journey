@@ -41,6 +41,7 @@
 		55A4F6F321D89CD7001C6C16 /* SKButtonDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A4F6F221D89CD7001C6C16 /* SKButtonDelegate.swift */; };
 		55C8469A22116BBD0084C496 /* GameScene+HotReloadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55C8469922116BBD0084C496 /* GameScene+HotReloadable.swift */; };
 		55D1B57422196A9700800AB5 /* GameScene+SKButtonDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55D1B57322196A9700800AB5 /* GameScene+SKButtonDelegate.swift */; };
+		55D1B576221AADEF00800AB5 /* SillyText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55D1B575221AADEF00800AB5 /* SillyText.swift */; };
 		55D279D7220FDF43009BC56D /* SpawnManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55D279D6220FDF43009BC56D /* SpawnManager.swift */; };
 		55D279D9220FDF7D009BC56D /* SpawnPositions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55D279D8220FDF7D009BC56D /* SpawnPositions.swift */; };
 		55D279DB220FDFCE009BC56D /* GameScene+SKPhysicsContactDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55D279DA220FDFCE009BC56D /* GameScene+SKPhysicsContactDelegate.swift */; };
@@ -112,6 +113,7 @@
 		55A4F6F221D89CD7001C6C16 /* SKButtonDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKButtonDelegate.swift; sourceTree = "<group>"; };
 		55C8469922116BBD0084C496 /* GameScene+HotReloadable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameScene+HotReloadable.swift"; sourceTree = "<group>"; };
 		55D1B57322196A9700800AB5 /* GameScene+SKButtonDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameScene+SKButtonDelegate.swift"; sourceTree = "<group>"; };
+		55D1B575221AADEF00800AB5 /* SillyText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SillyText.swift; sourceTree = "<group>"; };
 		55D279D6220FDF43009BC56D /* SpawnManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpawnManager.swift; sourceTree = "<group>"; };
 		55D279D8220FDF7D009BC56D /* SpawnPositions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpawnPositions.swift; sourceTree = "<group>"; };
 		55D279DA220FDFCE009BC56D /* GameScene+SKPhysicsContactDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameScene+SKPhysicsContactDelegate.swift"; sourceTree = "<group>"; };
@@ -370,6 +372,7 @@
 				55D279E0220FE1A4009BC56D /* ItemChancer.swift */,
 				55D279E8220FEB68009BC56D /* SillyAnimation.swift */,
 				55D279E9220FEB68009BC56D /* SillyColour.swift */,
+				55D1B575221AADEF00800AB5 /* SillyText.swift */,
 				55D279E4220FE322009BC56D /* TimeManager.swift */,
 			);
 			path = Managers;
@@ -562,6 +565,7 @@
 				55D279DB220FDFCE009BC56D /* GameScene+SKPhysicsContactDelegate.swift in Sources */,
 				55F78D3E21E2D4010098E892 /* SKButton+SKLabelNode.swift in Sources */,
 				55D279DD220FE014009BC56D /* Mob.swift in Sources */,
+				55D1B576221AADEF00800AB5 /* SillyText.swift in Sources */,
 				55D279ED220FF42C009BC56D /* SKSpriteNode+ConvenientActionSequenceRunnable.swift in Sources */,
 				35E93175665D1A30DA6E4B26 /* HomeMenuScene.swift in Sources */,
 				35E93BACEE437DEE94830774 /* backgroundAnimation.swift in Sources */,
