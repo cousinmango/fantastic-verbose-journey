@@ -40,7 +40,8 @@ extension MobFactory {
 struct SpriteFactory {
 
     static func createChickenSpriteNode() -> SKSpriteNode {
-        return SKSpriteNode(texture: Asset.chicken.skTextured)
+        return Asset.chicken.spriteNoded
+        // return SKSpriteNode(texture: Asset.chicken.skTextured)
     }
 }
 
