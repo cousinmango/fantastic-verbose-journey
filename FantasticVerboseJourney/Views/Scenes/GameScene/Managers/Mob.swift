@@ -21,9 +21,9 @@ struct Mob {
 
     ///? Default decided by SKSpriteNode of SKTexture image asset size?
     /// unintended side effects?
-    let size: CGFloat
+    let size: CGFloat = 0
     /// Decimal fraction chance of spawning 0.0..1.0
-    let spawnChance: Double
+    let spawnChance: Double = 1.0
 
 
     let node: SKSpriteNode
@@ -37,13 +37,13 @@ extension MobFactory {
 }
 
 // Probably unnecessary
-struct SpriteFactory {
-
-    static func createChickenSpriteNode() -> SKSpriteNode {
-        return Asset.chicken.spriteNoded
-        // return SKSpriteNode(texture: Asset.chicken.skTextured)
-    }
-}
+//struct SpriteFactory {
+//
+//    static func createChickenSpriteNode() -> SKSpriteNode {
+//        return Asset.chicken.spriteNoded
+//        // return SKSpriteNode(texture: Asset.chicken.skTextured)
+//    }
+//}
 
 
 struct LabelFactory {
