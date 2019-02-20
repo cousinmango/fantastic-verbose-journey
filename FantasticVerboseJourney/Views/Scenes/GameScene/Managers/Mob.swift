@@ -14,6 +14,10 @@ import SpriteKit
 
 
 // Probably shouldn't keep the Node data inside here...
+// First: collate the requirements anyway.
+// Needs additional information for encoded behaviours in the app
+// Where to add this information?
+// Not complex enough to require a separate
 
 // Mob data model basic
 struct Mob {
@@ -25,12 +29,12 @@ struct Mob {
     /// Decimal fraction chance of spawning 0.0..1.0
     let spawnChance: Double = 1.0
 
-
+    
     let node: SKSpriteNode
 }
 
 struct MobFactory {
-
+    
 }
 extension MobFactory {
 
