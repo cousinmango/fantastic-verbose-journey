@@ -28,4 +28,15 @@ extension ImageAsset: SKTexturable {
         return SKTexture(image: self.image)
     }
 }
+
+protocol SKSpritable: SKTexturable {
+    var spriteNoded: SKSpriteNode { get }
+}
+
+extension ImageAsset: SKSpritable {
+    var spriteNoded: SKSpriteNode {
+        return SKSpriteNode(texture: self.skTextured)
+    }
+
+}
 //private final class BundleToken {}
