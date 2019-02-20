@@ -23,21 +23,76 @@ import SpriteKit
 struct Mob {
     // Mob spawn chicken, powerups, items, barriers.
 
+    // Some redundant with ImageAsset and the created SKSpriteNode
+    let image: ImageAsset
     ///? Default decided by SKSpriteNode of SKTexture image asset size?
     /// unintended side effects?
-    let size: CGFloat = 0
+    let size: CGFloat
     /// Decimal fraction chance of spawning 0.0..1.0
-    let spawnChance: Double = 1.0
+    let spawnChance: Double
 
-    
-    let node: SKSpriteNode
+//    let preferredPosition
+
+    /// Created node from details. Could use computed var.
+    let node: SKSpriteNode? = nil
+
+    ///
+    let initAnimation: SKAction? = nil
+
+    init(
+        image: ImageAsset,
+        size: CGFloat = 300,
+        spawnChance: Double = 0.8
+    ) {
+        self.image = image
+        self.size = image.skTextured.size()
+        self.spawnChance = 0.8
+        node = image.spriteNoded
+
+    }
+}
+struct lol {
+    let lol = 32
 }
 
-struct MobFactory {
-    
-}
 extension MobFactory {
+    static func createChicken() {
 
+        Mob(image: Asset.chicken,
+            spawnChance: 0.8,
+            node: Asset.chicken.spriteNoded,
+            initAnimation:
+        )
+    }
+    static func createDuck() {
+
+    }
+    static func createEgg() {
+
+    }
+    static func createPan() {
+
+    }
+    static func createPekingRoastedChicken() {
+
+    }
+}
+
+struct uiElement {
+
+}
+extension uiElement {
+    static func createStartButton() {
+
+    }
+
+    static func createTitle(position: CGPoint, scale: CGFloat) {
+        let titleNode = Asset.title.spriteNoded
+        titleNode.position = position
+        titleNode.setScale(scale)
+
+        return
+    }
 }
 
 // Probably unnecessary
