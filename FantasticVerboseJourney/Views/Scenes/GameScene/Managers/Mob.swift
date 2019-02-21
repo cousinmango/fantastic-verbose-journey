@@ -27,41 +27,45 @@ struct Mob {
     let image: ImageAsset
     ///? Default decided by SKSpriteNode of SKTexture image asset size?
     /// unintended side effects?
-    let size: CGFloat
+    let size: CGSize
     /// Decimal fraction chance of spawning 0.0..1.0
     let spawnChance: Double
 
 //    let preferredPosition
 
     /// Created node from details. Could use computed var.
-    let node: SKSpriteNode? = nil
+    let node: SKSpriteNode
 
     ///
-    let initAnimation: SKAction? = nil
+    let initAnimation: SKAction?
 
     init(
         image: ImageAsset,
-        size: CGFloat = 300,
-        spawnChance: Double = 0.8
+        size: CGSize?,
+        spawnChance: Double = 0.8,
+        initAnimation: SKAction? = nil
     ) {
         self.image = image
         self.size = image.skTextured.size()
         self.spawnChance = 0.8
-        node = image.spriteNoded
-
+        self.node = image.spriteNoded
+        self.initAnimation = nil
     }
 }
-struct lol {
-    let lol = 32
+
+struct MobFactory {
+
 }
 
+// - MARK: Mob creation functions.
 extension MobFactory {
     static func createChicken() {
 
-        Mob(image: Asset.chicken,
+        Mob(
+            image: Asset.chicken,
+            size: nil,
             spawnChance: 0.8,
-            node: Asset.chicken.spriteNoded,
-            initAnimation:
+            initAnimation: nil
         )
     }
     static func createDuck() {
@@ -86,12 +90,16 @@ extension uiElement {
 
     }
 
-    static func createTitle(position: CGPoint, scale: CGFloat) {
+    static func createTitle(
+        position: CGPoint,
+        scale: CGFloat
+    ) -> SKSpriteNode {
+        //
         let titleNode = Asset.title.spriteNoded
         titleNode.position = position
         titleNode.setScale(scale)
 
-        return
+        return titleNode
     }
 }
 
