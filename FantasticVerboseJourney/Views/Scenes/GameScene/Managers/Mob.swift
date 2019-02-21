@@ -36,7 +36,7 @@ struct Mob {
     /// Created node from details. Could use computed var.
     let node: SKSpriteNode
 
-    ///
+    /// Initial animation that you want to run on spawn.
     let initAnimation: SKAction?
 
     init(
@@ -59,25 +59,83 @@ struct MobFactory {
 
 // - MARK: Mob creation functions.
 extension MobFactory {
-    static func createChicken() {
-
-        Mob(
+    static func createChicken(
+        size: CGSize? = nil,
+        spawnChance: Double = 0.8,
+        initAnimation: SKAction
+    ) -> Mob {
+        // feels like code smell.
+        let chickenMob = Mob(
             image: Asset.chicken,
-            size: nil,
+            size: size, // nil size defaults to the SKTexture size.
             spawnChance: 0.8,
-            initAnimation: nil
+            initAnimation: initAnimation
         )
+        return chickenMob
     }
-    static func createDuck() {
+    
+    static func createDuck(
+        size: CGSize? = nil,
+        spawnChance: Double = 0.8,
+        initAnimation: SKAction
+    ) -> Mob {
+        let duckMobMainCharacter = Mob(
+            image: Asset.duck,
+            size: size,
+            spawnChance: 1.0, // unused PC player character main.
+            initAnimation: initAnimation
+        )
+
+        return duckMobMainCharacter
+    }
+
+    static func createEgg(
+        size: CGSize? = nil,
+        spawnChance: Double = 0.8,
+        initAnimation: SKAction
+    ) -> Mob {
+        let egg = Mob(
+            image: Asset.egg,
+            size: size,
+            spawnChance: spawnChance, // unused PC player character main.
+            initAnimation: initAnimation
+        )
+
+        return egg
+    }
+
+    static func createPan(
+        size: CGSize? = nil,
+        spawnChance: Double = 0.6,
+        initAnimation: SKAction
+    ) -> Mob {
+
+        let pan = Mob(
+            image: Asset.pan,
+            size: size,
+            spawnChance: spawnChance,
+            initAnimation: initAnimation
+        )
+
+        return pan
 
     }
-    static func createEgg() {
 
-    }
-    static func createPan() {
+    /// unnecessary things
+    static func createPekingRoastedChicken(
+        size: CGSize? = nil,
+        spawnChance: Double = 0.8, // unused
+        initAnimation: SKAction
+    ) -> Mob {
 
-    }
-    static func createPekingRoastedChicken() {
+        let pekingRoastChicken = Mob(
+            image: Asset.peking,
+            size: size,
+            spawnChance: spawnChance,
+            initAnimation: initAnimation
+        )
+
+
 
     }
 }
