@@ -27,20 +27,27 @@ extension SpawnManager {
     func spawn(
         spawnScene: GameScene,
         mob: Mob,
-        positions: CGPoint...
+        possibleSpawnPositions: [CGPoint] // can have an array of size 1.
     ) {
         let size = spawnScene.size
 
-        
+        getScaledSpawn(
+            size: size,
+            possiblePositions: possibleSpawnPositions
+        )
+    }
+
+    func getScaledSpawn(size: CGSize, possiblePositions: [CGPoint]) {
+
         // Pick a random spawn position out of possible spawns.
-        guard let selectedSpawnPosition = positions.randomElement() else { return }// can use a seed random generator for reproducibility and unit testing consistency. Conform to protocol with predicted .next()
+        guard let selectedSpawnPosition = possiblePositions.randomElement() else { return }// can use a seed random generator for reproducibility and unit testing consistency. Conform to protocol with predicted .next()
 
         // recalculating unnecessarily... optimising opportunity cache
         let scaledSpawn = size * selectedSpawnPosition
 
+        // probs won't work .. -340..+340 ???
 
     }
-
     // not sure
     func lol(spawnScene: SKScene) {
 
