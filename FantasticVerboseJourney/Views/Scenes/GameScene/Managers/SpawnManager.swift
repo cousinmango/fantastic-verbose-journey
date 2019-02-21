@@ -31,22 +31,31 @@ extension SpawnManager {
     ) {
         let size = spawnScene.size
 
-        getScaledSpawn(
+        let scaledSpawn = getScaledSpawn(
             size: size,
             possiblePositions: possibleSpawnPositions
         )
+        let node = mob.node
+
+        node.position = CGPoint(x: scaledSpawn.width, y: scaledSpawn.height)
+        spawnScene.addChild(mob.node)
+
     }
 
-    func getScaledSpawn(size: CGSize, possiblePositions: [CGPoint]) {
+    // -- FIXME: Cheating using CGSize when just want the x and y coordinate...
+    func getScaledSpawn(size: CGSize, possiblePositions: [CGPoint]) -> CGSize {
 
         // Pick a random spawn position out of possible spawns.
-        guard let selectedSpawnPosition = possiblePositions.randomElement() else { return }// can use a seed random generator for reproducibility and unit testing consistency. Conform to protocol with predicted .next()
+        let selectedSpawnPosition = possiblePositions.randomElement() // can use a seed random generator for reproducibility and unit testing consistency. Conform to protocol with predicted .next()
+
+        
 
         // recalculating unnecessarily... optimising opportunity cache
         let scaledSpawn = size * selectedSpawnPosition
 
         // probs won't work .. -340..+340 ???
 
+        return scaledSpawn
     }
     // not sure
     func lol(spawnScene: SKScene) {
