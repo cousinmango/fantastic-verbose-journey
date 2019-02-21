@@ -6,11 +6,42 @@
 //  Copyright © 2019 CousinMango. All rights reserved.
 //
 
-import Foundation
+import SpriteKit
+// Only need to know the initial position? Propotional coordinate system
 
-// Only need to know the initial position
-
+//extension CGSize {
+//    static func *(point: CGSize, scalar: CGFloat) -> CGSize {
+//        // multiplied proportion.
+//        return CGSize(
+//            width: point.width * scalar,
+//            height: point.height * scalar
+//        )
+//    }
+//}
 struct SpawnManager {
-    
+
+    // let customSeedNumberGenerator
 }
 
+extension SpawnManager {
+    func spawn(
+        spawnScene: GameScene,
+        mob: Mob,
+        positions: CGPoint...
+    ) {
+        let size = spawnScene.size
+
+        // Pick a random spawn position out of possible spawns.
+        let spawnPosition = positions.randomElement() // can use a seed random generator for reproducibility and unit testing consistency. Conform to protocol with predicted .next()
+
+        // recalculating unnecessarily... optimising opportunity cache
+        let scaledSpawn = spawnPosition * size
+
+
+    }
+
+    // not sure
+    func lol(spawnScene: SKScene) {
+
+    }
+}

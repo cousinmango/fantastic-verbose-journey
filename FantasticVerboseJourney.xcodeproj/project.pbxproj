@@ -26,6 +26,7 @@
 		35E93BACEE437DEE94830774 /* backgroundAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E9387DC247B9B7702E5771 /* backgroundAnimation.swift */; };
 		35E93EC5AD44C4F5CF23FE1C /* PauseScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E932D20F86DCD84061B40D /* PauseScene.swift */; };
 		35E93EFCED7570BFC8C2812C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 35E93FFAC1AD8A9B74F306F8 /* Main.storyboard */; };
+		55260752221EA56C008749E5 /* CGSize+VectorCalculatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55260751221EA56C008749E5 /* CGSize+VectorCalculatable.swift */; };
 		553032C421D87F77001DB357 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553032C321D87F77001DB357 /* AppDelegate.swift */; };
 		553032C821D87F77001DB357 /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = 553032C721D87F77001DB357 /* Actions.sks */; };
 		553032D121D87F78001DB357 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 553032D021D87F78001DB357 /* Assets.xcassets */; };
@@ -92,6 +93,7 @@
 		35E938A99B0608F569AC32AB /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
 		35E93FDB35FF04810F9951C7 /* SKView+DebugPerformanceOptimisable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SKView+DebugPerformanceOptimisable.swift"; sourceTree = "<group>"; };
 		35E93FFAC1AD8A9B74F306F8 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		55260751221EA56C008749E5 /* CGSize+VectorCalculatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGSize+VectorCalculatable.swift"; sourceTree = "<group>"; };
 		553032C021D87F77001DB357 /* FantasticVerboseJourney.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FantasticVerboseJourney.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		553032C321D87F77001DB357 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		553032C721D87F77001DB357 /* Actions.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Actions.sks; sourceTree = "<group>"; };
@@ -208,6 +210,7 @@
 				35E93F56C03B3C29BADD1E32 /* Protocols */,
 				35E93FDB35FF04810F9951C7 /* SKView+DebugPerformanceOptimisable.swift */,
 				35E9354863941805D65056D0 /* CGPoint+VectorCalculatable.swift */,
+				55260751221EA56C008749E5 /* CGSize+VectorCalculatable.swift */,
 				55A4F6EC21D89A91001C6C16 /* UIViewController+InjectionIiiHotReloadable.swift */,
 			);
 			path = Utilities;
@@ -567,6 +570,7 @@
 				55D279DD220FE014009BC56D /* Mob.swift in Sources */,
 				55D1B576221AADEF00800AB5 /* SillyText.swift in Sources */,
 				55D279ED220FF42C009BC56D /* SKSpriteNode+ConvenientActionSequenceRunnable.swift in Sources */,
+				55260752221EA56C008749E5 /* CGSize+VectorCalculatable.swift in Sources */,
 				35E93175665D1A30DA6E4B26 /* HomeMenuScene.swift in Sources */,
 				35E93BACEE437DEE94830774 /* backgroundAnimation.swift in Sources */,
 				55D279E1220FE1A4009BC56D /* ItemChancer.swift in Sources */,
