@@ -24,13 +24,23 @@ extension CGSize: VectorCalculatable {
     static func +-(left: CGSize, right: CGSize) -> CGSize {
         return CGSize(width: left.width + right.width, height:  left.height - right.height)
     }
-    static func *(point: CGSize, scalar: CGFloat) -> CGSize {
+    static func *(size: CGSize, scalar: CGFloat) -> CGSize {
         // multiplied proportion.
         return CGSize(
-            width: point.width * scalar,
-            height: point.height * scalar
+            width: size.width * scalar,
+            height: size.height * scalar
         )
     }
+
+    // Proporrion scale
+    static func *(size: CGSize, scale: CGPoint) -> CGSize {
+        // multiplied proportion.
+        return CGSize(
+            width: size.width * scale.x,
+            height: size.height * scale.y
+        )
+    }
+
     static func /(point: CGSize, scalar: CGFloat) -> CGSize {
         return CGSize(width: point.width / scalar, height:  point.height / scalar)
     }

@@ -31,11 +31,12 @@ extension SpawnManager {
     ) {
         let size = spawnScene.size
 
+        
         // Pick a random spawn position out of possible spawns.
-        let spawnPosition = positions.randomElement() // can use a seed random generator for reproducibility and unit testing consistency. Conform to protocol with predicted .next()
+        guard let selectedSpawnPosition = positions.randomElement() else { return }// can use a seed random generator for reproducibility and unit testing consistency. Conform to protocol with predicted .next()
 
         // recalculating unnecessarily... optimising opportunity cache
-        let scaledSpawn = spawnPosition * size
+        let scaledSpawn = size * selectedSpawnPosition
 
 
     }
