@@ -31,24 +31,37 @@ extension SpawnManager {
     ) {
         let size = spawnScene.size
 
-        let scaledSpawn = getScaledSpawn(
+        // Cheating using CGSize for now.
+        guard let scaledSpawn = getScaledSpawn(
             size: size,
             possiblePositions: possibleSpawnPositions
-        )
+        ) else { return }
         let node = mob.node
 
-        node.position = CGPoint(x: scaledSpawn.width, y: scaledSpawn.height)
+        // CGPoint makes more sense. Validate -300 +300 anchor point positioning coordinate system.
+        let scaledSpawnPosition = CGPoint(x: scaledSpawn.width, y: scaledSpawn.height)
+
+        node.position = scaledSpawnPosition
+
+        // spawn
         spawnScene.addChild(mob.node)
 
     }
 
     // -- FIXME: Cheating using CGSize when just want the x and y coordinate...
-    func getScaledSpawn(size: CGSize, possiblePositions: [CGPoint]) -> CGSize {
+    func getScaledSpawn(size: CGSize, possiblePositions: [CGPoint]) -> CGSize? {
+        let invalidPositionsWarning: String = """
+            Array is empty.
+            Possible spawn points should be passed as a parameter.
+        """
+        if possiblePositions.isEmpty {
+            fatalError(invalidPositionsWarning)
+        }
 
         // Pick a random spawn position out of possible spawns.
-        let selectedSpawnPosition = possiblePositions.randomElement() // can use a seed random generator for reproducibility and unit testing consistency. Conform to protocol with predicted .next()
+        guard let selectedSpawnPosition = possiblePositions.randomElement() else { return nil } // can use a seed random generator for reproducibility and unit testing consistency. Conform to protocol with predicted .next()
 
-        
+
 
         // recalculating unnecessarily... optimising opportunity cache
         let scaledSpawn = size * selectedSpawnPosition
