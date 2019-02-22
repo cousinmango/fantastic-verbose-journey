@@ -18,14 +18,16 @@ import SpriteKit
 //        )
 //    }
 //}
-struct SpawnManager {
-
+class SpawnManager {
+    weak var spawnScene: GameScene! // zzzzzzzz
     // let customSeedNumberGenerator
+    init(spawnScene: GameScene) {
+        self.spawnScene = spawnScene // for adding child.... ruh roh
+    }
 }
 
 extension SpawnManager {
     func spawn(
-        spawnScene: GameScene,
         spawnMob: Mob,
         possibleSpawnPositions: [CGPoint] // can have an array of size 1.
     ) {
