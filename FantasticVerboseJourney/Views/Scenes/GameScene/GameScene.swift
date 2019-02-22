@@ -12,7 +12,7 @@ import GameplayKit
 class GameScene: SKScene {
 
     let hudOverlay = HudNode()
-
+    let spawnManager = SpawnManager()
     override init() {
         super.init()
     }
@@ -27,7 +27,7 @@ class GameScene: SKScene {
     override func sceneDidLoad() {
 
         let scaleFactor = size.height * 0.25
-
+        spawnManager.spawn(spawnScene: <#T##GameScene#>, mob: <#T##Mob#>, possibleSpawnPositions: <#T##[CGPoint]#>)
     }
     override func didMove(to view: SKView) {
 

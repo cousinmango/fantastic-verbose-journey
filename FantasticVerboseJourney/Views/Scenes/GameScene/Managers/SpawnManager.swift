@@ -49,7 +49,7 @@ extension SpawnManager {
     }
 
     // -- FIXME: Cheating using CGSize when just want the x and y coordinate...
-    func getScaledSpawn(size: CGSize, possiblePositions: [CGPoint]) -> CGSize? {
+    private static func getScaledSpawn(size: CGSize, possiblePositions: [CGPoint]) -> CGSize? {
         let invalidPositionsWarning: String = """
             Array is empty.
             Possible spawn points should be passed as a parameter.
@@ -70,8 +70,5 @@ extension SpawnManager {
 
         return scaledSpawn
     }
-    // not sure
-    func lol(spawnScene: SKScene) {
 
-    }
 }
