@@ -14,7 +14,7 @@ struct SpawnPositionProportion {
     // Depending on anchor maybe -1.0 < 0.0 < 1.0
     // Can replace this with enforced type... make 0 to 100 else fatal error initialisation. Static checking
 
-    // safe padding area positioning first draft
+    // safe padding area positioning first draft Operating on a 0.0..1.0 scale. 0 to 100% of the view.
     static private let safeMinRangeLimit = 0.2
     static private let safeMaxRangeLimit = 0.8
 
@@ -28,6 +28,8 @@ struct SpawnPositionProportion {
 
 }
 
+// - MARK: - WARNING: Simple linear modification requires the translation of the scaled spawn in the initialised SpawnManager.
+// Hopefully stored property in the Mob object... might run into trouble here. Mutation already!
 // starting with static functions to more easily move into functional programming later.
 protocol PositionAdjustable {
     static func closerToMid(spawnPosition: CGPoint) -> CGPoint
@@ -35,7 +37,8 @@ protocol PositionAdjustable {
     static func furtherFromMid(spawnPosition: CGPoint) -> CGPoint
 }
 extension SpawnPositionProportion: PositionAdjustable {
-    
+    // safe from modification.. but maybe encapsulate some of the other mob spawn properties to prevent undue non-standard modification?
+    private static let linearIncrement = 0.05
     // functional style closer() closer() chain to alter by fixed amounts? does the same thing as *0.8*0.8 orrrr return a computed variable that derives from the previously defined coordinate positioning system definitions e.g. northwest
     // linear increment? vs fraction? math-e-mat-ics. 0.8*0.8 to bring closer to centre. but 0.1*0.8...
     // linear increment simplest is best to start with. 0.1 + 0.05 and 0.8 - 0.05
