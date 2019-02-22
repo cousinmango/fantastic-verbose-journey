@@ -27,7 +27,8 @@ class GameScene: SKScene {
     override func sceneDidLoad() {
 
         let scaleFactor = size.height * 0.25
-        spawnManager.spawn(spawnScene: <#T##GameScene#>, mob: <#T##Mob#>, possibleSpawnPositions: <#T##[CGPoint]#>)
+        let chickenMob = MobFactory.createChicken(initAnimation: nil)
+        spawnManager.spawn(spawnScene: self, mob: chickenMob, possibleSpawnPositions: <#T##[CGPoint]#>)
     }
     override func didMove(to view: SKView) {
 

@@ -62,7 +62,7 @@ extension MobFactory {
     static func createChicken(
         size: CGSize? = nil,
         spawnChance: Double = 0.8,
-        initAnimation: SKAction
+        initAnimation: SKAction? = SillyAnimation.boopDownAnimation
     ) -> Mob {
         // feels like code smell.
         let chickenMob = Mob(
@@ -77,7 +77,7 @@ extension MobFactory {
     static func createDuck(
         size: CGSize? = nil,
         spawnChance: Double = 0.8,
-        initAnimation: SKAction
+        initAnimation: SKAction = SillyAnimation.boopDownAnimation
     ) -> Mob {
         let duckMobMainCharacter = Mob(
             image: Asset.duck,
@@ -92,7 +92,7 @@ extension MobFactory {
     static func createEgg(
         size: CGSize? = nil,
         spawnChance: Double = 0.8,
-        initAnimation: SKAction
+        initAnimation: SKAction = SillyAnimation.boopDownAnimation
     ) -> Mob {
         let egg = Mob(
             image: Asset.egg,
@@ -107,7 +107,7 @@ extension MobFactory {
     static func createPan(
         size: CGSize? = nil,
         spawnChance: Double = 0.6,
-        initAnimation: SKAction
+        initAnimation: SKAction = SillyAnimation.boopDownAnimation
     ) -> Mob {
 
         let pan = Mob(
@@ -125,7 +125,7 @@ extension MobFactory {
     static func createPekingRoastedChicken(
         size: CGSize? = nil,
         spawnChance: Double = 0.8, // unused
-        initAnimation: SKAction
+        initAnimation: SKAction = SillyAnimation.boopDownAnimation
     ) -> Mob {
 
         let pekingRoastChicken = Mob(
