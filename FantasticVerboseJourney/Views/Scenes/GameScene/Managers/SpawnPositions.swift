@@ -16,9 +16,9 @@ struct SpawnPositionProportion {
 
     // 0 to 1 assumption 0,0 anchor point (but scene probs uses 0.5, 0.5
     // could also back convert this to proper scale. renormalise the scale.
-    let northWestern = CGPoint(x: 0.1, y: 0.8)
-    let northEastern = CGPoint(x: 0.8, y: 0.8)
-    let southWestern = CGPoint(x: 0.1, y: 0.1)
-    let southEastern = CGPoint(x: 0.8, y: 0.1)
+    static let northWestern = CGPoint(x: 0.1, y: 0.8)
+    static let northEastern = CGPoint(x: 0.8, y: 0.8)
+    static let southWestern = CGPoint(x: 0.1, y: 0.1)
+    static let southEastern = CGPoint(x: 0.8, y: 0.1)
 
 }

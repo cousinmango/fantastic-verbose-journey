@@ -26,7 +26,7 @@ struct SpawnManager {
 extension SpawnManager {
     func spawn(
         spawnScene: GameScene,
-        mob: Mob,
+        spawnMob: Mob,
         possibleSpawnPositions: [CGPoint] // can have an array of size 1.
     ) {
         let size = spawnScene.size
@@ -36,7 +36,7 @@ extension SpawnManager {
             size: size,
             possiblePositions: possibleSpawnPositions
         ) else { return }
-        let node = mob.node
+        let node = spawnMob.node
 
         // CGPoint makes more sense. Validate -300 +300 anchor point positioning coordinate system.
         let scaledSpawnPosition = CGPoint(x: scaledSpawn.width, y: scaledSpawn.height)
@@ -44,12 +44,12 @@ extension SpawnManager {
         node.position = scaledSpawnPosition
 
         // spawn
-        spawnScene.addChild(mob.node)
+        spawnScene.addChild(spawnMob.node)
 
     }
 
     // -- FIXME: Cheating using CGSize when just want the x and y coordinate...
-    private static func getScaledSpawn(size: CGSize, possiblePositions: [CGPoint]) -> CGSize? {
+    private func getScaledSpawn(size: CGSize, possiblePositions: [CGPoint]) -> CGSize? {
         let invalidPositionsWarning: String = """
             Array is empty.
             Possible spawn points should be passed as a parameter.

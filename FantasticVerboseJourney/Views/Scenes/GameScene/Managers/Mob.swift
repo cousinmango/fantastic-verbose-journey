@@ -94,14 +94,14 @@ extension MobFactory {
         spawnChance: Double = 0.8,
         initAnimation: SKAction = SillyAnimation.boopDownAnimation
     ) -> Mob {
-        let egg = Mob(
+        let chickenEgg = Mob(
             image: Asset.egg,
             size: size,
             spawnChance: spawnChance, // unused PC player character main.
             initAnimation: initAnimation
         )
 
-        return egg
+        return chickenEgg
     }
 
     static func createPan(
@@ -110,14 +110,14 @@ extension MobFactory {
         initAnimation: SKAction = SillyAnimation.boopDownAnimation
     ) -> Mob {
 
-        let pan = Mob(
+        let fryingPan = Mob(
             image: Asset.pan,
             size: size,
             spawnChance: spawnChance,
             initAnimation: initAnimation
         )
 
-        return pan
+        return fryingPan
 
     }
 
@@ -135,15 +135,14 @@ extension MobFactory {
             initAnimation: initAnimation
         )
 
-
-
+        return pekingRoastChicken
     }
 }
 
-struct uiElement {
+struct UIElement {
 
 }
-extension uiElement {
+extension UIElement {
     static func createStartButton() {
 
     }
