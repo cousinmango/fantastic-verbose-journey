@@ -7,7 +7,7 @@
 //
 import Foundation
 
-extension GameScene {
+extension GameScene: InjectionIiiHotReloadable {
 
     #if DEBUG
     @objc func injected() {
