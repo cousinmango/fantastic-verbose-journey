@@ -39,7 +39,10 @@ extension SpawnManager {
             possiblePositions: possibleSpawnPositions
         ) else { return }
 
-        let node = spawnMob.node
+        // safe immutable
+        guard let node = spawnMob.node.copy() as? SKSpriteNode else {
+            fatalError("Node reference type can't copy as SKSpriteNode")
+        }
 
         // CGPoint makes more sense. Validate -300 +300 anchor point positioning coordinate system.
         let scaledSpawnPosition = CGPoint(x: scaledSpawn.width, y: scaledSpawn.height)
