@@ -12,7 +12,7 @@ import GameplayKit
 class HomeMenuScene: SKScene {
 
     let hudOverlay = HudNode()
-    let gameScene = GameScene()
+//    let gameScene = GameScene()
     private let scoreKey = "DUCKMAN_HIGHSCORE"
     private var highscore: Int = 0
     private let currentScoreKey = "CURRENT_SCORE"
