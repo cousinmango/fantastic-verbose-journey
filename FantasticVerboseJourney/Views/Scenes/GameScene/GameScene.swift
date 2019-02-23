@@ -45,13 +45,28 @@ extension GameScene {
     func setupSpawn() {
         self.spawnManager = SpawnManager(spawnScene: self) // weak var ref like delegate
         
-        let scaleFactor = size.height * 0.25
-        let chickenMob: Mob = MobFactory.createChicken(initAnimation: nil)
-        let chickenMob2: Mob = MobFactory.createChicken()
+//        let scaleFactor = size.height * 0.25
+        let chickenMob = MobFactory.createChicken(
+            initAnimation: nil
+        )
+        let chick2 = chickenMob
         spawnManager.spawn(
             spawnMob: chickenMob,
             possibleSpawnPositions: [
                 SpawnPositionProportion.northEastern
+            ]
+        )
+        spawnManager.spawn(
+            spawnMob: chickenMob,
+            possibleSpawnPositions: [
+                SpawnPositionProportion.northWestern
+            ]
+        )
+
+        spawnManager.spawn(
+            spawnMob: chick2,
+            possibleSpawnPositions: [
+                SpawnPositionProportion.northWestern
             ]
         )
 
@@ -60,7 +75,7 @@ extension GameScene {
             SpawnPositionProportion.southWestern
         ]
         spawnManager.spawn(
-            spawnMob: chickenMob2,
+            spawnMob: MobFactory.createChicken(initAnimation: SKAction.moveTo(x: 99, duration: 2)),
             possibleSpawnPositions: testPositions
         )
         // - FIXME:  using spawnmanager to spawn using the same instance of Mob causes a crash appdelegate first load // ref error dunno

@@ -38,6 +38,7 @@ extension SpawnManager {
             size: size,
             possiblePositions: possibleSpawnPositions
         ) else { return }
+
         let node = spawnMob.node
 
         // CGPoint makes more sense. Validate -300 +300 anchor point positioning coordinate system.
@@ -45,8 +46,10 @@ extension SpawnManager {
 
         node.position = scaledSpawnPosition
 
-        // spawn
-        spawnScene.addChild(spawnMob.node)
+        // the most dangerous part.
+        // spawn by adding child to the game scene.
+        spawnScene.addChild(node) // NSEXception if adding same reference node to the same scene more than once.
+        // initial animation to give life to the sprites
 
     }
 
@@ -62,8 +65,6 @@ extension SpawnManager {
 
         // Pick a random spawn position out of possible spawns.
         guard let selectedSpawnPosition = possiblePositions.randomElement() else { return nil } // can use a seed random generator for reproducibility and unit testing consistency. Conform to protocol with predicted .next()
-
-
 
         // recalculating unnecessarily... optimising opportunity cache
         let scaledSpawn = size * selectedSpawnPosition

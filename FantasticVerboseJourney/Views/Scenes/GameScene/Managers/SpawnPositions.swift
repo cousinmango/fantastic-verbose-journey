@@ -59,17 +59,23 @@ extension SpawnPositionProportion: PositionAdjustable {
     )
 
     
-    // functional style closer() closer() chain to alter by fixed amounts? does the same thing as *0.8*0.8 orrrr return a computed variable that derives from the previously defined coordinate positioning system definitions e.g. northwest
-    // linear increment? vs fraction? math-e-mat-ics. 0.8*0.8 to bring closer to centre. but 0.1*0.8...
-    // linear increment simplest is best to start with. 0.1 + 0.05 and 0.8 - 0.05
-    // standard probably only makes sense for silly duckman four corners attack initial spawn system... sooo don't think too hard.
+    // * functional style closer() closer() chain to alter by fixed
+    // amounts? does the same thing as *0.8*0.8 orrrr return a computed
+    // variable that derives from the previously defined coordinate
+    // positioning system definitions e.g. northwest
+    // * linear increment? vs fraction? math-e-mat-ics. 0.8*0.8 to bring closer
+    // to centre. but 0.1*0.8...
+    // * linear increment simplest is best to start with. 0.1 + 0.05 and
+    // 0.8 - 0.05
+    // * Standard probably only makes sense for silly duckman
+    // * four corners attack initial spawn system... sooo don't think too hard.
     // static func closer()
     static func closerToCentre(spawnPosition: CGPoint) -> CGPoint {
         let furtheredPoint: CGPoint = increment(
             givenPoint: spawnPosition,
             increment: -linearIncrement
         ) // - TODO: not clear with the nested function call taking responsibility for the point vs midpoint comparison calculation
-        
+
         return furtheredPoint
     }
     

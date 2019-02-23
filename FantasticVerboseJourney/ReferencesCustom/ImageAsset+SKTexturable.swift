@@ -33,9 +33,11 @@ protocol SKSpritable: SKTexturable {
     var spriteNoded: SKSpriteNode { get }
 }
 
+// Initialises a new SKSprite using the given image as SKTexture.
 extension ImageAsset: SKSpritable {
     var spriteNoded: SKSpriteNode {
-        return SKSpriteNode(texture: self.skTextured)
+        let newSpriteNode = SKSpriteNode(texture: self.skTextured)
+        return newSpriteNode
     }
 
 }

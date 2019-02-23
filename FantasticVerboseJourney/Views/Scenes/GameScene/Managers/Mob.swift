@@ -64,7 +64,7 @@ extension MobFactory {
         spawnChance: Double = 0.8,
         initAnimation: SKAction? = SillyAnimation.boopDownAnimation
     ) -> Mob {
-        // feels like code smell.
+        // feels like code smell. lots of default info for each
         let chickenMob = Mob(
             image: Asset.chicken,
             size: size, // nil size defaults to the SKTexture size.
