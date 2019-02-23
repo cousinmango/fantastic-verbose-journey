@@ -46,10 +46,14 @@ extension GameScene {
         self.spawnManager = SpawnManager(spawnScene: self) // weak var ref like delegate
         
 //        let scaleFactor = size.height * 0.25
-        let chickenMob = MobFactory.createChicken(
-            initAnimation: nil
+        let chickenMob = MobFactory.createChicken()
+        let chickenMobFlying: Mob = MobFactory.createChicken(
+            initAnimation: SKAction.moveTo(
+                x: 99,
+                duration: 2
+            )
         )
-        let chick2 = chickenMob
+        
         spawnManager.spawn(
             spawnMob: chickenMob,
             possibleSpawnPositions: [
@@ -63,23 +67,18 @@ extension GameScene {
             ]
         )
 
-        spawnManager.spawn(
-            spawnMob: chick2,
-            possibleSpawnPositions: [
-                SpawnPositionProportion.northWestern
-            ]
-        )
-
         let testPositions = [
             SpawnPositionProportion.southEastern,
             SpawnPositionProportion.southWestern
         ]
+
         spawnManager.spawn(
-            spawnMob: MobFactory.createChicken(initAnimation: SKAction.moveTo(x: 99, duration: 2)),
+            spawnMob: chickenMobFlying,
             possibleSpawnPositions: testPositions
         )
+
         // - FIXME:  using spawnmanager to spawn using the same instance of Mob causes a crash appdelegate first load // ref error dunno
-        
+
         /*
              2019-02-23 07:57:10.476884+1000 FantasticVerboseJourney[5659:149226] libMobileGestalt MobileGestalt.c:890: MGIsDeviceOneOfType is not supported on this platform.
              Injection connected, watching /Users/xcodeserver/Projects/cousinmango/fantastic-verbose-journey/**
@@ -145,9 +144,9 @@ extension GameScene {
              55  libdyld.dylib                       0x000000010f1b9575 start + 1
              )
              libc++abi.dylib: terminating with uncaught exception of type NSException
-         
+
          */ // */ // */ // log had grop wildcards slash oops escape // */ // */ // */
-        
+
     }
 }
 

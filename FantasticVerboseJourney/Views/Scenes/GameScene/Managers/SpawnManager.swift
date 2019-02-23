@@ -53,7 +53,10 @@ extension SpawnManager {
         // spawn by adding child to the game scene.
         spawnScene.addChild(node) // NSEXception if adding same reference node to the same scene more than once.
         // initial animation to give life to the sprites
-
+        node.run(spawnMob.initAnimation)
+        // - TODO: the little jump boop animation gives a different UX feel depending on the size of the sprite
+        // Boop animation should also scale depending on the size.
+        // 
     }
 
     // -- FIXME: Cheating using CGSize when just want the x and y coordinate...

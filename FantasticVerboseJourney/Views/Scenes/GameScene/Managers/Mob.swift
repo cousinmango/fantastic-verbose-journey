@@ -37,19 +37,19 @@ struct Mob {
     let node: SKSpriteNode
 
     /// Initial animation that you want to run on spawn.
-    let initAnimation: SKAction?
+    let initAnimation: SKAction
 
     init(
         image: ImageAsset,
         size: CGSize?,
         spawnChance: Double = 0.8,
-        initAnimation: SKAction? = nil
+        initAnimation: SKAction
     ) {
         self.image = image
         self.size = image.skTextured.size()
         self.spawnChance = 0.8
         self.node = image.spriteNoded
-        self.initAnimation = nil
+        self.initAnimation = initAnimation
     }
 }
 
@@ -62,7 +62,7 @@ extension MobFactory {
     static func createChicken(
         size: CGSize? = nil,
         spawnChance: Double = 0.8,
-        initAnimation: SKAction? = SillyAnimation.boopDownAnimation
+        initAnimation: SKAction = SillyAnimation.boopDownAnimation
     ) -> Mob {
         // feels like code smell. lots of default info for each
         let chickenMob = Mob(
