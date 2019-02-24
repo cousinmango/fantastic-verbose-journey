@@ -12,15 +12,13 @@ import GameplayKit
 class HomeMenuScene: SKScene {
 
     let hudOverlay = HudNode()
-    let gameScene = GameScene()
-    var homeMusic: SKAudioNode!
+//    let gameScene = GameScene()
     private let scoreKey = "DUCKMAN_HIGHSCORE"
     private var highscore: Int = 0
     private let currentScoreKey = "CURRENT_SCORE"
     private var currentScore: Int = 0
     let background = SKSpriteNode(imageNamed: "BG")
     var scaleFactor: CGFloat = 284 // default minumum - change value in didMove(to view
-    var startButton: SKButton!
 
     override init() {
         super.init()
@@ -40,15 +38,79 @@ class HomeMenuScene: SKScene {
             defaults.removeObject(forKey: "DUCKMAN_HIGHSCORE")
         }
     }
-    
-    override func didMove(to view: SKView) {
+
+    func setupStartMusic() {
         guard let musicURL = Bundle.main.url(
             forResource: "homeMusic",
             withExtension: "wav"
-        ) else { return }
-        homeMusic = SKAudioNode(url: musicURL)
+            ) else { return }
+        let homeMusic = SKAudioNode(url: musicURL)
         addChild(homeMusic)
-        
+    }
+    fileprivate func setupLogo() {
+        let logoNode = SKSpriteNode(imageNamed: "duck")
+        logoNode.anchorPoint = CGPoint(x: 0.5, y: 0.4)
+        logoNode.position = CGPoint(x: size.width / 2, y: size.height / 2)
+        logoNode.size = CGSize(width: scaleFactor, height: scaleFactor)
+        addChild(logoNode)
+        logoNode.run(
+            SKAction.repeatForever(
+                SKAction.rotate(
+                    byAngle: -2 * CGFloat(Double.pi),
+                    duration: 4
+                )
+            )
+        )
+        let scaleUpDown = SKAction.repeatForever(
+            SKAction.sequence(
+                [
+                    SKAction.scale(
+                        to: 0.85,
+                        duration: 0.8),
+                    SKAction.scale(
+                        to: 1,
+                        duration: 0.8
+                    )
+                ]
+            )
+        )
+        scaleUpDown.timingMode = SKActionTimingMode.easeInEaseOut
+        logoNode.run(scaleUpDown)
+    }
+
+    fileprivate func scoreLabelSetup(_ defaults: UserDefaults) {
+        currentScore = defaults.integer(forKey: currentScoreKey)
+        let scoreLabel = SKLabelNode(text: String(currentScore))
+        scoreLabel.fontName = "DIN Alternate"
+        scoreLabel.fontColor = SillyColour.textColour
+        scoreLabel.fontSize = scaleFactor * 0.4//80
+        scoreLabel.position = CGPoint(x: size.width / 2, y: size.height * 0.64)
+        addChild(scoreLabel)
+        scoreLabel.run(
+            SKAction.sequence(
+                [
+                    SKAction.scale(to: 1, duration: 0),
+                    SKAction.wait(forDuration: 0.2),
+                    SKAction.scale(to: 1.4, duration: 0.1),
+                    SKAction.wait(forDuration: 0.3),
+                    SKAction.scale(to: 1, duration: 0.1)
+                ]
+            )
+        )
+    }
+
+    fileprivate func highScoreLabelSetup(_ defaults: UserDefaults) {
+        highscore = defaults.integer(forKey: scoreKey)
+        let highscoreLabel = SKLabelNode(text: "BEST: \(highscore)")//String(highscore))
+        highscoreLabel.fontName = "DIN Alternate"
+        highscoreLabel.fontColor = SillyColour.textColour
+        highscoreLabel.fontSize = scaleFactor * 0.15//40
+        highscoreLabel.position = CGPoint(x: size.width / 2, y: size.height * 0.32)
+        addChild(highscoreLabel)
+    }
+
+    override func didMove(to view: SKView) {
+        setupStartMusic()
 
         scaleFactor = size.height * 0.25 // = 284 on iPhone SE
 
@@ -69,53 +131,53 @@ class HomeMenuScene: SKScene {
         titleNode.setScale(scaleFactor * 0.001_3)
         //titleNode.size = CGSize(width: scaleFactor * 3, height: titleNode.size.y * scaleFactor)
         addChild(titleNode)
-        titleNode.run(SKAction.sequence([SKAction.scale(to: 0, duration: 0),
-                                         SKAction.wait(forDuration: 0.8),
-                                           SKAction.scale(to: scaleFactor * 0.001_5, duration: 0.1),
-                                           SKAction.scale(to: scaleFactor * 0.001_3, duration: 0.1)]))
+        titleNode.run(
+            SKAction.sequence(
+                [
+                    SillyAnimation.scaleSizeToZeroInstant,
+                    SKAction.wait(forDuration: 0.8),
+                    SKAction.scale(
+                        to: scaleFactor * 0.001_5,
+                        duration: 0.1
+                    ),
+                    SKAction.scale(
+                        to: scaleFactor * 0.001_3,
+                        duration: 0.1
+                    )
+                ]
+            )
+        )
 
-        let logoNode = SKSpriteNode(imageNamed: "duck")
-        logoNode.anchorPoint = CGPoint(x: 0.5, y: 0.4)
-        logoNode.position = CGPoint(x: size.width / 2, y: size.height / 2)
-        logoNode.size = CGSize(width: scaleFactor, height: scaleFactor)
-        addChild(logoNode)
-        logoNode.run(SKAction.repeatForever(SKAction.rotate(byAngle: -2 * CGFloat(Double.pi), duration: 4)))
-        let scaleUpDown = SKAction.repeatForever(SKAction.sequence([SKAction.scale(to: 0.85, duration: 0.8), SKAction.scale(to: 1, duration: 0.8)]))
-        scaleUpDown.timingMode = SKActionTimingMode.easeInEaseOut
-        logoNode.run(scaleUpDown)
+        setupLogo()
 
         let defaults = UserDefaults.standard
 
-        currentScore = defaults.integer(forKey: currentScoreKey)
-        let scoreLabel = SKLabelNode(text: String(currentScore))
-        scoreLabel.fontName = "DIN Alternate"
-        scoreLabel.fontColor = SillyColour.textColour
-        scoreLabel.fontSize = scaleFactor * 0.4//80
-        scoreLabel.position = CGPoint(x: size.width / 2, y: size.height * 0.64)
-        addChild(scoreLabel)
-        scoreLabel.run(SKAction.sequence([SKAction.scale(to: 1, duration: 0),
-                                         SKAction.wait(forDuration: 0.2),
-                                         SKAction.scale(to: 1.4, duration: 0.1),
-                                         SKAction.wait(forDuration: 0.3),
-                                         SKAction.scale(to: 1, duration: 0.1)]))
+        scoreLabelSetup(defaults)
 
-        highscore = defaults.integer(forKey: scoreKey)
-        let highscoreLabel = SKLabelNode(text: "BEST: \(highscore)")//String(highscore))
-        highscoreLabel.fontName = "DIN Alternate"
-        highscoreLabel.fontColor = SillyColour.textColour
-        highscoreLabel.fontSize = scaleFactor * 0.15//40
-        highscoreLabel.position = CGPoint(x: size.width / 2, y: size.height * 0.32)
-        addChild(highscoreLabel)
+        highScoreLabelSetup(defaults)
 
         setup()
 
-        startButton = createSKButtonStart()
+        let startButton = createSKButtonStart()
 
         addChild(startButton)
-        startButton.run(SKAction.sequence([SKAction.scale(to: 0, duration: 0),
-                                           SKAction.wait(forDuration: 1.1),
-                                           SKAction.scale(to: scaleFactor * 0.003_5, duration: 0.1),
-                                           SKAction.scale(to: scaleFactor * 0.003, duration: 0.1)]))
+        startButton.run(
+            SKAction.sequence(
+                [
+                    SillyAnimation.scaleSizeToZeroInstant,
+                    SKAction.wait(
+                        forDuration: 1.1
+                    ),
+                    SKAction.scale(
+                        to: scaleFactor * 0.003_5,
+                        duration: 0.1),
+                    SKAction.scale(
+                        to: scaleFactor * 0.003,
+                        duration: 0.1
+                    )
+                ]
+            )
+        )
         print("HomeMenuScene:: didMove() finished")
     }
 
@@ -188,6 +250,5 @@ extension HomeMenuScene: SKButtonDelegate {
         let gameScene = GameScene(size: size)
         gameScene.scaleMode = .aspectFit
         self.view?.presentScene(gameScene, transition: gameSceneTransition)
-        //self.removeAllChildren() // clear -- TODO: Move this code to the hot reload injection refresher.
     }
 }

@@ -28,4 +28,17 @@ extension ImageAsset: SKTexturable {
         return SKTexture(image: self.image)
     }
 }
+
+protocol SKSpritable: SKTexturable {
+    var spriteNoded: SKSpriteNode { get }
+}
+
+// Initialises a new SKSprite using the given image as SKTexture.
+extension ImageAsset: SKSpritable {
+    var spriteNoded: SKSpriteNode {
+        let newSpriteNode = SKSpriteNode(texture: self.skTextured)
+        return newSpriteNode
+    }
+
+}
 //private final class BundleToken {}

@@ -7,6 +7,7 @@
 //
 
 import Foundation
+// swiftlint:disable missing_docs
 public typealias AssetSoundUrlTypeAlias = URL
 
 public enum SoundAssetFileName {
@@ -36,4 +37,3 @@ public enum SoundAssetUrl {
         withExtension: "wav"
     )
 }
-
