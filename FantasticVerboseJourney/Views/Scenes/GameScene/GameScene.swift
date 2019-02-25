@@ -44,23 +44,28 @@ class GameScene: SKScene {
 extension GameScene {
     func setupSpawn() {
         self.spawnManager = SpawnManager(spawnScene: self) // weak var ref like delegate
-        
-//        let scaleFactor = size.height * 0.25
+
+        let testFlyPoint: CGPoint = spawnManager
+            .getScaledSpawn(
+                sizeToScaleWithin: self.size,
+                spawnPointProportion: CGPoint(x: 1.0, y: 1.0)
+        )
+        let flyAction = SKAction.move(to: testFlyPoint, duration: 3)
+
+
+        //        let scaleFactor = size.height * 0.25
         let chickenMob = MobFactory.createChicken()
         let chickenMobFlying: Mob = MobFactory.createChicken(
-            initAnimation: SKAction.moveTo(
-                x: 99,
-                duration: 2
-            )
+            initAnimation: flyAction
         )
-        
-        spawnManager.spawn(
+
+        let spawnedChickenNode1: SKSpriteNode = spawnManager.spawn(
             spawnMob: chickenMob,
             possibleSpawnPositions: [
                 SpawnPositionProportion.northEastern
             ]
         )
-        spawnManager.spawn(
+        let spawnedChickenNode2: SKSpriteNode = spawnManager.spawn(
             spawnMob: chickenMob,
             possibleSpawnPositions: [
                 SpawnPositionProportion.northWestern
@@ -72,7 +77,7 @@ extension GameScene {
             SpawnPositionProportion.southWestern
         ]
 
-        spawnManager.spawn(
+        let spawnedFlyingChicken: SKSpriteNode = spawnManager.spawn(
             spawnMob: chickenMobFlying,
             possibleSpawnPositions: testPositions
         )

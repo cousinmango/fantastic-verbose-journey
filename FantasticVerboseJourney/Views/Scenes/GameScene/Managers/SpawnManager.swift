@@ -27,25 +27,34 @@ class SpawnManager {
 }
 
 extension SpawnManager {
+    /// <#Description#>
+    ///
+    /// - Parameters:
+    ///   - spawnMob: <#spawnMob description#>
+    ///   - possibleSpawnPositions: <#possibleSpawnPositions description#>
+    /// - Returns: The spawned node... probs dont need to do it like this
     func spawn(
         spawnMob: Mob,
         possibleSpawnPositions: [CGPoint] // can have an array of size 1.
-    ) {
-        let size = spawnScene.size
+    ) -> SKSpriteNode {
+        let sceneSpawnSize = spawnScene.size
 
         // Cheating using CGSize for now.
-        guard let scaledSpawn = getScaledSpawn(
-            size: size,
+        guard let selectedSpawnPoint = checkGetRandomSpawnPosition(
             possiblePositions: possibleSpawnPositions
-        ) else { return }
+        ) else {
+            fatalError("randomElement failed")
+        }
+        let scaledSpawnPosition = getScaledSpawn(
+            sizeToScaleWithin: sceneSpawnSize,
+            spawnPointProportion: selectedSpawnPoint
+        )
 
         // safe immutable
         guard let node = spawnMob.node.copy() as? SKSpriteNode else {
             fatalError("Node reference type can't copy as SKSpriteNode")
         }
 
-        // CGPoint makes more sense. Validate -300 +300 anchor point positioning coordinate system.
-        let scaledSpawnPosition = CGPoint(x: scaledSpawn.width, y: scaledSpawn.height)
 
         node.position = scaledSpawnPosition
 
@@ -56,11 +65,48 @@ extension SpawnManager {
         node.run(spawnMob.initAnimation)
         // - TODO: the little jump boop animation gives a different UX feel depending on the size of the sprite
         // Boop animation should also scale depending on the size.
-        // 
+        //
+
+        return node
     }
 
-    // -- FIXME: Cheating using CGSize when just want the x and y coordinate...
-    private func getScaledSpawn(size: CGSize, possiblePositions: [CGPoint]) -> CGSize? {
+//    // -- FIXME: Cheating using CGSize when just want the x and y coordinate...
+//    private func getScaledSpawn(size: CGSize, possiblePositions: [CGPoint]) -> CGSize? {
+//
+//
+//        // recalculating unnecessarily... optimising opportunity cache
+//        let scaledSpawn = size * selectedSpawnPosition
+//
+//        // probs won't work .. -340..+340 ???
+//
+//        return scaledSpawn
+//    }
+
+        
+    // GGSP GOOD GAME SPAWN POINT
+    /// Normalises the spawnPoint decimal percentage against the size.
+    /// -- TODO: Create types to safely distinguish this behaviour.
+    ///
+    /// - Parameter sizeToScaleWithin: Scene size or any arbitrary rectangle.
+    /// - Returns: Returns the decimal fraction normalised against the size
+    func getScaledSpawn(
+        sizeToScaleWithin: CGSize,
+        spawnPointProportion: CGPoint
+    ) -> CGPoint {
+        let scaledSpawnPointX = sizeToScaleWithin.width * spawnPointProportion.x
+        let scaledSpawnPointY = sizeToScaleWithin.height * spawnPointProportion.y
+
+
+        // CGPoint makes more sense. Validate -300 +300 anchor point positioning coordinate system.
+        let scaledSpawnPosition = CGPoint(
+            x: scaledSpawnPointX,
+            y: scaledSpawnPointY
+        )
+
+        return scaledSpawnPosition
+    }
+    private func checkGetRandomSpawnPosition(possiblePositions: [CGPoint]) -> CGPoint? {
+
         let invalidPositionsWarning: String = """
             Array is empty.
             Possible spawn points should be passed as a parameter.
@@ -72,12 +118,6 @@ extension SpawnManager {
         // Pick a random spawn position out of possible spawns.
         guard let selectedSpawnPosition = possiblePositions.randomElement() else { return nil } // can use a seed random generator for reproducibility and unit testing consistency. Conform to protocol with predicted .next()
 
-        // recalculating unnecessarily... optimising opportunity cache
-        let scaledSpawn = size * selectedSpawnPosition
-
-        // probs won't work .. -340..+340 ???
-
-        return scaledSpawn
+        return selectedSpawnPosition
     }
-
 }
