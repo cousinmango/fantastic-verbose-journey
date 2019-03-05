@@ -39,6 +39,51 @@ class HomeMenuScene: SKScene {
         }
     }
 
+
+    override func didMove(to view: SKView) {
+        setupStartMusic()
+
+        scaleFactor = size.height * 0.25 // = 284 on iPhone SE
+
+        print("on home screen", hudOverlay.score)
+        // resetDefaults()
+        print("HomeMenuScene:: didMove() start \(view)")
+        print("HomeMenuScene:: size", size)
+
+        setupBackground()
+
+        setupTitle()
+
+        setupLogo()
+
+        let defaults = UserDefaults.standard
+
+        scoreLabelSetup(defaults)
+
+        highScoreLabelSetup(defaults)
+
+        setup()
+
+        startSKButtonSetup()
+        print("HomeMenuScene:: didMove() finished")
+    }
+
+    override func update(_ currentTime: TimeInterval) {
+        // Called before each frame is rendered
+    }
+
+}
+
+// - MARK: Setup helpers
+extension HomeMenuScene {
+
+    private func setup() {
+
+        // Setup physics
+        physicsWorld.gravity = .zero
+        physicsWorld.contactDelegate = self
+    }
+
     func setupStartMusic() {
         guard let musicURL = Bundle.main.url(
             forResource: "homeMusic",
@@ -109,22 +154,15 @@ class HomeMenuScene: SKScene {
         addChild(highscoreLabel)
     }
 
-    override func didMove(to view: SKView) {
-        setupStartMusic()
-
-        scaleFactor = size.height * 0.25 // = 284 on iPhone SE
-
-        print("on home screen", hudOverlay.score)
-        // resetDefaults()
-        print("HomeMenuScene:: didMove() start \(view)")
-        print("HomeMenuScene:: size", size)
-
+    fileprivate func setupBackground() {
         background.position = CGPoint(x: size.width / 2, y: size.height / 2)
         background.size = CGSize(width: size.height * 1.5, height: size.height * 1.5)//(width: size.width, height: size.height)
         background.zPosition = -10
         addChild(background)
         background.run(SKAction.repeatForever(SKAction.rotate(byAngle: -2 * CGFloat(Double.pi), duration: 25)))
+    }
 
+    fileprivate func setupTitle() {
         // title setup
         let titleNode = SKSpriteNode(imageNamed: "title")//color: UIColor.red, size: CGSize(width: 300, height: 150))
         titleNode.position = CGPoint(x: size.width / 2, y: size.height * 0.85)
@@ -147,17 +185,9 @@ class HomeMenuScene: SKScene {
                 ]
             )
         )
+    }
 
-        setupLogo()
-
-        let defaults = UserDefaults.standard
-
-        scoreLabelSetup(defaults)
-
-        highScoreLabelSetup(defaults)
-
-        setup()
-
+    fileprivate func startSKButtonSetup() {
         let startButton = createSKButtonStart()
 
         addChild(startButton)
@@ -178,24 +208,8 @@ class HomeMenuScene: SKScene {
                 ]
             )
         )
-        print("HomeMenuScene:: didMove() finished")
     }
 
-    override func update(_ currentTime: TimeInterval) {
-        // Called before each frame is rendered
-    }
-
-}
-
-// - MARK: Setup helpers
-extension HomeMenuScene {
-
-    private func setup() {
-
-        // Setup physics
-        physicsWorld.gravity = .zero
-        physicsWorld.contactDelegate = self
-    }
 }
 
 // - MARK: Touches responders
