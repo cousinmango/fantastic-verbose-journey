@@ -13,6 +13,7 @@ class GameScene: SKScene {
     
     let hudOverlay = HudNode()
     var spawnManager: SpawnManager!
+    var timeManager: TimeManager!
     
     
     override init() {
@@ -27,6 +28,10 @@ class GameScene: SKScene {
 
 
     override func sceneDidLoad() {
+        // setup managers
+        self.spawnManager = SpawnManager(spawnScene: self) // weak var ref like delegate
+        self.timeManager = TimeManager(delegate: self, initialTime: 60)
+
 
         setupSpawn()
     }
@@ -35,7 +40,7 @@ class GameScene: SKScene {
     }
     override func update(_ currentTime: TimeInterval) {
         // Called before each frame is rendered
-
+        // print("Current time \(currentTime)")
     }
 
 }
@@ -43,7 +48,7 @@ class GameScene: SKScene {
 // - MARK: Spawn
 extension GameScene {
     func setupSpawn() {
-        self.spawnManager = SpawnManager(spawnScene: self) // weak var ref like delegate
+
 
         let testFlyPoint: CGPoint = spawnManager
             .getScaledSpawn(
@@ -162,14 +167,16 @@ extension GameScene {
     }
 }
 
+// - MARK: Game timer
 extension GameScene: TimeManagerDelegate {
-    func timerTriggerPerSecond() {
-        print("GameScene+TimeManagerDelegate:: timerTriggerPerSecond()")
+    func timerTriggerPerSecond(currentTimeLeft: Int) {
+        print("GameScene+TimeManagerDelegate:: timerTriggerPerSecond() \(currentTimeLeft)")
     }
 
     func timerFinished() {
         print("GameScene+TimeManagerDelegate timerFinished()")
     }
 
-
 }
+
+
