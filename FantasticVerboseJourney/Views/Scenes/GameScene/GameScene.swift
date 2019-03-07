@@ -161,3 +161,15 @@ extension GameScene {
         print("GameScene:: touchesEnded finish", touchLocationInScene)
     }
 }
+
+extension GameScene: TimeManagerDelegate {
+    func timerTriggerPerSecond() {
+        print("GameScene+TimeManagerDelegate:: timerTriggerPerSecond()")
+    }
+
+    func timerFinished() {
+        print("GameScene+TimeManagerDelegate timerFinished()")
+    }
+
+
+}
