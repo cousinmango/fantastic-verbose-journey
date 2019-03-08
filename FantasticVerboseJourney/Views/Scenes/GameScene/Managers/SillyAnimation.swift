@@ -22,7 +22,6 @@ struct SillyAnimation {
         x: 0,
         y: -10,
         duration: 0.1
-
     )
 
     // Hardcoding duration instead of passing a parameter
@@ -42,6 +41,38 @@ struct SillyAnimation {
         duration: 0.1
     )
 
+    static let despawnAnimated: SKAction =
+        SKAction.sequence(
+            [
+                SillyAnimation.scaleSizeToZero,
+                SKAction.removeFromParent()
+            ]
+    )
+
+    // dunno if removeFromParent is all the cleanup that is required. Hmm which param to use
+    static func despawn(afterDurationSeconds durationSeconds: Int) -> SKAction {
+        let despawnAnimatedRemoval =        SKAction.sequence(
+            [
+                SKAction.wait(forDuration: TimeInterval(durationSeconds)),
+                SillyAnimation.scaleSizeToZero,
+                SKAction.removeFromParent()
+            ]
+        )
+
+        return despawnAnimatedRemoval
+    }
+    static func spawnEphemeral() -> SKAction {
+        let spawnDespawnSequence = SKAction.sequence(
+            [
+                SillyAnimation.scaleSizeToZeroInstant,
+                SillyAnimation.scaleSizeToNormal,
+                SillyAnimation.boopDownAnimation,
+                SillyAnimation.despawn(afterDurationSeconds: 1)
+            ]
+        )
+
+        return spawnDespawnSequence
+    }
     // Scales to 1. Where 1 is decimal fraction of original size.
     // Need to check whether uses node size immutably, unsafe or the
     // texture/image size

@@ -30,7 +30,7 @@ class GameScene: SKScene {
     override func sceneDidLoad() {
         // setup managers
         self.spawnManager = SpawnManager(spawnScene: self) // weak var ref like delegate
-        self.timeManager = TimeManager(delegate: self, initialTime: 60)
+        self.timeManager = TimeManager(delegate: self, initialTimeSeconds: 5)
 
 
         setupSpawn()
@@ -47,6 +47,22 @@ class GameScene: SKScene {
 
 // - MARK: Spawn
 extension GameScene {
+    fileprivate func spawnChickenRunner() {
+        // SpawnTest
+        let testPositions = [
+            SpawnPositionProportion.northWestern,
+            SpawnPositionProportion.northEastern,
+            SpawnPositionProportion.southWestern,
+            SpawnPositionProportion.southEastern
+        ]
+        let timedSpawnDeathAnimation: SKAction = SillyAnimation.spawnEphemeral()
+
+        let chickenMobEphemeralSpawnDeathOneSecond = MobFactory.createChicken( initAnimation: timedSpawnDeathAnimation)
+        let chickenSprite = spawnManager.spawn(
+            spawnMob: chickenMobEphemeralSpawnDeathOneSecond,
+            possibleSpawnPositions: testPositions) // Wonder if memory leak
+    }
+
     func setupSpawn() {
 
 
@@ -60,32 +76,27 @@ extension GameScene {
 
         //        let scaleFactor = size.height * 0.25
         let chickenMob = MobFactory.createChicken()
+
         let chickenMobFlying: Mob = MobFactory.createChicken(
             initAnimation: flyAction
         )
 
-        let spawnedChickenNode1: SKSpriteNode = spawnManager.spawn(
-            spawnMob: chickenMob,
-            possibleSpawnPositions: [
-                SpawnPositionProportion.northEastern
-            ]
-        )
-        let spawnedChickenNode2: SKSpriteNode = spawnManager.spawn(
-            spawnMob: chickenMob,
-            possibleSpawnPositions: [
-                SpawnPositionProportion.northWestern
-            ]
-        )
+        
 
         let testPositions = [
-            SpawnPositionProportion.southEastern,
-            SpawnPositionProportion.southWestern
+            SpawnPositionProportion.northWestern,
+            SpawnPositionProportion.northEastern,
+            SpawnPositionProportion.southWestern,
+            SpawnPositionProportion.southEastern
         ]
 
         let spawnedFlyingChicken: SKSpriteNode = spawnManager.spawn(
             spawnMob: chickenMobFlying,
             possibleSpawnPositions: testPositions
         )
+
+
+
 
     }
 }
@@ -171,6 +182,8 @@ extension GameScene {
 extension GameScene: TimeManagerDelegate {
     func timerTriggerPerSecond(currentTimeLeft: Int) {
         print("GameScene+TimeManagerDelegate:: timerTriggerPerSecond() \(currentTimeLeft)")
+        
+        spawnChickenRunner()
     }
 
     func timerFinished() {
