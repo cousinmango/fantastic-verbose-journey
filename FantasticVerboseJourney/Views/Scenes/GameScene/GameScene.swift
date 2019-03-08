@@ -69,7 +69,10 @@ extension GameScene {
         let testFlyPoint: CGPoint = spawnManager
             .getPositionScaled(
                 sizeToScaleWithin: self.size,
-                spawnPointProportion: CGPoint(x: 1.0, y: 1.0)
+                spawnPointProportion: CGPoint(
+                    x: 1.0,
+                    y: 1.0 // very top right corner. 100%, 100% of scene.
+                )
         )
         let flyAction = SKAction.move(to: testFlyPoint, duration: 3)
 
