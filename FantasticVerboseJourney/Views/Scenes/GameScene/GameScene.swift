@@ -76,15 +76,12 @@ extension GameScene {
         )
         let flyAction = SKAction.move(to: testFlyPoint, duration: 3)
 
-
         //        let scaleFactor = size.height * 0.25
         let chickenMob = MobFactory.createChicken()
 
         let chickenMobFlying: Mob = MobFactory.createChicken(
             initAnimation: flyAction
         )
-
-        
 
         let testPositions = [
             SpawnPositionProportion.northWestern,
