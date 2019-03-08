@@ -114,7 +114,7 @@ extension GameScene {
          any previous versions built into the texture atlases).
          **/
         /* use samew rationale for maintaining everything in an enum for
-         design system. Artistic tuning easier than having a single objet for
+         design system. Artistic tuning easier than having a single object for
          each bespoke object without clear design system.
          */
 
@@ -188,7 +188,7 @@ extension GameScene {
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         print("GameScene:: touchesBegan start")
-
+        getCornerOrientationAngle(touchPositionForQuadrantCalc: touches.first!)
         print("GameScene:: touchesBegan finish")
     }
 
@@ -199,6 +199,50 @@ extension GameScene {
         let touchLocationInScene = firstTouch.location(in: self)
 
         print("GameScene:: touchesEnded finish", touchLocationInScene)
+    }
+}
+
+// - MARK: Orientation four corners angle
+extension GameScene {
+
+    // Angle to rotate towards the four corners if touch in four quadrants.
+    // hmm snappy. Different ways of doing this but depends on UX look and feel.
+    func getCornerOrientationAngle(touchPositionForQuadrantCalc touchLocation: UITouch) {
+        let midWidth = size.width / 2
+        let midHeight = size.height / 2
+
+        let scaledTouchLocation = touchLocation.location(in: self)
+        print(touchLocation, scaledTouchLocation)
+
+        // x and y ranges for each of the four quadrants.
+        // Cartesian coordinate system quadrants?
+        // In relation to 0.5, 0.5 instead of 0, 0
+        // Quadrant I   +x, +y; Quadrant II -x, +y;
+        // Quadrant III -x, -y; Quadrant IV +x, -y;
+        // However, using anchorpoint 0.5, 0.5 as origin instead of origin 0, 0
+
+        let positiveXRange = midWidth..<size.width
+        let negativeXRange = 0..<midWidth
+        let positiveYRange = midHeight..<size.height
+        let negativeYRange = 0..<midHeight
+        switch (scaledTouchLocation.x, scaledTouchLocation.y) {
+
+        case(positiveXRange, positiveYRange):
+            // Quadrant I Top-right
+            print("Quad-I")
+        case(negativeXRange, positiveYRange):
+            // Quadrant II Top-left
+            print("Quad-II")
+        case(negativeXRange, negativeYRange):
+            // Quadrant III Bottom-left
+            print("Quad-III")
+        case(positiveXRange, negativeYRange):
+            // Quadrant IV Bottom-right
+            print("Quad-IV")
+        case (_, _):
+            print("_, _ no quads")
+
+        }
     }
 }
 
