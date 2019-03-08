@@ -67,7 +67,7 @@ extension GameScene {
 
 
         let testFlyPoint: CGPoint = spawnManager
-            .getScaledSpawn(
+            .getPositionScaled(
                 sizeToScaleWithin: self.size,
                 spawnPointProportion: CGPoint(x: 1.0, y: 1.0)
         )
@@ -94,9 +94,6 @@ extension GameScene {
             spawnMob: chickenMobFlying,
             possibleSpawnPositions: testPositions
         )
-
-
-
 
     }
 }

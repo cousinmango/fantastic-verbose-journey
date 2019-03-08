@@ -45,7 +45,7 @@ extension SpawnManager {
         ) else {
             fatalError("randomElement failed")
         }
-        let scaledSpawnPosition = getScaledSpawn(
+        let scaledSpawnPosition = getPositionScaled(
             sizeToScaleWithin: sceneSpawnSize,
             spawnPointProportion: selectedSpawnPoint
         )
@@ -89,7 +89,7 @@ extension SpawnManager {
     ///
     /// - Parameter sizeToScaleWithin: Scene size or any arbitrary rectangle.
     /// - Returns: Returns the decimal fraction normalised against the size
-    func getScaledSpawn(
+    func getPositionScaled(
         sizeToScaleWithin: CGSize,
         spawnPointProportion: CGPoint
     ) -> CGPoint {
