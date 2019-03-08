@@ -97,7 +97,7 @@ extension GameScene {
 //        )
     }
     func spawnFireball(
-        position: CGPoint,
+        startPosition: CGPoint,
         destination: CGPoint,
         angle: CGFloat
         ) {
@@ -112,7 +112,28 @@ extension GameScene {
         /* use samew rationale for maintaining everything in an enum for design system. Artistic tuning easier than having a single objet for each bespoke object without clear design system.
          */
 
-        
+        // -- FIXME: hmm reinit. can just preload this and store somewhere else in memory.
+        let fireballAtlas = SKTextureAtlas(named: "fire")
+
+        let fireballFrames = fireballAtlas.textureNames
+            .map(
+                {
+                    fireballAtlas.textureNamed($0)
+                }
+        )
+
+        let fireballNode = SKSpriteNode(texture: fireballFrames.first!)
+
+        fireballNode.position = startPosition
+        let loopFireballFrames = SKAction.repeatForever(
+            SKAction.animate(
+                with: fireballFrames,
+                timePerFrame: 0.1
+            )
+        )
+
+        self.addChild(fireballNode)
+        fireballNode.run(loopFireballFrames)
     }
 
     func createBackgroundAnimation() -> SKAction {
@@ -181,6 +202,14 @@ extension GameScene: TimeManagerDelegate {
         print("GameScene+TimeManagerDelegate:: timerTriggerPerSecond() \(currentTimeLeft)")
         
         spawnChickenRunner()
+
+        self.spawnFireball(
+            startPosition: self.spawnManager.getPositionScaled(
+                sizeToScaleWithin: self.size,
+                spawnPointProportion: CGPoint(x: 0.3, y: 0.4)
+            ),
+            destination: CGPoint(x: 0.3, y: 0.4), angle: 1.0
+        )
     }
 
     func timerFinished() {
