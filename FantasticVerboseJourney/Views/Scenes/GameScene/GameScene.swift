@@ -89,12 +89,30 @@ extension GameScene {
         addChild(gameMusic)
     }
 
-    
+    func spawnFireballSetup() {
+
+        // stringName: UIImage
+//        let fireballAtlasDictionary = [ "fire1" : Asset.fire]
+//        let fireballAtlas = SKTextureAtlas(dictionary:
+//        )
+    }
     func spawnFireball(
         position: CGPoint,
         destination: CGPoint,
         angle: CGFloat
         ) {
+
+        // ? re init fireball atlas
+        // Readability immutability and maintainability trumps performance
+        // Dev time vs CPU time :P
+
+        /** from doc
+         This design also offers your artists the ability to experiment with new textures without requiring that your game be rebuilt. The artists drop the textures into the app bundle. When the app is relaunched, SpriteKit automatically discovers the textures (overriding any previous versions built into the texture atlases).
+         **/
+        /* use samew rationale for maintaining everything in an enum for design system. Artistic tuning easier than having a single objet for each bespoke object without clear design system.
+         */
+
+        
     }
 
     func createBackgroundAnimation() -> SKAction {
