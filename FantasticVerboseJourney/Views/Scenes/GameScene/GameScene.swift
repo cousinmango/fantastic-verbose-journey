@@ -60,12 +60,13 @@ extension GameScene {
         let chickenMobEphemeralSpawnDeathOneSecond = MobFactory.createChicken( initAnimation: timedSpawnDeathAnimation)
         let chickenSprite = spawnManager.spawn(
             spawnMob: chickenMobEphemeralSpawnDeathOneSecond,
-            possibleSpawnPositions: testPositions) // Wonder if memory leak
+            possibleSpawnPositions: testPositions
+        ) // Wonder if memory leak
     }
 
     func setupSpawn() {
 
-
+        // Example of scaled point
         let testFlyPoint: CGPoint = spawnManager
             .getPositionScaled(
                 sizeToScaleWithin: self.size,
@@ -75,25 +76,6 @@ extension GameScene {
                 )
         )
         let flyAction = SKAction.move(to: testFlyPoint, duration: 3)
-
-        //        let scaleFactor = size.height * 0.25
-        let chickenMob = MobFactory.createChicken()
-
-        let chickenMobFlying: Mob = MobFactory.createChicken(
-            initAnimation: flyAction
-        )
-
-        let testPositions = [
-            SpawnPositionProportion.northWestern,
-            SpawnPositionProportion.northEastern,
-            SpawnPositionProportion.southWestern,
-            SpawnPositionProportion.southEastern
-        ]
-
-        let spawnedFlyingChicken: SKSpriteNode = spawnManager.spawn(
-            spawnMob: chickenMobFlying,
-            possibleSpawnPositions: testPositions
-        )
 
     }
 }
