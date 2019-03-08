@@ -140,6 +140,21 @@ extension GameScene {
 
         self.addChild(fireballNode)
         fireballNode.run(loopFireballFrames)
+
+        // Hahah trig
+        // Quad1 angle
+        // Quad2 Pi 180 rads - angle zzz
+        // Quad3 Pi + anglezzz
+        // Quad 4 2Pi - Anglezzz
+
+        let angle1 = tanh(size.height / size.width) // e.g. angle to corner by aspect ratio .9445
+        let angle2 = -tanh(size.height / size.width)
+        let angle3 = CGFloat.pi
+        let angle4 = 2 * CGFloat.pi
+        let angle5 = angle4 + -angle1
+
+        fireballNode.zRotation = angle1 + CGFloat.pi
+//        let angle3 =
     }
 
     func createBackgroundAnimation() -> SKAction {
