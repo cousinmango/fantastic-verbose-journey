@@ -249,24 +249,44 @@ extension GameScene {
 
         // Could use the same 4 positions enum with preloaded angles instead of inline closure
         // Just split into function and move it out after...
-        let orientAngle = {
+        let orientAngle: CGFloat = {
+            // swiftlint:disable identifier_name
+            // Cartesian trig stuff based on formulae... SATC
+            // Corresponds to aspect ratio... Trianglezzz vs 1 / 1
+            // 0 to 2π radians 360
+            let thetaAngle = tanh(self.size.height / self.size.width)
+            let π = CGFloat.pi
+
+            // -- FIXME: Function would be more readable now that it is fleshed out with more verbose lines.
             switch (scaledTouchLocation.x, scaledTouchLocation.y) {
 
             case(positiveXRange, positiveYRange):
                 // Quadrant I Top-right
-                print("Quad-I")
-                return
+                let angleRadiansTowardsCorner = thetaAngle
+                print("Quad-I", angleRadiansTowardsCorner)
+                return angleRadiansTowardsCorner
+
             case(negativeXRange, positiveYRange):
                 // Quadrant II Top-left
-                print("Quad-II")
+                let angleRadiansTowardsCorner = π - thetaAngle
+                print("Quad-II", angleRadiansTowardsCorner)
+                return angleRadiansTowardsCorner
+
             case(negativeXRange, negativeYRange):
                 // Quadrant III Bottom-left
-                print("Quad-III")
+                let angleRadiansTowardsCorner = π + thetaAngle
+                print("Quad-III", angleRadiansTowardsCorner)
+                return angleRadiansTowardsCorner
+
             case(positiveXRange, negativeYRange):
                 // Quadrant IV Bottom-right
-                print("Quad-IV")
+                let angleRadiansTowardsCorner = 2 * π - thetaAngle
+                print("Quad-IV", angleRadiansTowardsCorner)
+                return angleRadiansTowardsCorner
+
             case (_, _):
                 print("_, _ Quad-9001 no quads")
+                return thetaAngle
             }
         }()
 
