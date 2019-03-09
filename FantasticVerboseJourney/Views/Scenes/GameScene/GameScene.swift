@@ -222,34 +222,8 @@ extension GameScene {
 
     // Angle to rotate towards the four corners if touch in four quadrants.
     // hmm snappy. Different ways of doing this but depends on UX look and feel.
-    func getCornerOrientationAngle(touchPositionForQuadrantCalc touchLocation: UITouch) {
-        let midWidth = size.width / 2
-        let midHeight = size.height / 2
-
-        let scaledTouchLocation = touchLocation.location(in: self)
-        print(touchLocation, scaledTouchLocation)
-
-        // x and y ranges for each of the four quadrants.
-        // Cartesian coordinate system quadrants?
-        // In relation to 0.5, 0.5 instead of 0, 0
-        // Quadrant I   +x, +y; Quadrant II -x, +y;
-        // Quadrant III -x, -y; Quadrant IV +x, -y;
-        // However, using anchorpoint 0.5, 0.5 as origin instead of origin 0, 0
-
-        let positiveXRange = midWidth..<size.width
-        let negativeXRange = 0..<midWidth
-        let positiveYRange = midHeight..<size.height
-        let negativeYRange = 0..<midHeight
-
-//        // Pre-defined quadrant var didn't work
-//        let topRightQuadrantI: (Range<CGFloat>, Range<CGFloat>) = (positiveXRange, positiveYRange)
-//        let topLeftQuadrantII = (negativeXRange, positiveYRange)
-//        let bottomLeftQuadrantIII = (negativeXRange, negativeYRange)
-//        let bottomRightQuadrantIV = (positiveXRange, negativeYRange)
-
-        // Could use the same 4 positions enum with preloaded angles instead of inline closure
-        // Just split into function and move it out after...
-        let orientAngle: CGFloat = {
+    fileprivate func cornerAnglesForQuadrantRanges(_ scaledTouchLocation: CGPoint, _ positiveXRange: Range<CGFloat>, _ positiveYRange: Range<CGFloat>, _ negativeXRange: Range<CGFloat>, _ negativeYRange: Range<CGFloat>) -> CGFloat {
+        return {
             // swiftlint:disable identifier_name
             // Cartesian trig stuff based on formulae... SATC
             // Corresponds to aspect ratio... Trianglezzz vs 1 / 1
@@ -288,8 +262,37 @@ extension GameScene {
                 print("_, _ Quad-9001 no quads")
                 return thetaAngle
             }
-        }()
+            }()
+    }
 
+    func getCornerOrientationAngle(touchPositionForQuadrantCalc touchLocation: UITouch) {
+        let midWidth = size.width / 2
+        let midHeight = size.height / 2
+
+        let scaledTouchLocation = touchLocation.location(in: self)
+        print(touchLocation, scaledTouchLocation)
+
+        // x and y ranges for each of the four quadrants.
+        // Cartesian coordinate system quadrants?
+        // In relation to 0.5, 0.5 instead of 0, 0
+        // Quadrant I   +x, +y; Quadrant II -x, +y;
+        // Quadrant III -x, -y; Quadrant IV +x, -y;
+        // However, using anchorpoint 0.5, 0.5 as origin instead of origin 0, 0
+
+        let positiveXRange = midWidth..<size.width
+        let negativeXRange = 0..<midWidth
+        let positiveYRange = midHeight..<size.height
+        let negativeYRange = 0..<midHeight
+
+//        // Pre-defined quadrant var didn't work
+//        let topRightQuadrantI: (Range<CGFloat>, Range<CGFloat>) = (positiveXRange, positiveYRange)
+//        let topLeftQuadrantII = (negativeXRange, positiveYRange)
+//        let bottomLeftQuadrantIII = (negativeXRange, negativeYRange)
+//        let bottomRightQuadrantIV = (positiveXRange, negativeYRange)
+
+        // Could use the same 4 positions enum with preloaded angles instead of inline closure
+        let orientAngle: CGFloat = cornerAnglesForQuadrantRanges(scaledTouchLocation, positiveXRange, positiveYRange, negativeXRange, negativeYRange)
+        
 
     }
 }
