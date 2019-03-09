@@ -100,7 +100,7 @@ extension GameScene {
         startPosition: CGPoint,
         destination: CGPoint,
         angle: CGFloat
-        ) {
+    ) {
 
         // ? re init fireball atlas
         // Readability immutability and maintainability trumps performance
@@ -138,8 +138,20 @@ extension GameScene {
             )
         )
 
+        // Spawn
         self.addChild(fireballNode)
+        // Animate frames
         fireballNode.run(loopFireballFrames)
+
+        // Shoot
+
+        // Shoot move
+        // 0.5 seconds...
+        let fireballMoveToDest = SKAction.move(to: destination, duration: 0.5)
+        fireballNode.run(fireballMoveToDest)
+
+        // Shoot angle
+
 
         // Hahah trig
         // Quad1 angle
@@ -148,12 +160,8 @@ extension GameScene {
         // Quad 4 2Pi - Anglezzz
         // - TEST angle rotation radians
         let angle1 = tanh(size.height / size.width) // e.g. angle to corner by aspect ratio .9445
-        let angle2 = -tanh(size.height / size.width)
-        let angle3 = CGFloat.pi
-        let angle4 = 2 * CGFloat.pi
-        let angle5 = angle4 + -angle1
 
-        fireballNode.zRotation = angle1 + CGFloat.pi
+        fireballNode.zRotation = angle1 + 2 * CGFloat.pi
 //        let angle3 =
     }
 
@@ -203,7 +211,23 @@ extension GameScene {
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         print("GameScene:: touchesBegan start")
-        getCornerOrientationAngle(touchPositionForQuadrantCalc: touches.first!)
+        let fireballOrientationRadians = getCornerOrientationAngle(touchPositionForQuadrantCalc: touches.first!)
+
+        // Testing - DEBUG: test
+        spawnFireball(
+            startPosition: spawnManager.getPositionScaled(
+                sizeToScaleWithin: self.size,
+                spawnPointProportion: CGPoint(
+                    x: 0.4,
+                    y: 0.1
+                )
+            ),
+            destination: CGPoint(
+                x: 0.7,
+                y: 0.8
+            ),
+            angle: fireballOrientationRadians
+        )
         print("GameScene:: touchesBegan finish")
     }
 
@@ -222,50 +246,59 @@ extension GameScene {
 
     // Angle to rotate towards the four corners if touch in four quadrants.
     // hmm snappy. Different ways of doing this but depends on UX look and feel.
-    fileprivate func cornerAnglesForQuadrantRanges(_ scaledTouchLocation: CGPoint, _ positiveXRange: Range<CGFloat>, _ positiveYRange: Range<CGFloat>, _ negativeXRange: Range<CGFloat>, _ negativeYRange: Range<CGFloat>) -> CGFloat {
-        return {
-            // swiftlint:disable identifier_name
-            // Cartesian trig stuff based on formulae... SATC
-            // Corresponds to aspect ratio... Trianglezzz vs 1 / 1
-            // 0 to 2π radians 360
-            let thetaAngle = tanh(self.size.height / self.size.width)
-            let π = CGFloat.pi
+    fileprivate func cornerAnglesForQuadrantRanges(
+        _ scaledTouchLocation: CGPoint,
+        _ positiveXRange: Range<CGFloat>,
+        _ positiveYRange: Range<CGFloat>,
+        _ negativeXRange: Range<CGFloat>,
+        _ negativeYRange: Range<CGFloat>
+    ) -> CGFloat
+    {
 
-            // -- FIXME: Function would be more readable now that it is fleshed out with more verbose lines.
-            switch (scaledTouchLocation.x, scaledTouchLocation.y) {
+        // swiftlint:disable identifier_name
+        // Cartesian trig stuff based on formulae... SATC
+        // Corresponds to aspect ratio... Trianglezzz vs 1 / 1
+        // 0 to 2π radians 360
+        let thetaAngle = tanh(self.size.height / self.size.width)
+        let π = CGFloat.pi
 
-            case(positiveXRange, positiveYRange):
-                // Quadrant I Top-right
-                let angleRadiansTowardsCorner = thetaAngle
-                print("Quad-I", angleRadiansTowardsCorner)
-                return angleRadiansTowardsCorner
+        // -- FIXME: Function would be more readable now that it is fleshed out with more verbose lines.
+        switch (scaledTouchLocation.x, scaledTouchLocation.y) {
 
-            case(negativeXRange, positiveYRange):
-                // Quadrant II Top-left
-                let angleRadiansTowardsCorner = π - thetaAngle
-                print("Quad-II", angleRadiansTowardsCorner)
-                return angleRadiansTowardsCorner
+        case(positiveXRange, positiveYRange):
+            // Quadrant I Top-right
+            let angleRadiansTowardsCorner = thetaAngle
+            print("Quad-I", angleRadiansTowardsCorner)
+            return angleRadiansTowardsCorner
 
-            case(negativeXRange, negativeYRange):
-                // Quadrant III Bottom-left
-                let angleRadiansTowardsCorner = π + thetaAngle
-                print("Quad-III", angleRadiansTowardsCorner)
-                return angleRadiansTowardsCorner
+        case(negativeXRange, positiveYRange):
+            // Quadrant II Top-left
+            let angleRadiansTowardsCorner = π - thetaAngle
+            print("Quad-II", angleRadiansTowardsCorner)
+            return angleRadiansTowardsCorner
 
-            case(positiveXRange, negativeYRange):
-                // Quadrant IV Bottom-right
-                let angleRadiansTowardsCorner = 2 * π - thetaAngle
-                print("Quad-IV", angleRadiansTowardsCorner)
-                return angleRadiansTowardsCorner
+        case(negativeXRange, negativeYRange):
+            // Quadrant III Bottom-left
+            let angleRadiansTowardsCorner = π + thetaAngle
+            print("Quad-III", angleRadiansTowardsCorner)
+            return angleRadiansTowardsCorner
 
-            case (_, _):
-                print("_, _ Quad-9001 no quads")
-                return thetaAngle
-            }
-            }()
+        case(positiveXRange, negativeYRange):
+            // Quadrant IV Bottom-right
+            let angleRadiansTowardsCorner = 2 * π - thetaAngle
+            print("Quad-IV", angleRadiansTowardsCorner)
+            return angleRadiansTowardsCorner
+
+        case (_, _):
+            print("_, _ Quad-9001 no quads")
+            return thetaAngle
+        }
+
     }
 
-    func getCornerOrientationAngle(touchPositionForQuadrantCalc touchLocation: UITouch) {
+    func getCornerOrientationAngle(
+        touchPositionForQuadrantCalc touchLocation: UITouch
+    ) -> CGFloat {
         let midWidth = size.width / 2
         let midHeight = size.height / 2
 
@@ -292,8 +325,8 @@ extension GameScene {
 
         // Could use the same 4 positions enum with preloaded angles instead of inline closure
         let orientAngle: CGFloat = cornerAnglesForQuadrantRanges(scaledTouchLocation, positiveXRange, positiveYRange, negativeXRange, negativeYRange)
-        
 
+        return orientAngle
     }
 }
 

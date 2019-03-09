@@ -88,6 +88,7 @@ extension SpawnManager {
     /// -- TODO: Create types to safely distinguish this behaviour.
     ///
     /// - Parameter sizeToScaleWithin: Scene size or any arbitrary rectangle.
+    /// - Parameter spawnPointProportion: The decimal fraction proportion of the whole scene size. 0..<1.0 for 0 to 100% of the x and y width height values.
     /// - Returns: Returns the decimal fraction normalised against the size
     func getPositionScaled(
         sizeToScaleWithin: CGSize,
