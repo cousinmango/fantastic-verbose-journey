@@ -247,24 +247,30 @@ extension GameScene {
 //        let bottomLeftQuadrantIII = (negativeXRange, negativeYRange)
 //        let bottomRightQuadrantIV = (positiveXRange, negativeYRange)
 
-        switch (scaledTouchLocation.x, scaledTouchLocation.y) {
+        // Could use the same 4 positions enum with preloaded angles instead of inline closure
+        // Just split into function and move it out after...
+        let orientAngle = {
+            switch (scaledTouchLocation.x, scaledTouchLocation.y) {
 
-        case(positiveXRange, positiveYRange):
-            // Quadrant I Top-right
-            print("Quad-I")
-        case(negativeXRange, positiveYRange):
-            // Quadrant II Top-left
-            print("Quad-II")
-        case(negativeXRange, negativeYRange):
-            // Quadrant III Bottom-left
-            print("Quad-III")
-        case(positiveXRange, negativeYRange):
-            // Quadrant IV Bottom-right
-            print("Quad-IV")
-        case (_, _):
-            print("_, _ no quads")
+            case(positiveXRange, positiveYRange):
+                // Quadrant I Top-right
+                print("Quad-I")
+                return
+            case(negativeXRange, positiveYRange):
+                // Quadrant II Top-left
+                print("Quad-II")
+            case(negativeXRange, negativeYRange):
+                // Quadrant III Bottom-left
+                print("Quad-III")
+            case(positiveXRange, negativeYRange):
+                // Quadrant IV Bottom-right
+                print("Quad-IV")
+            case (_, _):
+                print("_, _ Quad-9001 no quads")
+            }
+        }()
 
-        }
+
     }
 }
 
