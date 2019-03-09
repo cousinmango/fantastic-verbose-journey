@@ -27,11 +27,14 @@ class GameScene: SKScene {
     }
 
 
+    // - MARK: Load point
     override func sceneDidLoad() {
         // setup managers
         self.spawnManager = SpawnManager(spawnScene: self) // weak var ref like delegate
         self.timeManager = TimeManager(delegate: self, initialTimeSeconds: 5)
 
+        setupPhysics()
+        setupHud()
 
         setupSpawn()
     }
@@ -62,6 +65,12 @@ extension GameScene {
             spawnMob: chickenMobEphemeralSpawnDeathOneSecond,
             possibleSpawnPositions: testPositions
         ) // Wonder if memory leak
+        // Rip data model
+        chickenSprite.physicsBody = SKPhysicsBody(texture: chickenSprite.texture!, size: chickenSprite.size)
+
+        chickenSprite.physicsBody?.contactTestBitMask = PhysicsCategory.fireball
+        chickenSprite.physicsBody?.categoryBitMask = PhysicsCategory.chicken
+        chickenSprite.physicsBody?.collisionBitMask = PhysicsCategory.none
     }
 
     func setupSpawn() {
@@ -123,7 +132,7 @@ extension GameScene {
         // -- FIXME: hmm reinit. can just preload this and store somewhere else in memory.
         let fireballAtlas = SKTextureAtlas(named: "fire")
 
-        let fireballFrames = fireballAtlas.textureNames
+        let fireballFrames: [SKTexture] = fireballAtlas.textureNames
             .map(
                 {
                     fireballAtlas.textureNamed($0)
@@ -131,6 +140,10 @@ extension GameScene {
         )
 
         let fireballNode = SKSpriteNode(texture: fireballFrames.first!)
+
+        fireballNode.physicsBody = SKPhysicsBody(rectangleOf: fireballNode.size)
+        fireballNode.physicsBody?.categoryBitMask = PhysicsCategory.fireball
+//        fireballNode.physicsBody?.contactTestBitMask = PhysicsCategory.chicken
 
         fireballNode.position = startPosition
         let loopFireballFrames = SKAction.repeatForever(
@@ -195,16 +208,17 @@ extension GameScene {
 // - MARK: Setup helpers
 extension GameScene {
 
-    private func setup() {
+    private func setupPhysics() {
         // Setup physics
         physicsWorld.gravity = .zero
         physicsWorld.contactDelegate = self
 
+    }
+    private func setupHud() {
         // HUD setup
         hudOverlay.setup(size: size)
         addChild(hudOverlay)
         hudOverlay.resetPoints()
-
     }
 }
 
@@ -246,6 +260,7 @@ extension GameScene {
 // - MARK: Orientation four corners angle
 extension GameScene {
 
+    // Could just keep this pre-caclulated preloaded.
     // Angle to rotate towards the four corners if touch in four quadrants.
     // hmm snappy. Different ways of doing this but depends on UX look and feel.
     fileprivate func cornerAnglesForQuadrantRanges(

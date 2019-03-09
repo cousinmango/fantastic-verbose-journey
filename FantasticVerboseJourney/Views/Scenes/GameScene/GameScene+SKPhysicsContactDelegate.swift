@@ -10,9 +10,8 @@ import SpriteKit
 
 // - MARK: Physics collision detection
 extension GameScene: SKPhysicsContactDelegate {
-
     func didBegin(_ contact: SKPhysicsContact) {
-
+        print("GameScene Physics:: didBegin()")
         // Random dodgy code.
         // ?? Validate this. Why does categoryBitMask determine which is "first"
         // Stable? Seems volatile or unintended behaviour-prone.
@@ -21,6 +20,7 @@ extension GameScene: SKPhysicsContactDelegate {
         let firstBody: SKPhysicsBody = aIsFirst ? contact.bodyA : contact.bodyB
         let secondBody: SKPhysicsBody = bIsSecond ? contact.bodyB : contact.bodyA
 
+        print("physicsContact")
         hitCollisionBehaviourCalcDoStuff(firstBody, secondBody)
     }
 
