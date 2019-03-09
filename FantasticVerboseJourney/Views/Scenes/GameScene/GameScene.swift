@@ -146,7 +146,7 @@ extension GameScene {
         // Quad2 Pi 180 rads - angle zzz
         // Quad3 Pi + anglezzz
         // Quad 4 2Pi - Anglezzz
-
+        // - TEST angle rotation radians
         let angle1 = tanh(size.height / size.width) // e.g. angle to corner by aspect ratio .9445
         let angle2 = -tanh(size.height / size.width)
         let angle3 = CGFloat.pi
@@ -240,6 +240,13 @@ extension GameScene {
         let negativeXRange = 0..<midWidth
         let positiveYRange = midHeight..<size.height
         let negativeYRange = 0..<midHeight
+
+//        // Pre-defined quadrant var didn't work
+//        let topRightQuadrantI: (Range<CGFloat>, Range<CGFloat>) = (positiveXRange, positiveYRange)
+//        let topLeftQuadrantII = (negativeXRange, positiveYRange)
+//        let bottomLeftQuadrantIII = (negativeXRange, negativeYRange)
+//        let bottomRightQuadrantIV = (positiveXRange, negativeYRange)
+
         switch (scaledTouchLocation.x, scaledTouchLocation.y) {
 
         case(positiveXRange, positiveYRange):
