@@ -20,12 +20,20 @@ class GameViewController: UIViewController {
 
         guard let skView = self.view as? SKView else { return }
 
-        let homeMenuScene = HomeMenuScene(size: view.bounds.size)
         // homeMenuScene.scaleMode = .aspectFit
         // Default blank .sks file replicate programmatically with dimension W: 750 H: 1334
-        // Anchor point 0.5, 0.5
-        homeMenuScene.view?.setPerformanceOptimisation()
-        homeMenuScene.view?.setShowDebug()
+        // Anchor point 0.5, 0.5. GameScene may be using 0.0, 0.0
+// //        homeMenuScene.view?.setPerformanceOptimisation()
+// //        homeMenuScene.view?.setShowDebug()
+
+        // setupIfDebug for perf stats
+        // Haha awesome the extension is still here and working
+        #if DEBUG
+            print("Debug stats enabled")
+            skView.setShowDebug()
+        #endif
+
+        let homeMenuScene = HomeMenuScene(size: view.bounds.size)
 
         skView.presentScene(
             homeMenuScene,
