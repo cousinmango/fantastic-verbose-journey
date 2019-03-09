@@ -101,7 +101,9 @@ extension GameScene {
         destination: CGPoint,
         angle: CGFloat
     ) {
-
+        /* PERF Stats
+            Simulator 30FPS for 58 nodes and 50 draws with animated fireballs on screen by themselves.
+         */
         // ? re init fireball atlas
         // Readability immutability and maintainability trumps performance
         // Dev time vs CPU time :P
