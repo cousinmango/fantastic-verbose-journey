@@ -139,6 +139,32 @@ extension MobFactory {
     }
 }
 
+extension MobFactory {
+    // lessen uncontrolled mutation somehow?
+    ///
+    static func getPhysicsBody(
+        texture: SKTexture,
+        size: CGSize,
+        contact: UInt32,
+        category: UInt32,
+        collision: UInt32
+    ) -> SKPhysicsBody
+    {
+
+        // Rip data model
+        let physicsBody = SKPhysicsBody(
+            texture: texture,
+            size: size
+        )
+
+        physicsBody.contactTestBitMask = contact
+        physicsBody.categoryBitMask = category
+        physicsBody.collisionBitMask = collision
+
+        return physicsBody
+    }
+}
+
 struct UIElement {
 
 }

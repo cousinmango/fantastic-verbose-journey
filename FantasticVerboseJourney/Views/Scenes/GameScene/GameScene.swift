@@ -65,12 +65,17 @@ extension GameScene {
             spawnMob: chickenMobEphemeralSpawnDeathOneSecond,
             possibleSpawnPositions: testPositions
         ) // Wonder if memory leak
-        // Rip data model
-        chickenSprite.physicsBody = SKPhysicsBody(texture: chickenSprite.texture!, size: chickenSprite.size)
 
-        chickenSprite.physicsBody?.contactTestBitMask = PhysicsCategory.fireball
-        chickenSprite.physicsBody?.categoryBitMask = PhysicsCategory.chicken
-        chickenSprite.physicsBody?.collisionBitMask = PhysicsCategory.none
+        // Rip data model. // Looks like no choice but to make a subclass for each type of mobsta lobsta monster
+        let chickenPhysicsBody = MobFactory.getPhysicsBody(
+            texture: chickenSprite.texture!,
+            size: chickenSprite.size,
+            contact: PhysicsCategory.fireball,
+            category: PhysicsCategory.chicken,
+            collision: PhysicsCategory.none
+        )
+        chickenSprite.physicsBody = chickenPhysicsBody
+
     }
 
     func setupSpawn() {
