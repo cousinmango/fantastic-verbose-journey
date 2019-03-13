@@ -31,7 +31,7 @@ class GameScene: SKScene {
     override func sceneDidLoad() {
         // setup managers
         self.spawnManager = SpawnManager(spawnScene: self) // weak var ref like delegate
-        self.timeManager = TimeManager(delegate: self, initialTimeSeconds: 5)
+        self.timeManager = TimeManager(delegate: self, initialTimeSeconds: 30)
 
         setupPhysics()
         setupHud()
@@ -148,6 +148,7 @@ extension GameScene {
 
         fireballNode.physicsBody = SKPhysicsBody(rectangleOf: fireballNode.size)
         fireballNode.physicsBody?.categoryBitMask = PhysicsCategory.fireball
+        fireballNode.physicsBody?.collisionBitMask = PhysicsCategory.none
 //        fireballNode.physicsBody?.contactTestBitMask = PhysicsCategory.chicken
 
         fireballNode.position = startPosition
