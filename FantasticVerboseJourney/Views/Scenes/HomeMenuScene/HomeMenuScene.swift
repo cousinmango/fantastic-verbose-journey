@@ -41,7 +41,7 @@ class HomeMenuScene: SKScene {
 
 
     override func didMove(to view: SKView) {
-        setupStartMusic()
+
 
         scaleFactor = size.height * 0.25 // = 284 on iPhone SE
 
@@ -51,7 +51,6 @@ class HomeMenuScene: SKScene {
         print("HomeMenuScene:: size", size)
 
         setupBackground()
-
         setupTitle()
 
         setupLogo()
@@ -65,7 +64,11 @@ class HomeMenuScene: SKScene {
         setup()
 
         startSKButtonSetup()
+
+        setupStartMusic()
+
         print("HomeMenuScene:: didMove() finished")
+        
     }
 
     override func update(_ currentTime: TimeInterval) {

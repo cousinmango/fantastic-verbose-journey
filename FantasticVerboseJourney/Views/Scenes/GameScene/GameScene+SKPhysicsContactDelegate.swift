@@ -26,41 +26,82 @@ extension GameScene: SKPhysicsContactDelegate {
 
     // - TODO Refactor massive monolithic function
     // swiftlint:disable function_body_length cyclomatic_complexity
+    fileprivate func doMobFireballReactionsSeries(otherBody recipientBody: SKPhysicsBody, projectileBody: SKPhysicsBody) {
+        // Fireballs should not collide with each other (first and second body) based on initial config.
+
+        // categories are set only to allow chicken and pan to get hit.
+        // and activated against fireball.
+
+        // order the logic by prioritising early escape and finish execution
+
+        // if pan
+        // - TODO: Implement OOD or basic denormalised data struct to start
+        // Best to try to reuse the SKSpriteNode as much as possible.
+        // - TODO: Replace identification node physicscategory with node.name
+
+        if recipientBody.categoryBitMask == PhysicsCategory.fryingPan {
+            // bounce back
+            guard let projectile = projectileBody.node else { return }
+            guard let fryingPan = recipientBody.node else { return }
+
+            // 1. Animate pan on hit
+            let fryingPanResponsiveHitBoopAnimation = SKAction.sequence(
+                [
+                    SillyAnimation.scaleSizeEmbiggen,
+                    SillyAnimation.scaleSizeToNormal
+                ]
+            )
+            fryingPan.run(fryingPanResponsiveHitBoopAnimation)
+
+            // rotate the fireball back at the centre
+            // delete fireball after completing the action (presumably hitting centre)
+            // completion handler is clearer more declarative.
+
+
+            //zzzzzz back to attack the chicken... Wonder if can do cool curved things like in bloooooon td
+
+            let centrePoint = spawnManager.getPositionScaled(
+                sizeToScaleWithin: size,
+                spawnPointProportion: CGPoint(x: 0.5, y: 0.5)
+            )
+            let aShortInterval = 0.15
+
+            let rotate180Instant = SKAction.rotate(byAngle: CGFloat.pi, duration: 0)
+            let shootProjectileBack = SKAction.move(to: centrePoint, duration: aShortInterval)
+
+            let projectileReflect = SKAction.sequence(
+                [
+                    rotate180Instant,
+                    shootProjectileBack
+                ]
+            )
+            let despawnProjectile = { projectile.removeFromParent() } // superfluous wrap
+            projectile.run(
+                projectileReflect,
+                completion: despawnProjectile
+            )
+
+
+        }
+    }
+
     fileprivate func hitCollisionBehaviourCalcDoStuff(_ firstBody: SKPhysicsBody, _ secondBody: SKPhysicsBody) {
 
         let firstIsFireball = firstBody.categoryBitMask == PhysicsCategory.fireball
         let secondIsFireball = secondBody.categoryBitMask == PhysicsCategory.fireball
 
         if firstIsFireball {
-            // Fireballs should not collide with each other (first and second body)
-            // categories are set only to allow chicken and pan to get hit.
-            // and activated against fireball.
+            // remove (secondBody)
+            doMobFireballReactionsSeries(otherBody: secondBody, projectileBody: firstBody)
+            // return
 
-            // remove secondBody
         } else if secondIsFireball {
+            // the recipient body that was hit by the fireball is therefore the other body in the SKPhysicsContactDelegate
             // remove firstBody
+            doMobFireballReactionsSeries(otherBody: firstBody, projectileBody: secondBody)
+
 
         }
-        print("1 fireball \(firstIsFireball)2 fireball \(secondIsFireball)")
-
-        let firstBit = firstBody.categoryBitMask
-        let secondBit = secondBody.categoryBitMask
-
-        let andBit = firstBit & secondBit
-        let orBit = firstBit | secondBit
-
-        let firstChicken = firstBody.categoryBitMask == PhysicsCategory.chicken
-        let secondChicken = secondBody.categoryBitMask == PhysicsCategory.chicken
-
-        if firstChicken {
-            print(" firstChicken \(firstChicken)")
-        }
-
-        if secondChicken {
-            print(" secondChicken \(secondChicken)")
-        }
-
-        print("firstBit \(firstBit) secondBit \(secondBit) andBit \(andBit) orBit \(orBit)")
 
 
     }
